@@ -19,7 +19,6 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off',
     '@tanstack/query/exhaustive-deps': 'error',
     '@tanstack/query/no-rest-destructuring': 'warn',
     '@tanstack/query/stable-query-client': 'error',

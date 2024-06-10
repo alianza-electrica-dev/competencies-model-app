@@ -1,4 +1,4 @@
-import { AppRouter } from './router/AppRouter';
+import { AppRouter } from './routers';
 
 export const CompetenciesApp = () => {
   return <AppRouter />;
