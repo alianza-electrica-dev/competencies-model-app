@@ -1,8 +1,7 @@
 export const ManagersPage = () => {
   return (
     <>
-      <h1>Managers Page</h1>
-      <hr />
+      <span>Hola mundo</span>
     </>
   );
 };
