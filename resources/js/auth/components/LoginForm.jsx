@@ -1,33 +1,15 @@
-/* eslint-disable no-undef */
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
 import { Formik, Form } from 'formik';
+import { useAppLoginMutation } from '../../hooks';
+import { CustomInputText } from '../../formik';
+import { loginValidations } from '../validations';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
-import { CustomInputText } from '../../formik';
-import { useAuthUserStore } from '../../store/authUser';
 import { ImageForm } from './';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
-
-  // TODO: Create a custom hook for mutations
-  // TODO: Create validation shcema
-  // TODO: Show error message
-
-  const mutation = useMutation({
-    mutationFn: values => {
-      return axios.post(route('login'), values);
-    },
-    onSuccess: data => {
-      const { data: response } = data;
-      if (response.success) {
-        const login = useAuthUserStore.getState().setAuthUser;
-        login(response.user);
-      }
-    },
-  });
+  const { mutate, isPending, isError } = useAppLoginMutation('login');
 
   return (
     <div className='card'>
@@ -35,7 +17,8 @@ export const LoginForm = () => {
         <ImageForm />
         <Formik
           initialValues={{ email: '', password: '' }}
-          onSubmit={values => mutation.mutate(values)}
+          onSubmit={values => mutate(values)}
+          validationSchema={loginValidations}
         >
           {formik => (
             <Form>
@@ -45,6 +28,12 @@ export const LoginForm = () => {
                 name='password'
                 type='password'
               />
+
+              {isError && (
+                <p className='font-medium text-red-500'>
+                  El correo o la contraseña no son validas
+                </p>
+              )}
 
               <div className='flex justify-content-end align-items-center'>
                 <Button
@@ -59,7 +48,7 @@ export const LoginForm = () => {
                   type='submit'
                   rounded
                   className='w-10'
-                  loading={mutation.isPending}
+                  loading={isPending}
                 />
               </div>
             </Form>
