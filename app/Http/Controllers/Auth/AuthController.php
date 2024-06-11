@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Area;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\TryCatch;
 
 class AuthController extends Controller
 {
     // * TODO: Añadir el isActive a los usuarios
-    // * TODO: Checar que no choque con la validacion de rutas del react-router
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -39,5 +42,35 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
+    }
+
+    public function register(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $user = new User();
+            $user->fill($request->all());
+            $user->saveOrFail();
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'error' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+            ], 500);
+        }
+    }
+
+    public function getAreas()
+    {
+        return response()->json([
+            'areas' => Area::all(),
+        ]);
     }
 }

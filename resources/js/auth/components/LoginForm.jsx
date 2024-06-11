@@ -13,7 +13,7 @@ export const LoginForm = () => {
 
   return (
     <div className='card'>
-      <Card className='md:w-35rem'>
+      <Card className='md:w-25rem'>
         <ImageForm />
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -21,7 +21,7 @@ export const LoginForm = () => {
           validationSchema={loginValidations}
         >
           {formik => (
-            <Form>
+            <Form className='formgrid grid'>
               <CustomInputText label='Correo electronico' name='email' />
               <CustomInputText
                 label='Contraseña'

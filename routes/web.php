@@ -9,14 +9,11 @@ Route::get('/', function () {
     return view('main');
 });
 
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-// Route::prefix('users')->name('users.')->group(function () {
-//     Route::get('/managers', [UserController::class, 'getManagers'])->name('managers');
-//     Route::get('/employees', [UserController::class, 'getEmployees'])->name('employees');
-// });
-
-// Route::get('employe-test', [UserController::class, 'getTest'])->name('employe.test');
-
+Route::prefix('/auth')->name('auth.')->group(function () {
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::get('/get-areas', [AuthController::class, 'getAreas'])->name('get_areas');
+})->middleware(['guest']);
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/client.php';

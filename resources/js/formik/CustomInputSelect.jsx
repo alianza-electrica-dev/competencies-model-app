@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { ErrorMessage, useField } from 'formik';
-import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
 
-export const CustomInputText = ({ label, ...props }) => {
+export const CustomInputSelect = ({ label, ...props }) => {
   const [field] = useField(props);
 
   return (
@@ -13,7 +13,7 @@ export const CustomInputText = ({ label, ...props }) => {
       >
         {label}
       </label>
-      <InputText className='w-full' {...field} {...props} />
+      <Dropdown className='w-full' {...field} {...props} />
       <ErrorMessage
         name={props.name}
         component='p'

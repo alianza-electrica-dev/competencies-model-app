@@ -1,0 +1,103 @@
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { Formik, Form } from 'formik';
+import { CustomInputSelect, CustomInputText } from '../../formik';
+import { registerValidations } from '../validations';
+import { Card } from 'primereact/card';
+import { ImageForm } from './ImageForm';
+import { Button } from 'primereact/button';
+import { useAppLoginMutation } from '../../hooks';
+
+export const RegisterForm = ({ areas }) => {
+  const navigate = useNavigate();
+  const { mutate, isPending, isError } = useAppLoginMutation('auth.register');
+
+  const initialValues = {
+    name: '',
+    last_name: '',
+    second_last_name: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+    role_id: 2,
+    area_id: '',
+  };
+
+  return (
+    <div className='card'>
+      <Card className='md:w-30rem'>
+        <ImageForm />
+        <Formik
+          initialValues={initialValues}
+          onSubmit={values => mutate(values)}
+          validationSchema={registerValidations}
+        >
+          {formik => (
+            <Form className='formgrid grid'>
+              <CustomInputText label='Nombre' name='name' />
+
+              <CustomInputText
+                label='Apellido paterno'
+                name='last_name'
+                col='6'
+              />
+
+              <CustomInputText
+                label='Apellido materno'
+                name='second_last_name'
+                col='6'
+              />
+
+              <CustomInputText label='Correo electronico' name='email' />
+
+              <CustomInputText label='Contraseña' name='password' />
+
+              <CustomInputText
+                label='Confirmar contraseña'
+                name='confirm_password'
+              />
+
+              <CustomInputSelect
+                label='Area'
+                name='area_id'
+                options={areas}
+                optionLabel='name'
+                optionValue='id'
+              />
+
+              {isError && (
+                <div className='field mb-4 col-12 flex justify-content-center'>
+                  <p className='font-medium text-red-500'>
+                    Ocurrio un error en el proceso de registro
+                  </p>
+                </div>
+              )}
+
+              <div className='field mb-4 col-12 flex justify-content-around'>
+                <Button
+                  className='w-10rem'
+                  label='Registrate'
+                  rounded
+                  type='submit'
+                  loading={isPending}
+                />
+                <Button
+                  className='w-10rem'
+                  label='Volver'
+                  rounded
+                  severity='warning'
+                  type='button'
+                  onClick={() => navigate(-1)}
+                />
+              </div>
+            </Form>
+          )}
+        </Formik>
+      </Card>
+    </div>
+  );
+};
+
+RegisterForm.propTypes = {
+  areas: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
