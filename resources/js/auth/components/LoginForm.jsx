@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
-import { useAppLoginMutation } from '../../hooks';
+import { useAuthMutation } from '../../hooks';
 import { CustomInputText } from '../../formik';
 import { loginValidations } from '../validations';
 import { Button } from 'primereact/button';
@@ -9,7 +9,7 @@ import { ImageForm } from './';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
-  const { mutate, isPending, isError } = useAppLoginMutation('login');
+  const { mutate, isPending, isError } = useAuthMutation('auth.login');
 
   return (
     <div className='card'>
@@ -30,25 +30,29 @@ export const LoginForm = () => {
               />
 
               {isError && (
-                <p className='font-medium text-red-500'>
-                  El correo o la contraseña no son validas
-                </p>
+                <div className='field mb-4 col-12 flex justify-content-center'>
+                  <p className='font-medium text-red-500'>
+                    El correo o la contraseña no son validas
+                  </p>
+                </div>
               )}
 
-              <div className='flex justify-content-end align-items-center'>
+              <div className='field mb-4 col-12 flex justify-content-around'>
                 <Button
-                  label='Registrate'
-                  text
-                  onClick={() => navigate('/register')}
-                />
-              </div>
-              <div className='flex justify-content-center mt-5'>
-                <Button
+                  className='w-10rem'
                   label='Iniciar Sesión'
                   type='submit'
                   rounded
-                  className='w-10'
                   loading={isPending}
+                />
+
+                <Button
+                  className='w-10rem'
+                  label='Registrate'
+                  rounded
+                  severity='warning'
+                  type='button'
+                  onClick={() => navigate('/register')}
                 />
               </div>
             </Form>

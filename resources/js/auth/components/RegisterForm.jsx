@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
+import { useAuthMutation } from '../../hooks';
 import { CustomInputSelect, CustomInputText } from '../../formik';
 import { registerValidations } from '../validations';
+import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { ImageForm } from './ImageForm';
-import { Button } from 'primereact/button';
-import { useAppLoginMutation } from '../../hooks';
 
 export const RegisterForm = ({ areas }) => {
   const navigate = useNavigate();
-  const { mutate, isPending, isError } = useAppLoginMutation('auth.register');
+  const { mutate, isPending, isError } = useAuthMutation('auth.register');
 
   const initialValues = {
     name: '',
@@ -50,11 +50,16 @@ export const RegisterForm = ({ areas }) => {
 
               <CustomInputText label='Correo electronico' name='email' />
 
-              <CustomInputText label='Contraseña' name='password' />
+              <CustomInputText
+                label='Contraseña'
+                name='password'
+                type='password'
+              />
 
               <CustomInputText
                 label='Confirmar contraseña'
                 name='confirm_password'
+                type='password'
               />
 
               <CustomInputSelect

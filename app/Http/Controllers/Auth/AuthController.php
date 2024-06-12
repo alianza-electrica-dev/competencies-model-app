@@ -9,7 +9,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Stmt\TryCatch;
 
 class AuthController extends Controller
 {
@@ -25,7 +24,8 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return response()->json([
                 'user' => Auth::user(),
-                'success' => true
+                'success' => true,
+                'isLogin' => true,
             ]);
         }
 
@@ -52,10 +52,12 @@ class AuthController extends Controller
             $user = new User();
             $user->fill($request->all());
             $user->saveOrFail();
+            $user->tests()->attach([1, 2, 3]);
             DB::commit();
 
             return response()->json([
                 'success' => true,
+                'isLogin' => false,
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();
