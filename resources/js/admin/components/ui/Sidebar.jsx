@@ -7,12 +7,12 @@ export const Sidebar = () => {
 
   return (
     <div className='h-full'>
-      <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJMqyAyGCL_vQ2z5PK6aZFazqhpGYbbmiYRgX8RCFwbtk1uPSBM4OedwPmtWHKaOcHkpc&usqp=CAU' 
+      {/* <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJMqyAyGCL_vQ2z5PK6aZFazqhpGYbbmiYRgX8RCFwbtk1uPSBM4OedwPmtWHKaOcHkpc&usqp=CAU' 
         height='100px'
         width='100%'
-      />
+      /> */}
 
-      <Menu model={items} className='w-full border-transparent'/>
+      <Menu model={items} className='w-full h-full border-transparent'/>
     
     </div>
   );

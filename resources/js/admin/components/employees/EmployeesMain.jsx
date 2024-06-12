@@ -1,8 +1,20 @@
-import { Card } from 'primereact/card';
+import { useAppQuery } from '../../../hooks';
+import { Loading } from '../../../common';
+import { EmployeesTable } from './';
+
 export const EmployeesMain = () => {
-  return (
-    <Card className='h-full'>
-      <p className='m-0'>Prueba</p>
-    </Card>
+  const { isPending, isError, data, error } = useAppQuery(
+    'Employees',
+    'admin.employees.index_content',
   );
+
+  if (isPending) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
+
+  return <EmployeesTable employees={data.employees} />;
 };

@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from '../admin/components/ui';
 import styles from '../admin/styles/private-layout.module.css';
+import { Footer } from '../common';
 
 export const PrivateLayout = () => {
   return (
@@ -14,12 +15,14 @@ export const PrivateLayout = () => {
           <p>header</p>
         </div>
 
-        <div className={`card ${styles['pl-outlet']}`}>
-          <Outlet />
+        <div className={`${styles['pl-outlet']}`}>
+          <div style={{ height: '100%' }}>
+            <Outlet />
+          </div>
         </div>
 
         <div className={styles['pl-footer']}>
-          <p>footer</p>
+          <Footer />
         </div>
       </div>
     </div>

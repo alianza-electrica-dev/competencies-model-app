@@ -1,17 +1,18 @@
 .pl-layout {
-  background-color: rgb(228, 228, 228);
+  background-color: rgb(247, 247, 247);
   display: grid;
   grid-template-columns: 1fr 5fr;
   min-height: 100vh;
 }
 
 .pl-sidebar {
-  background-color: #FFF;
+  background-color: #fff;
 }
 
 .pl-content {
   display: grid;
-  grid-template-rows: 1fr 6fr 1fr;
+  grid-template-rows: 1fr 7fr 0.5fr;
+  height: 100%;
 }
 
 .pl-header {
@@ -23,5 +24,8 @@
 }
 
 .pl-footer {
-  background-color: palevioletred;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
