@@ -27,8 +27,16 @@ class Test extends Model
         return $this->hasMany(Question::class);
     }
 
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
+    }
+
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)
+            ->using(TestUser::class)
+            ->withPivot('status_id', 'score')
+            ->withTimestamps();
     }
 }

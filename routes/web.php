@@ -1,8 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\UserController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +17,4 @@ Route::prefix('/auth')->name('auth.')->group(function () {
 require __DIR__ . '/admin.php';
 require __DIR__ . '/client.php';
 
-Route::view('/{path?}', 'main');
-Route::view('/admin/{path?}', 'main');
-Route::view('/client/{path?}', 'main');
+Route::view('/{path?}', 'main')->where('path', '.*');

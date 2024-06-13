@@ -75,6 +75,9 @@ class User extends Authenticatable
 
     public function tests(): BelongsToMany
     {
-        return $this->belongsToMany(Test::class);
+        return $this->belongsToMany(Test::class)
+            ->using(TestUser::class)
+            ->withPivot('status_id', 'score')
+            ->withTimestamps();
     }
 }

@@ -21,4 +21,21 @@ class UserController extends Controller
             'employees' => $employees,
         ]);
     }
+
+    public function getUserTests()
+    {
+        $user = User::query()->findOrFail(3);
+        $tests = $user->tests()
+            ->with('competency')
+            ->get();
+
+        $tests->each(function ($test) {
+            $test->pivot->load('status');
+        });
+
+        return response()->json([
+            'success' => true,
+            'tests' => $tests,
+        ]);
+    }
 }

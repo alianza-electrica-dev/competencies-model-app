@@ -8,6 +8,7 @@ return new class extends Migration
 {
     protected const
         AREAS = 'areas',
+        STATUSES = 'statuses',
         COMPETENCIES = 'competencies',
         QUESTIONS = 'questions',
         ROLES = 'roles',
@@ -22,6 +23,7 @@ return new class extends Migration
         QUESTION_ID = 'question_id',
         ROLE_ID = 'role_id',
         TEST_ID = 'test_id',
+        STATUS_ID = 'status_id',
         USER_ID = 'user_id';
 
     /**
@@ -30,6 +32,7 @@ return new class extends Migration
     public function up(): void
     {
         self::createRolesTable();
+        self::createStatusesTable();
         self::createAreasTable();
         self::createCompetenciesTable();
         self::createTestsTable();
@@ -52,6 +55,7 @@ return new class extends Migration
             self::TESTS,
             self::COMPETENCIES,
             self::AREAS,
+            self::STATUSES,
             self::ROLES,
         ];
 
@@ -63,6 +67,14 @@ return new class extends Migration
     private static function createRolesTable()
     {
         Schema::create(self::ROLES, function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+    }
+
+    private static function createStatusesTable()
+    {
+        Schema::create(self::STATUSES, function (Blueprint $table) {
             $table->id();
             $table->string('name');
         });
@@ -115,6 +127,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId(self::TEST_ID)->constrained()->onDelete('cascade');
             $table->foreignId(self::USER_ID)->constrained()->onDelete('cascade');
+            $table->foreignId(self::STATUS_ID)->constrained('statuses')->onDelete('cascade');
             $table->integer('score')->nullable();
             $table->timestamps();
         });

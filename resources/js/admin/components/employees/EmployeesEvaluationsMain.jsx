@@ -1,11 +1,11 @@
 import { useAppQuery } from '../../../hooks';
 import { Loading } from '../../../common';
-import { EmployeesTable } from './EmployeesTable';
+import { EmpoyeesEvaluationsTable } from './EmpoyeesEvaluationsTable';
 
-export const EmployeesMain = () => {
+export const EmployeesEvaluationsMain = () => {
   const { isPending, isError, data, error } = useAppQuery(
-    'Employees',
-    'admin.employees.index_content',
+    'EmployeesEvaluations',
+    'admin.employees.user_test',
   );
 
   if (isPending) {
@@ -16,5 +16,5 @@ export const EmployeesMain = () => {
     return <span>Error: {error.message}</span>;
   }
 
-  return <EmployeesTable employees={data.employees} />;
+  return <EmpoyeesEvaluationsTable evaluations={data.tests} />;
 };

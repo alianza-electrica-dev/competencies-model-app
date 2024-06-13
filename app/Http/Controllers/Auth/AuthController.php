@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Area;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -52,7 +53,15 @@ class AuthController extends Controller
             $user = new User();
             $user->fill($request->all());
             $user->saveOrFail();
-            $user->tests()->attach([1, 2, 3]);
+
+            $testIds = [1, 2, 3];
+            $testData = [];
+
+            foreach ($testIds as $testId) {
+                $testData[$testId] = ['status_id' => Status::PENDIENTE];
+            }
+
+            $user->tests()->attach($testData);
             DB::commit();
 
             return response()->json([
