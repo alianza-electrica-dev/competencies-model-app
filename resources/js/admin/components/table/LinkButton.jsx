@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 import { Button } from 'primereact/button';
 import { Link } from 'react-router-dom';
 
-export const LinkButton = ({ rowData }) => {
+export const LinkButton = ({ rowData, icon, tooltipText }) => {
   return (
     <Link to={`/admin/employees-evaluations/${rowData.id}`}>
       <Button
-        icon='pi pi-clipboard'
+        icon={icon}
         rounded
         text
-        tooltip='Evaluaciones'
+        tooltip={tooltipText}
         tooltipOptions={{ position: 'top' }}
         type='button'
       />
@@ -19,4 +19,6 @@ export const LinkButton = ({ rowData }) => {
 
 LinkButton.propTypes = {
   rowData: PropTypes.object.isRequired,
+  icon: PropTypes.string.isRequired,
+  tooltipText: PropTypes.string.isRequired,
 };

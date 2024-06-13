@@ -12,3 +12,23 @@ export const showRegisterAlert = () => {
     timer: 1500,
   });
 };
+
+export const showSuccessAlert = (title, text) => {
+  MySwal.fire({
+    icon: 'success',
+    title,
+    text,
+    showConfirmButton: false,
+    timer: 1500,
+  });
+};
+
+export const showErrorAlert = (title, text) => {
+  MySwal.fire({
+    icon: 'error',
+    title,
+    text,
+    showConfirmButton: false,
+    timer: 1500,
+  });
+};

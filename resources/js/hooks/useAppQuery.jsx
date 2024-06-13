@@ -2,9 +2,9 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
-export const useAppQuery = (queryKey, url, params = '', request= '') => {
+export const useAppQuery = (queryKey, url, params = {}) => {
   const onGetData = async () => {
-    const { data } = await axios.get(route(url, { params }), request);
+    const { data } = await axios.get(route(url, params));
     return data;
   };
 
