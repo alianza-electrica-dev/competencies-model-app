@@ -1,7 +1,7 @@
 .pl-layout {
   background-color: rgb(247, 247, 247);
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 1fr;
   min-height: 100vh;
 }
 
@@ -16,7 +16,8 @@
 }
 
 .pl-header {
-  background-color: palegreen;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .pl-outlet {

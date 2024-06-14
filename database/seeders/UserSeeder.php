@@ -50,28 +50,6 @@ class UserSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ATENCION_CLIENTES,
             ],
-            [
-                'id' => 4,
-                'name' => 'Empleado',
-                'last_name' => 'Prueba',
-                'second_last_name' => '2',
-                'email' => 'empleado.prueba2@alianzaelectrica.com',
-                'password' => Hash::make('prueba123'),
-                'active' => true,
-                'role_id' => Role::EMPLOYEE,
-                'area_id' => Area::COMPRAS_MATERIALES,
-            ],
-            [
-                'id' => 5,
-                'name' => 'Empleado',
-                'last_name' => 'Prueba',
-                'second_last_name' => '3',
-                'email' => 'empleado.prueba3@alianzaelectrica.com',
-                'password' => Hash::make('prueba123'),
-                'active' => true,
-                'role_id' => Role::EMPLOYEE,
-                'area_id' => Area::VENTAS,
-            ],
         ]);
     }
 }

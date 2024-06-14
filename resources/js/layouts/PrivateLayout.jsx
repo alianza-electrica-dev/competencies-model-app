@@ -1,18 +1,18 @@
 import { Outlet } from 'react-router-dom';
+import { Footer, Header } from '../common';
 import { Sidebar } from '../admin/components/ui';
 import styles from '../admin/styles/private-layout.module.css';
-import { Footer } from '../common';
 
 export const PrivateLayout = () => {
   return (
     <div className={styles['pl-layout']}>
-      <div className={styles['pl-sidebar']}>
+      {/* <div className={styles['pl-sidebar']}>
         <Sidebar />
-      </div>
+      </div> */}
 
       <div className={styles['pl-content']}>
         <div className={styles['pl-header']}>
-          <p>header</p>
+          <Header />
         </div>
 
         <div className={`${styles['pl-outlet']}`}>
