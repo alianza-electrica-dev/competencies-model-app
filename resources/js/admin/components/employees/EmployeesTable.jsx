@@ -4,7 +4,7 @@ import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { employeesColumns } from '../../helpers';
 import { LinkButton } from '../table/LinkButton';
-import { EmployeesAssignation } from './EmployeesAssignation';
+import { EvaluationForm } from './';
 
 export const EmployeesTable = ({ employees }) => {
   return (
@@ -25,7 +25,7 @@ export const EmployeesTable = ({ employees }) => {
         />
         <Column
           header=''
-          body={rowData => <EmployeesAssignation rowData={rowData}/>}
+          body={rowData => <EvaluationForm /> }
         />
       </DataTable>
     </Card>

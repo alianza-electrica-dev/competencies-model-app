@@ -3,18 +3,23 @@ import { Loading } from '../../../common';
 import { EmployeesTable } from './EmployeesTable';
 
 export const EmployeesMain = () => {
-  const { isPending, isError, data, error } = useAppQuery(
+  const employeesQuery = useAppQuery(
     'Employees',
     'admin.employees.index_content',
   );
 
-  if (isPending) {
+  const TestCompetenciesQuery = useAppQuery(
+    'Employees',
+    'admin.employees.index_content',
+  );
+
+  if (employeesQuery.isPending || TestCompetenciesQuery.isPending) {
     return <Loading />;
   }
 
-  if (isError) {
-    return <span>Error: {error.message}</span>;
+  if (employeesQuery.isError || TestCompetenciesQuery.isError) {
+    return <span>Error</span>;
   }
 
-  return <EmployeesTable employees={data.employees} />;
+  return <EmployeesTable employees={employeesQuery.data.employees}  />;
 };

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Area;
 use App\Models\AreaTest;
 use App\Models\Role;
 use App\Models\Test;
@@ -11,6 +12,20 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function getManagers()
+    {
+        $managers = User::query()
+            ->where('role_id', Role::ADMIN)
+            ->with(['role', 'area'])
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'managers' => $managers,
+            'areas' => Area::all(),
+        ]);
+    }
+
     public function indexContent()
     {
         $employees = User::query()
