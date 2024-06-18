@@ -65,7 +65,9 @@ class User extends Authenticatable
 
     public function questions(): BelongsToMany
     {
-        return $this->belongsToMany(Question::class, 'user_response');
+        return $this->belongsToMany(Question::class, 'user_response')
+            ->withPivot('response_value')
+            ->withTimestamps();
     }
 
     public function role(): BelongsTo

@@ -18,6 +18,8 @@ class Question extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'user_response');
+        return $this->belongsToMany(User::class, 'user_response')
+            ->withPivot('response_value')
+            ->withTimestamps();
     }
 }

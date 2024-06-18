@@ -1,0 +1,24 @@
+.container {
+  background-color: rgb(247, 247, 247);
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: 1fr 10fr 1fr;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px 0 10px;
+}
+
+.grid {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

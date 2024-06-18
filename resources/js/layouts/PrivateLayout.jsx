@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Footer, Header } from '../common';
-import styles from '../admin/styles/private-layout.module.css';
+import styles from './private-layout.module.css';
 
 export const PrivateLayout = () => {
   return (
