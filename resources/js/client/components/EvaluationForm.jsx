@@ -2,15 +2,15 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { useAppMutation } from '../../hooks';
 import { CustomRadioButton } from '../../formik';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-import { useAppMutation } from '../../hooks';
 
 export const EvaluationForm = ({ questions, test }) => {
   const [visible, setVisible] = useState(false);
 
-  const { mutate, isPending, isError } = useAppMutation(
+  const { mutate, isPending } = useAppMutation(
     'client.evaluations.answer_test',
     'evaluations',
   );
@@ -29,7 +29,7 @@ export const EvaluationForm = ({ questions, test }) => {
     }, {}),
   );
 
-  const handleSubmit = async values => {
+  const onSubmit = async values => {
     const responses = Object.keys(values).map(key => {
       const questionId = key.split('_')[1];
       return {
@@ -46,25 +46,25 @@ export const EvaluationForm = ({ questions, test }) => {
     <div className='card flex justify-content-center'>
       <Button
         onClick={() => setVisible(true)}
-        icon='pi pi-file-edit'
-        rounded
-        text
-        tooltip='Responder'
-        tooltipOptions={{ position: 'top' }}
-        type='button'
         disabled={test.pivot.status_id !== 1}
+        icon='pi pi-file-edit'
+        label='responder'
+        severity='warning'
+        text
+        type='button'
       />
 
       <Dialog
-        header={test.description}
-        visible={visible}
-        style={{ width: '60vw' }}
         onHide={() => setVisible(false)}
+        header={test.description}
+        maximizable
+        style={{ width: '60vw' }}
+        visible={visible}
       >
         <Formik
           initialValues={initialValues}
+          onSubmit={onSubmit}
           validationSchema={validationSchema}
-          onSubmit={handleSubmit}
         >
           {({ values }) => (
             <Form>
@@ -80,7 +80,13 @@ export const EvaluationForm = ({ questions, test }) => {
                   ]}
                 />
               ))}
-              <Button type='submit' label='Enviar' loading={isPending} />
+              <Button
+                icon='pi pi-send'
+                label='Enviar'
+                loading={isPending}
+                severity='warning'
+                type='submit'
+              />
             </Form>
           )}
         </Formik>
@@ -90,6 +96,6 @@ export const EvaluationForm = ({ questions, test }) => {
 };
 
 EvaluationForm.propTypes = {
-  questions: PropTypes.array.isRequired,
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
   test: PropTypes.object.isRequired,
 };

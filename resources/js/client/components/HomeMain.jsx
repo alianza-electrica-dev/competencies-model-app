@@ -1,6 +1,6 @@
 import { useAppQuery } from '../../hooks';
-import { EvaluationGrid } from './';
-import { Footer } from '../../common/ui/Footer';
+import { Error, Footer, Loading } from '../../common';
+import { EvaluationGrid, Header } from './';
 import styles from '../styles/home.module.css';
 
 export const HomeMain = () => {
@@ -10,18 +10,17 @@ export const HomeMain = () => {
   );
 
   if (isPending) {
-    return <span>Loading...</span>;
+    return <Loading />;
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>;
+    return <Error errorMessage={error.message} />;
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <p>Bienvenido Nombre del usuario</p>
-        <button>Log-out</button>
+        <Header />
       </div>
 
       <div className={`overflow-hidden ${styles.grid}`}>

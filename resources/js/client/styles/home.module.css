@@ -1,24 +1,24 @@
 .container {
-  background-color: rgb(247, 247, 247);
   display: grid;
+  grid-template-rows: 1fr 6fr 0.5fr;
   min-height: 100vh;
-  grid-template-rows: 1fr 10fr 1fr;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 10px 0 10px;
+  background-color: #fafafa;
+  justify-content: space-between;
+  padding: 0 4rem 0 4rem;
 }
 
 .grid {
-  padding-bottom: 1rem;
-  padding-top: 1rem;
+  padding: 1rem 0;
 }
 
 .footer {
   display: flex;
   align-items: center;
+  color: #fff;
   justify-content: center;
 }

@@ -66,7 +66,7 @@ class AuthController extends Controller
 
             return response()->json([
                 'success' => true,
-                'isLogin' => false,
+                'isRegister' => true,
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();
