@@ -1,38 +1,44 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { CustomRadioButton } from '../../../formik'; // Assuming CustomRadioButton is correctly defined
+import { useAppMutation } from '../../../hooks/useAppMutation';
 
 export const Test = ({ questions, test }) => {
   const [visible, setVisible] = useState(false);
-
+  const { mutate } = useAppMutation('admin.prueba');
   // Initialize initialValues based on response_values from tests2
   const initialValues = questions.reduce((values, question) => {
-    const response = test.questions.find(q => q.id === question.id)?.users[0]?.pivot?.response_value;
-    values[`question_${question.id}`] = response !== undefined ? `${response}` : ''; // Convert undefined to empty string
+    const response = test.questions.find(q => q.id === question.id)?.users[0]
+      ?.pivot?.response_value;
+    values[`question_${question.id}`] =
+      response !== undefined ? `${response}` : ''; // Convert undefined to empty string
     return values;
   }, {});
 
   const validationSchema = Yup.object().shape(
     questions.reduce((schema, question) => {
-      schema[`question_${question.id}`] = Yup.string().required('Este campo es requerido');
+      schema[`question_${question.id}`] = Yup.string().required(
+        'Este campo es requerido',
+      );
       return schema;
-    }, {})
+    }, {}),
   );
 
   const onSubmit = async values => {
     const responses = Object.keys(values).map(key => {
       const questionId = key.split('_')[1];
       return {
-        question_id: questionId,
+        question_id: parseInt(questionId),
         response_value: parseInt(values[key]), // Ensure response_value is integer
       };
     });
 
     // Handle your mutation logic here
-    console.log(responses); // For demo purposes
+    mutate({ request: { responses }, params: test.id });
 
     setVisible(false);
   };
@@ -90,4 +96,3 @@ export const Test = ({ questions, test }) => {
     </div>
   );
 };
-

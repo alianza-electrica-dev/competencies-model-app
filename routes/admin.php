@@ -18,4 +18,6 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/employee-evaluation/{id}', [UserController::class, 'getUserTests'])->name('user_test');
     Route::get('/evaluations-area/{userId}/{competencyId}', [TestController::class, 'getTestsByArea'])->name('tests.area');
   });
+
+  Route::post('prueba/{testId}', [TestController::class, 'prueba'])->name('prueba');
 })->middleware([IsAdmin::class]);
