@@ -3,13 +3,18 @@ import { Card } from 'primereact/card';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { employeesEvaluationsColumns } from '../../helpers';
-import { Button } from 'primereact/button';
 import { TableStatusTemplate } from '../table';
+import { Test } from './Test';
 
 export const EmpoyeesEvaluationsTable = ({ evaluations }) => {
   return (
     <Card title='Evaluaciones - Competencias' style={{ height: '100%' }}>
-      <DataTable value={evaluations} paginator rows={5} tableStyle={{ minWidth: '50rem' }}>
+      <DataTable
+        value={evaluations}
+        paginator
+        rows={5}
+        tableStyle={{ minWidth: '50rem' }}
+      >
         {employeesEvaluationsColumns.map(colum => (
           <Column
             key={colum.field}
@@ -24,16 +29,9 @@ export const EmpoyeesEvaluationsTable = ({ evaluations }) => {
         ))}
         <Column
           header=''
-          body={
-            <Button
-              icon='pi pi-list-check'
-              rounded
-              text
-              tooltip='Revisar Evaluacion'
-              tooltipOptions={{ position: 'top' }}
-              type='button'
-            />
-          }
+          body={rowData => (
+            <Test questions={rowData.questions} test={rowData} />
+          )}
         />
       </DataTable>
     </Card>

@@ -42,8 +42,17 @@ class UserController extends Controller
     public function getUserTests($id)
     {
         $user = User::query()->findOrFail($id);
+
         $tests = $user->tests()
-            ->with('competency')
+            ->with([
+                'competency',
+                'questions' => function ($query) use ($id) {
+                    $query->with(['users' => function ($query) use ($id) {
+                        $query->where('user_id', $id)
+                            ->withPivot('response_value');
+                    }]);
+                }
+            ])
             ->get();
 
         $tests->each(function ($test) {
