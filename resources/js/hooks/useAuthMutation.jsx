@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import { useAuthUserStore } from '../store/authUser';
-import { showRegisterAlert } from '../utils/alert';
+import { adminNavigationAlert, showRegisterAlert } from '../utils/alert';
 import { useNavigate } from 'react-router-dom';
 
 export const useAuthMutation = url => {
@@ -13,7 +13,13 @@ export const useAuthMutation = url => {
 
     onSuccess: data => {
       const { data: response } = data;
-      if (response.success && response.isLogin) {
+      if (response.success && response.isLogin && response.user.role_id === 1) {
+        adminNavigationAlert(response.user);
+      } else if (
+        response.success &&
+        response.isLogin &&
+        response.user.role_id === 2
+      ) {
         const login = useAuthUserStore.getState().setAuthUser;
         login(response.user);
       } else if (response.success) {

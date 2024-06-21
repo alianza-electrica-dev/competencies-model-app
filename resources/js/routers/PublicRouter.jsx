@@ -7,7 +7,7 @@ export const PublicRouter = ({ children }) => {
 
   return !user ? (
     children
-  ) : user.role_id === 1 ? (
+  ) : user.role_id === 1 && !user.hasPermission ? (
     <Navigate to='/admin/managers' />
   ) : (
     <Navigate to='/client/competencies' />
