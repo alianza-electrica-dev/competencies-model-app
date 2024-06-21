@@ -1,9 +1,8 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { LogOutBtn } from '../../auth/components';
+import { Button } from 'primereact/button';
 import { MegaMenu } from 'primereact/megamenu';
 import { Ripple } from 'primereact/ripple';
-import { Button } from 'primereact/button';
-import { Avatar } from 'primereact/avatar';
-import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -75,29 +74,14 @@ export const Header = () => {
     },
   ];
 
-  const start = (
-    <Avatar
-      image='https://grupo-fg.com/assets/Circle-Home.png'
-      shape='circle'
-    />
-  );
-  const end = (
-    <Avatar
-      image='https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png'
-      shape='circle'
-    />
-  );
-
   return (
     <div className='card'>
       <MegaMenu
         model={items}
         orientation='horizontal'
-        start={start}
-        end={end}
+        end={<LogOutBtn />}
         breakpoint='960px'
         className='p-3 surface-0 shadow-2'
-        // style={{ borderRadius: '3rem' }}
       />
     </div>
   );
