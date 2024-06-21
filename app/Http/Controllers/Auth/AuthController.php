@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
-    // * TODO: Añadir el isActive a los usuarios
     public function login(Request $request)
     {
         $credentials = $request->validate([

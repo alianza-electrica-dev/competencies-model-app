@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $employees = User::query()
             ->where('role_id', Role::EMPLOYEE)
-            ->with(['role', 'area'])
+            ->with(['role', 'area', 'tests'])
             ->get();
 
         return response()->json([

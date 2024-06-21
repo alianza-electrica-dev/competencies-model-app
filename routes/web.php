@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,6 +14,13 @@ Route::prefix('/auth')->name('auth.')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::get('/get-areas', [AuthController::class, 'getAreas'])->name('get_areas');
 })->middleware(['guest']);
+
+Route::get('/auth/check', function () {
+    return response()->json([
+        'authenticated' => Auth::check(),
+        'user' => Auth::user(),
+    ]);
+})->name('auth_check');
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/client.php';

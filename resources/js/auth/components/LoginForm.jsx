@@ -6,6 +6,7 @@ import { loginValidations } from '../validations';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { ImageForm } from './';
+import { TestAuthSesion } from './TestAuthSesion';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -54,6 +55,8 @@ export const LoginForm = () => {
                   type='button'
                   onClick={() => navigate('/register')}
                 />
+
+                <TestAuthSesion />
               </div>
             </Form>
           )}

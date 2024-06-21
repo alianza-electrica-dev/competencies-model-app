@@ -51,11 +51,33 @@ class User extends Authenticatable
         ];
     }
 
-    protected $appends = ['full_name'];
+    protected $appends = ['full_name', 'score', 'average'];
 
     public function getFullNameAttribute(): string
     {
         return "{$this->name} {$this->last_name} {$this->second_last_name}";
+    }
+
+    public function getScoreAttribute(): int
+    {
+        $score = 0;
+
+        foreach ($this->tests as $test) {
+            $score += $test->pivot->score;
+        }
+
+        return $score;
+    }
+
+    public function getAverageAttribute(): ?float
+    {
+        $totalTests = $this->tests->count();
+
+        if ($totalTests > 0) {
+            return $this->score / $totalTests;
+        } else {
+            return null; // Opcional: Devolver null si no hay tests asociados
+        }
     }
 
     public function area(): BelongsTo
