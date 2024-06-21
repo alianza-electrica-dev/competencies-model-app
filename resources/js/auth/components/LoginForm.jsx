@@ -6,7 +6,6 @@ import { loginValidations } from '../validations';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { ImageForm } from './';
-import { TestAuthSesion } from './TestAuthSesion';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -14,7 +13,7 @@ export const LoginForm = () => {
 
   return (
     <div className='card'>
-      <Card className='md:w-25rem'>
+      <Card className='w-25rem'>
         <ImageForm />
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -55,8 +54,6 @@ export const LoginForm = () => {
                   type='button'
                   onClick={() => navigate('/register')}
                 />
-
-                <TestAuthSesion />
               </div>
             </Form>
           )}
