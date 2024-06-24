@@ -7,3 +7,27 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.p-inputswitch.p-highlight .p-inputswitch-slider {
+  background: #0a2240;
+}
+
+.btn-primary {
+  background-color: #ff4d00;
+}
+
+.btn-secondary {
+  background-color: #0a2240;
+}
+
+.btn-terceary {
+  background-color: #898a8d;
+}
+
+.text-primary {
+  color: #ff4d00 !important;
+}
+
+.text-secondary {
+  color: #0a2240 !important;
+}

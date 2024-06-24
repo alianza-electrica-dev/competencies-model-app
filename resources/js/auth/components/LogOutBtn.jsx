@@ -15,11 +15,11 @@ export const LogOutBtn = () => {
   return (
     <Button
       onClick={() => mutate()}
+      className='text-secondary hover:bg-blue-50'
       icon='pi pi-sign-out'
       loading={isPending}
       rounded
       size='large'
-      style={{ color: '#000' }}
       text
       tooltip='Cerrar sesión'
       tooltipOptions={{ position: 'bottom' }}

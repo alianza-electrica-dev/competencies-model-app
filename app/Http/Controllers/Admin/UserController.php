@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\AreaTest;
 use App\Models\Role;
+use App\Models\Status;
 use App\Models\Test;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -37,6 +40,74 @@ class UserController extends Controller
             'success' => true,
             'employees' => $employees,
         ]);
+    }
+
+    public function upsert(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $user = User::firstOrNew(['id' => $id]);
+            $user->fill($request->all());
+            $user->password = Hash::make($request->password);
+            $user->role_id = Role::ADMIN;
+            $user->saveOrFail();
+
+            if ($id === 'FAKE_ID') {
+                $testIds = [1, 2, 3];
+                $testData = [];
+
+                foreach ($testIds as $testId) {
+                    $testData[$testId] = ['status_id' => Status::PENDIENTE];
+                }
+
+                $user->tests()->attach($testData);
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'titleAlert' => $id === 'FAKE_ID' ? '¡Administrador agregado!' : '¡Administrador actualizado!',
+                'textAlert' => $id === 'FAKE_ID'
+                    ? 'El administrador ha sido agregado correctamente'
+                    : 'El administrador ha sido actualizado correctamente',
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'error' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+            ], 500);
+        }
+    }
+
+    public function status($id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $user = User::findOrFail($id);
+            $user->active = !$user->active;
+            $user->saveOrFail();
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'titleAlert' => $user->active ? '¡Administrador activado!' : '¡Administrador desactivado!',
+                'textAlert' => $user->active
+                    ? 'El administrador ha sido activado correctamente'
+                    : 'El administrador ha sido desactivado correctamente',
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'error' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+            ], 500);
+        }
     }
 
     public function getUserTests($id)

@@ -22,10 +22,12 @@ export const useAppMutation = (url, invalidQuery = '') => {
         queryClient.invalidateQueries({ queryKey: [invalidQuery] });
     },
 
-    onError: error => {
-      const { response } = error;
-      const { data } = response;
-      console.log(data.message);
+    onError: (error, variables, context) => {
+      console.log({ error, variables, context });
+      showErrorAlert(
+        'Ha ocurrido un error',
+        'Favor de contactar a oscar.lopez@alianzaelectrica.com',
+      );
     },
   });
 };

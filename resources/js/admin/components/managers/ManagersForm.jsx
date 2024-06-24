@@ -1,14 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
+import { useAppMutation } from '../../../hooks';
+import { CustomInputSelect, CustomInputText } from '../../../formik';
+import { adminValidations } from '../../validations/adminValidations';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-import { CustomInputText } from '../../../formik';
 
-export const ManagersForm = ({ isUpdate, rowData }) => {
+export const ManagersForm = ({ isUpdate, rowData, areas }) => {
   const [visible, setVisible] = useState(false);
-  
-  useEffect(() => {}, [visible]);
+  const { mutate, isPending } = useAppMutation(
+    'admin.managers.upsert',
+    'managers',
+  );
 
   const initialValues = {
     name: '',
@@ -16,7 +20,6 @@ export const ManagersForm = ({ isUpdate, rowData }) => {
     second_last_name: '',
     email: '',
     password: '',
-    password_confirmation: '',
     rol_id: '',
     area_id: '',
   };
@@ -27,9 +30,16 @@ export const ManagersForm = ({ isUpdate, rowData }) => {
     second_last_name: rowData?.second_last_name,
     email: rowData?.email,
     password: '',
-    password_confirmation: '',
     rol_id: rowData?.rol_id,
     area_id: rowData?.area_id,
+  };
+
+  const onSubmit = values => {
+    mutate({
+      request: values,
+      params: { id: !isUpdate ? 'FAKE_ID' : rowData.id },
+    });
+    setVisible(false);
   };
 
   return (
@@ -37,6 +47,7 @@ export const ManagersForm = ({ isUpdate, rowData }) => {
       {!isUpdate ? (
         <Button
           onClick={() => setVisible(true)}
+          className='btn-primary'
           icon='pi pi-plus'
           label='Añadir Administrador'
           rounded
@@ -45,6 +56,7 @@ export const ManagersForm = ({ isUpdate, rowData }) => {
       ) : (
         <Button
           onClick={() => setVisible(true)}
+          className='text-primary'
           icon='pi pi-pencil'
           rounded
           text
@@ -55,7 +67,7 @@ export const ManagersForm = ({ isUpdate, rowData }) => {
       )}
 
       <Dialog
-        header='Agregar Administrador'
+        header={`${!isUpdate ? 'Agregar' : 'Actualizar'} Administrador`}
         visible={visible}
         style={{ width: '30vw' }}
         onHide={() => {
@@ -65,7 +77,8 @@ export const ManagersForm = ({ isUpdate, rowData }) => {
       >
         <Formik
           initialValues={!isUpdate ? initialValues : updateValues}
-          onSubmit={values => console.log(values)}
+          onSubmit={values => onSubmit(values)}
+          validationSchema={adminValidations}
         >
           {formik => (
             <Form className='formgrid grid'>
@@ -80,15 +93,30 @@ export const ManagersForm = ({ isUpdate, rowData }) => {
 
               <CustomInputText label='Correo electronico' name='email' />
 
-              <CustomInputText label='Contraseña' name='password' />
-
               <CustomInputText
-                label='Confirmar contraseña'
-                name='password_confirmation'
+                label='Contraseña'
+                name='password'
+                type='password'
+              />
+
+              <CustomInputSelect
+                label='Area'
+                name='area_id'
+                options={areas}
+                optionLabel='name'
+                optionValue='id'
               />
 
               <div className='col-12 flex justify-content-center mt-5'>
-                <Button label='Agregar Administrador' rounded type='submit' />
+                <Button
+                  label={`${
+                    !isUpdate ? 'Agregar' : 'Actualizar'
+                  } administrador`}
+                  rounded
+                  type='submit'
+                  loading={isPending}
+                  className='btn-primary'
+                />
               </div>
             </Form>
           )}
@@ -99,6 +127,7 @@ export const ManagersForm = ({ isUpdate, rowData }) => {
 };
 
 ManagersForm.propTypes = {
+  areas: PropTypes.arrayOf(PropTypes.object).isRequired,
   isUpdate: PropTypes.bool,
   rowData: PropTypes.object,
 };

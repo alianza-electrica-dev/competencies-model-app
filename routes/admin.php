@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/admin')->name('admin.')->group(function () {
 
-  // ****** EMPLOYEES ROUTES ****** //
+  // ****** MANAGERS ROUTES ****** //
   Route::prefix('/managers')->name('managers.')->group(function () {
     Route::get('/get-managers', [UserController::class, 'getManagers'])->name('get.managers');
+    Route::post('/upsert/${id}', [UserController::class, 'upsert'])->name('upsert');
+    Route::post('/status/${id}', [UserController::class, 'status'])->name('status');
   });
 
   // ****** EMPLOYEES ROUTES ****** //

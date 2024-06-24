@@ -1,9 +1,8 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { PrivateLayout } from '../../layouts';
 import {
   EmployeesEvaluationsPage,
   EmployeesPage,
-  EvaluationsPage,
   ManagersPage,
 } from '../pages';
 
@@ -17,7 +16,7 @@ export const AdminRoutes = () => {
           path='/employees-evaluations/:id'
           element={<EmployeesEvaluationsPage />}
         />
-        <Route path='/evaluations' element={<EvaluationsPage />} />
+        <Route path='/*' element={<Navigate to='/admin/managers' />} />
       </Route>
     </Routes>
   );

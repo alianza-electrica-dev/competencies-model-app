@@ -1,7 +1,8 @@
 import { useAppQuery } from '../../../hooks';
-import { AdminTable } from '../table';
-import { Loading } from '../../../common/ui/Loading';
+import { AdminTable, ToggleButton } from '../table';
+import { Error, Loading } from '../../../common';
 import { ManagersForm } from './ManagersForm';
+import { managersFilters } from '../../helpers/filters';
 import { Column } from 'primereact/column';
 
 export const ManagersMain = () => {
@@ -15,21 +16,34 @@ export const ManagersMain = () => {
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>;
+    return <Error errorMessage={error.message} />;
   }
 
   const tableHeader = (
-    <div className='flex justify-content-between align-items-center px-4 pt-2'>
-      <span className='text-xl text-900 font-bold'>Liderez</span>
-      <ManagersForm />
+    <div className='flex justify-content-between align-items-center px-4 pt-4'>
+      <span className='text-3xl text-900 font-bold text-secondary'>Liderez</span>
+      <ManagersForm areas={data.areas} />
     </div>
   );
 
   return (
-    <AdminTable tableData={data.managers} tableHeader={tableHeader}>
+    <AdminTable
+      tableData={data.managers}
+      tableHeader={tableHeader}
+      filters={managersFilters}
+    >
       <Column
         header=''
-        body={rowData => <ManagersForm isUpdate={true} rowData={rowData} />}
+        body={rowData => (
+          <ManagersForm isUpdate={true} rowData={rowData} areas={data.areas} />
+        )}
+      />
+
+      <Column
+        header=''
+        body={rowData => (
+          <ToggleButton id={rowData.id} status={rowData.active} />
+        )}
       />
     </AdminTable>
   );

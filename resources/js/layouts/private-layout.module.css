@@ -1,5 +1,5 @@
 .pl-layout {
-  background-color: rgb(247, 247, 247);
+  background-image: url('../../../public/assets/images/app-bg.webp');
   display: grid;
   grid-template-columns: 1fr;
   min-height: 100vh;
