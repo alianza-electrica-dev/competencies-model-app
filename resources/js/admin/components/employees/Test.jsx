@@ -4,18 +4,18 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-import { CustomRadioButton } from '../../../formik'; // Assuming CustomRadioButton is correctly defined
+import { CustomRadioButton } from '../../../formik';
 import { useAppMutation } from '../../../hooks/useAppMutation';
 
 export const Test = ({ questions, test }) => {
   const [visible, setVisible] = useState(false);
   const { mutate } = useAppMutation('admin.prueba');
-  // Initialize initialValues based on response_values from tests2
+
   const initialValues = questions.reduce((values, question) => {
     const response = test.questions.find(q => q.id === question.id)?.users[0]
       ?.pivot?.response_value;
     values[`question_${question.id}`] =
-      response !== undefined ? `${response}` : ''; // Convert undefined to empty string
+      response !== undefined ? `${response}` : '';
     return values;
   }, {});
 
@@ -33,12 +33,11 @@ export const Test = ({ questions, test }) => {
       const questionId = key.split('_')[1];
       return {
         question_id: parseInt(questionId),
-        response_value: parseInt(values[key]), // Ensure response_value is integer
+        response_value: parseInt(values[key]),
       };
     });
 
-    // Handle your mutation logic here
-    mutate({ request: { responses }, params: test.id });
+    mutate({ request: { responses }, params: {userId: test.pivot.user_id , testId: test.id }});
 
     setVisible(false);
   };

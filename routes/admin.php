@@ -19,5 +19,5 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/evaluations-area/{userId}/{competencyId}', [TestController::class, 'getTestsByArea'])->name('tests.area');
   });
 
-  Route::post('prueba/{testId}', [TestController::class, 'prueba'])->name('prueba');
+  Route::post('prueba/{userId}/{testId}', [TestController::class, 'prueba'])->name('prueba');
 })->middleware([IsAdmin::class]);

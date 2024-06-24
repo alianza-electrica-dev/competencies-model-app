@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Auth;
 class TestController extends Controller
 {
 
-    public function prueba(Request $request, $testId)
+    public function prueba(Request $request, $userId, $testId)
     {
 
         // Obtener el usuario
-        $user = User::findOrFail(3);
+        $user = User::findOrFail($userId);
 
         // Obtener las respuestas enviadas
         $responses = collect($request->responses);
