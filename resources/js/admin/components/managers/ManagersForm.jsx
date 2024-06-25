@@ -109,9 +109,7 @@ export const ManagersForm = ({ isUpdate, rowData, areas }) => {
 
               <div className='col-12 flex justify-content-center mt-5'>
                 <Button
-                  label={`${
-                    !isUpdate ? 'Agregar' : 'Actualizar'
-                  } administrador`}
+                  label={`${!isUpdate ? 'Agregar' : 'Actualizar'} administrador`}
                   rounded
                   type='submit'
                   loading={isPending}

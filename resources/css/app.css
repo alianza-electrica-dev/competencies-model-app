@@ -18,10 +18,12 @@ body {
 
 .btn-secondary {
   background-color: #0a2240;
+  border: none;
 }
 
 .btn-terceary {
   background-color: #898a8d;
+  border: none;
 }
 
 .text-primary {

@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { PrivateLayout } from '../../layouts';
 import {
-  EmployeesEvaluationsPage,
+  EmployeesCompetenciesPage,
   EmployeesPage,
   ManagersPage,
 } from '../pages';
@@ -13,8 +13,8 @@ export const AdminRoutes = () => {
         <Route path='/managers' element={<ManagersPage />} />
         <Route path='/employees' element={<EmployeesPage />} />
         <Route
-          path='/employees-evaluations/:id'
-          element={<EmployeesEvaluationsPage />}
+          path='/employees-competencies/:id'
+          element={<EmployeesCompetenciesPage />}
         />
         <Route path='/*' element={<Navigate to='/admin/managers' />} />
       </Route>

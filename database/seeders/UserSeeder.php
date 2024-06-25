@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
                 'name' => 'Oscar',
                 'last_name' => 'Lopez',
                 'second_last_name' => 'Rodriguez',
-                'email' => 'admin@alianzaelectrica.com',
+                'email' => 'admin@fg.com',
                 'password' => Hash::make('testadmin123'),
                 'active' => true,
                 'role_id' => Role::ADMIN,

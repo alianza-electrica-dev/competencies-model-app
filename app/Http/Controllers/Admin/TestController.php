@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Competency;
 use App\Models\Status;
 use App\Models\Test;
 use App\Models\User;
@@ -13,16 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class TestController extends Controller
 {
 
-    public function prueba(Request $request, $userId, $testId)
+    public function closeEvaluation(Request $request, $userId, $testId)
     {
-
-        // Obtener el usuario
         $user = User::findOrFail($userId);
 
-        // Obtener las respuestas enviadas
         $responses = collect($request->responses);
 
-        // Obtener las preguntas existentes del usuario para evitar duplicados
         $existingResponses = $user->questions()
             ->whereIn('questions.id', $responses->pluck('question_id'))
             ->get()
@@ -35,96 +30,95 @@ class TestController extends Controller
             $responseValue = $response['response_value'];
 
             if (isset($existingResponses[$questionId])) {
-                // Si la respuesta ya existe, actualizarla
                 $user->questions()->updateExistingPivot($questionId, ['response_value' => $responseValue]);
             } else {
-                // Si no existe, crear una nueva respuesta
                 $attachData[$questionId] = ['response_value' => $responseValue];
             }
         }
 
-        // Adjuntar nuevas respuestas si hay alguna
         if (!empty($attachData)) {
             $user->questions()->attach($attachData);
         }
 
-        // Opcional: Actualizar el puntaje del test del usuario
         $totalScore = $user->questions()
             ->wherePivotIn('question_id', $responses->pluck('question_id')->toArray())
             ->sum('response_value');
 
-        // Actualizar el pivote de tests con el puntaje y el estado
         $user->tests()->updateExistingPivot($testId, [
             'status_id' => Status::FINALIZADO,
             'score' => $totalScore,
         ]);
 
-        // Devolver una respuesta
         return response()->json([
             'success' => true,
-            'message' => 'Respuestas actualizadas correctamente',
+            'titleAlert' => '¡Se finalizo la evaluación!',
+            'textAlert' => 'Esta evaluación ha dado cierre por un administrador',
         ]);
     }
 
-    public function updateResponses(Request $request, $testId)
+    public function getCompetencies($competencyId, $areaId)
     {
-        dd($request->all());
-        // Obtener el usuario
-        $user = User::findOrFail(Auth::user()->id);
+        $tests = $this->evaluationsToAssing($competencyId, $areaId);
 
-        // Obtener las respuestas enviadas
-        $responses = $request->responses;
-
-        // Procesar las respuestas para attach
-        $attachData = [];
-        foreach ($responses as $response) {
-            $attachData[$response['question_id']] = ['response_value' => $response['response_value']];
-        }
-
-        // Adjuntar las respuestas (crea nuevas o actualiza existentes)
-        $user->responses()->syncWithoutDetaching($attachData);
-
-        // Opcional: Actualizar el puntaje del test del usuario
-        $totalScore = $user->responses()
-            ->wherePivotIn('question_id', array_column($responses, 'question_id'))
-            ->sum('response_value');
-
-        $user->tests()->updateExistingPivot($testId, [
-            'status_id' => Status::FINALIZADO,
-            'score' => $totalScore,
-        ]);
-
-        // Devolver una respuesta
         return response()->json([
             'success' => true,
-            'message' => 'Respuestas actualizadas correctamente',
-        ]);
-    }
-    public function getTestsByArea($userId, $competencyId)
-    {
-        $test = $this->SearchEvaluationsToAssing($userId, $competencyId);
-        return response()->json([
-            'success' => true,
-            'test' => $test,
-            'competencies' => Competency::all(),
+            'tests' => $tests,
         ]);
     }
 
-    private function SearchEvaluationsToAssing($userId, $competencyId)
+    public function assingEvaluation(Request $request, $userId)
     {
-        $user = User::query()->findOrFail($userId);
-        $areaId = $user->area->id;
+        $user = User::findOrFail($userId);
+        $user->tests()->attach(['test_id' => $request->test_id],  ['status_id' => Status::PENDIENTE]);
 
+        return response()->json([
+            'success' => true,
+            'titleAlert' => '¡Evaluaciones asignadas correctamente!',
+            'textAlert' => 'Todas las evaluaciones se han asignado a este usuario',
+        ]);
+    }
+
+    public function getUserTests($id)
+    {
+        $user = User::query()->findOrFail($id);
+
+        $tests = $user->tests()
+            ->with([
+                'competency',
+                'questions' => function ($query) use ($id) {
+                    $query->with(['users' => function ($query) use ($id) {
+                        $query->where('user_id', $id)
+                            ->withPivot('response_value');
+                    }]);
+                }
+            ])
+            ->get();
+
+        $tests->each(function ($test) {
+            $test->pivot->load('status');
+        });
+
+        return response()->json([
+            'success' => true,
+            'tests' => $tests,
+        ]);
+    }
+
+    private function evaluationsToAssing($competencyId, $areaId)
+    {
         switch ($competencyId) {
             case 1:
+                return Test::where('competency_id', 1)->get();
+
+            case 2:
                 return Test::whereHas('areas', function ($query) use ($areaId) {
                     $query->where('area_id', $areaId);
                 })->get();
 
-            case 2:
+            case 3:
                 return Test::where('competency_id', 3)->get();
 
-            case 3:
+            case 4:
                 return Test::where('competency_id', 4)->get();
 
             default:

@@ -2,9 +2,14 @@ import PropTypes from 'prop-types';
 import { Card } from 'primereact/card';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
-import { managersColumns } from '../../helpers/columns';
 
-export const AdminTable = ({ tableData, tableHeader, filters, children }) => {
+export const AdminTable = ({
+  tableData,
+  tableHeader,
+  tableColumns,
+  filters,
+  children,
+}) => {
   return (
     <Card header={tableHeader} style={{ height: '100%' }}>
       <DataTable
@@ -15,7 +20,7 @@ export const AdminTable = ({ tableData, tableHeader, filters, children }) => {
         filters={filters}
         filterDisplay='row'
       >
-        {managersColumns.map(colum => (
+        {tableColumns.map(colum => (
           <Column
             key={colum.field}
             field={colum.field}
@@ -33,6 +38,7 @@ export const AdminTable = ({ tableData, tableHeader, filters, children }) => {
 AdminTable.propTypes = {
   tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
   tableHeader: PropTypes.node.isRequired,
+  tableColumns: PropTypes.arrayOf(PropTypes.object).isRequired,
   filters: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
 };

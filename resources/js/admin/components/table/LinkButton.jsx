@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import { Button } from 'primereact/button';
 import { Link } from 'react-router-dom';
 
-export const LinkButton = ({ rowData, icon, tooltipText }) => {
+export const LinkButton = ({ icon, tooltipText, linkTo }) => {
   return (
-    <Link to={`/admin/employees-evaluations/${rowData.id}`}>
+    <Link to={linkTo}>
       <Button
+        className='text-primary'
         icon={icon}
         rounded
         text
@@ -18,7 +19,7 @@ export const LinkButton = ({ rowData, icon, tooltipText }) => {
 };
 
 LinkButton.propTypes = {
-  rowData: PropTypes.object.isRequired,
   icon: PropTypes.string.isRequired,
+  linkTo: PropTypes.string.isRequired,
   tooltipText: PropTypes.string.isRequired,
 };

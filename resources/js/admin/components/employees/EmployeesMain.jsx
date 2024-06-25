@@ -1,25 +1,78 @@
 import { useAppQuery } from '../../../hooks';
-import { Loading } from '../../../common';
-import { EmployeesTable } from './EmployeesTable';
+import { AdminTable, LinkButton, ToggleButton } from '../table';
+import { Error, Loading } from '../../../common';
+import { AssignEvaluationForm, ShowEmployee } from './';
+import { employeesColumns, employeesFilters } from '../../helpers';
+import { Column } from 'primereact/column';
 
 export const EmployeesMain = () => {
-  const employeesQuery = useAppQuery(
+  const { isPending, isError, data, error } = useAppQuery(
     'Employees',
     'admin.employees.index_content',
   );
 
-  const TestCompetenciesQuery = useAppQuery(
-    'Employees',
-    'admin.employees.index_content',
-  );
-
-  if (employeesQuery.isPending || TestCompetenciesQuery.isPending) {
+  if (isPending) {
     return <Loading />;
   }
 
-  if (employeesQuery.isError || TestCompetenciesQuery.isError) {
-    return <span>Error</span>;
+  if (isError) {
+    return <Error errorMessage={error.message} />;
   }
 
-  return <EmployeesTable employees={employeesQuery.data.employees}  />;
+  const tableHeader = (
+    <div className='flex justify-content-between align-items-center px-4 pt-4'>
+      <span className='text-3xl text-900 font-bold text-secondary'>
+        Colaboradores
+      </span>
+    </div>
+  );
+
+  return (
+    <AdminTable
+      tableData={data.employees}
+      tableHeader={tableHeader}
+      tableColumns={employeesColumns}
+      filters={employeesFilters}
+    >
+      <Column
+        header=''
+        body={rowData => (
+          <LinkButton
+            icon='pi pi-file'
+            tooltipText='Evaluaciones'
+            linkTo={`/admin/employees-competencies/${rowData.id}`}
+          />
+        )}
+      />
+
+      <Column
+        header=''
+        body={rowData => (
+          <AssignEvaluationForm
+            userId={rowData.id}
+            areaId={rowData.area_id}
+            competencies={data.competencies}
+          />
+        )}
+      />
+
+      <Column
+        header=''
+        body={rowData => (
+          <ShowEmployee rowData={rowData} tooltipText={'Más Información'} />
+        )}
+      />
+
+      <Column
+        header=''
+        body={rowData => (
+          <ToggleButton
+            id={rowData.id}
+            status={rowData.active}
+            queryToInvalidate='Employees'
+          />
+        )}
+      />
+    </AdminTable>
+  );
 };

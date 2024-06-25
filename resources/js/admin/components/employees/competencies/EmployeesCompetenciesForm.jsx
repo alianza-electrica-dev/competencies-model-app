@@ -1,15 +1,18 @@
-/* eslint-disable react/prop-types */
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { useAppMutation } from '../../../../hooks';
+import { CustomRadioButton } from '../../../../formik';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
-import { CustomRadioButton } from '../../../formik';
-import { useAppMutation } from '../../../hooks/useAppMutation';
 
-export const Test = ({ questions, test }) => {
+export const EmployeesCompetenciesForm = ({ questions, test }) => {
   const [visible, setVisible] = useState(false);
-  const { mutate } = useAppMutation('admin.prueba');
+  const { mutate } = useAppMutation(
+    'admin.employees.close.evaluation',
+    'EmployeesEvaluations',
+  );
 
   const initialValues = questions.reduce((values, question) => {
     const response = test.questions.find(q => q.id === question.id)?.users[0]
@@ -37,7 +40,10 @@ export const Test = ({ questions, test }) => {
       };
     });
 
-    mutate({ request: { responses }, params: {userId: test.pivot.user_id , testId: test.id }});
+    mutate({
+      request: { responses },
+      params: { userId: test.pivot.user_id, testId: test.id },
+    });
 
     setVisible(false);
   };
@@ -45,7 +51,9 @@ export const Test = ({ questions, test }) => {
   return (
     <div className='card flex justify-content-center'>
       <Button
+        className='text-primary'
         onClick={() => setVisible(true)}
+        disabled={test.pivot.status_id !== 2}
         icon='pi pi-list-check'
         rounded
         text
@@ -94,4 +102,9 @@ export const Test = ({ questions, test }) => {
       </Dialog>
     </div>
   );
+};
+
+EmployeesCompetenciesForm.propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  test: PropTypes.object.isRequired,
 };

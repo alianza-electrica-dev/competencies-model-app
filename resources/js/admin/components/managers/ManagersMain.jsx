@@ -1,8 +1,8 @@
 import { useAppQuery } from '../../../hooks';
 import { AdminTable, ToggleButton } from '../table';
 import { Error, Loading } from '../../../common';
-import { ManagersForm } from './ManagersForm';
-import { managersFilters } from '../../helpers/filters';
+import { ManagersForm } from './';
+import { managersColumns, managersFilters } from '../../helpers';
 import { Column } from 'primereact/column';
 
 export const ManagersMain = () => {
@@ -21,7 +21,9 @@ export const ManagersMain = () => {
 
   const tableHeader = (
     <div className='flex justify-content-between align-items-center px-4 pt-4'>
-      <span className='text-3xl text-900 font-bold text-secondary'>Liderez</span>
+      <span className='text-3xl text-900 font-bold text-secondary'>
+        Liderez
+      </span>
       <ManagersForm areas={data.areas} />
     </div>
   );
@@ -30,6 +32,7 @@ export const ManagersMain = () => {
     <AdminTable
       tableData={data.managers}
       tableHeader={tableHeader}
+      tableColumns={managersColumns}
       filters={managersFilters}
     >
       <Column
@@ -42,7 +45,11 @@ export const ManagersMain = () => {
       <Column
         header=''
         body={rowData => (
-          <ToggleButton id={rowData.id} status={rowData.active} />
+          <ToggleButton
+            id={rowData.id}
+            status={rowData.active}
+            queryToInvalidate='managers'
+          />
         )}
       />
     </AdminTable>

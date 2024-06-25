@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\AreaTest;
+use App\Models\Competency;
 use App\Models\Role;
 use App\Models\Status;
 use App\Models\Test;
@@ -39,6 +40,8 @@ class UserController extends Controller
         return response()->json([
             'success' => true,
             'employees' => $employees,
+            'competencies' => Competency::all(),
+            'tests' => Test::all(),
         ]);
     }
 
@@ -108,32 +111,6 @@ class UserController extends Controller
                 'line' => $th->getLine(),
             ], 500);
         }
-    }
-
-    public function getUserTests($id)
-    {
-        $user = User::query()->findOrFail($id);
-
-        $tests = $user->tests()
-            ->with([
-                'competency',
-                'questions' => function ($query) use ($id) {
-                    $query->with(['users' => function ($query) use ($id) {
-                        $query->where('user_id', $id)
-                            ->withPivot('response_value');
-                    }]);
-                }
-            ])
-            ->get();
-
-        $tests->each(function ($test) {
-            $test->pivot->load('status');
-        });
-
-        return response()->json([
-            'success' => true,
-            'tests' => $tests,
-        ]);
     }
 
     public function assingEvaluation($id)

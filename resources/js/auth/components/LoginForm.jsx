@@ -39,7 +39,7 @@ export const LoginForm = () => {
 
               <div className='field mb-4 col-12 flex justify-content-around'>
                 <Button
-                  className='w-10rem'
+                  className='w-10rem btn-primary'
                   label='Iniciar Sesión'
                   type='submit'
                   rounded
@@ -47,7 +47,7 @@ export const LoginForm = () => {
                 />
 
                 <Button
-                  className='w-10rem'
+                  className='w-10rem btn-secondary'
                   label='Registrate'
                   rounded
                   severity='warning'

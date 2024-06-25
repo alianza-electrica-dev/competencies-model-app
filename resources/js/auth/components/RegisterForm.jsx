@@ -80,14 +80,14 @@ export const RegisterForm = ({ areas }) => {
 
               <div className='field mb-4 col-12 flex justify-content-around'>
                 <Button
-                  className='w-10rem'
+                  className='w-10rem btn-primary'
                   label='Registrate'
                   rounded
                   type='submit'
                   loading={isPending}
                 />
                 <Button
-                  className='w-10rem'
+                  className='w-10rem btn-terceary'
                   label='Volver'
                   rounded
                   severity='warning'
