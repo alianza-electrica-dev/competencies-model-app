@@ -13,12 +13,17 @@
 }
 
 .grid {
-  padding: 1rem 0;
+  padding: 1rem;
 }
 
 .footer {
   display: flex;
   align-items: center;
-  color: #fff;
   justify-content: center;
+}
+
+@media (max-width: 991px) {
+  .grid {
+    padding: 0;
+  }
 }

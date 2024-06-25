@@ -19,7 +19,7 @@ export const HomeMain = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
+      <div className={`shadow-5 ${styles.header}`}>
         <Header />
       </div>
 

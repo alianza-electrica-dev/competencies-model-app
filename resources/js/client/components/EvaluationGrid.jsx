@@ -3,7 +3,7 @@ import { EvaluationCard } from './';
 
 export const EvaluationGrid = ({ evaluations }) => {
   return (
-    <div className='flex flex-wrap gap-1 justify-content-around'>
+    <div className='flex flex-wrap gap-3 justify-content-between'>
       {evaluations.map(test => (
         <EvaluationCard key={test.id} evaluation={test}/>
       ))}

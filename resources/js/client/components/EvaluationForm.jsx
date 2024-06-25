@@ -50,7 +50,6 @@ export const EvaluationForm = ({ questions, test }) => {
         icon='pi pi-file-edit'
         label='responder'
         severity='warning'
-        text
         type='button'
       />
 
