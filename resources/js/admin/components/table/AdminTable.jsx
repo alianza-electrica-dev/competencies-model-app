@@ -19,6 +19,7 @@ export const AdminTable = ({
         tableStyle={{ minWidth: '50rem' }}
         filters={filters}
         filterDisplay='row'
+        emptyMessage='No existe ningun registro'
       >
         {tableColumns.map(colum => (
           <Column
