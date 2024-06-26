@@ -11,6 +11,7 @@ use App\Models\Status;
 use App\Models\Test;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -34,6 +35,7 @@ class UserController extends Controller
     {
         $employees = User::query()
             ->where('role_id', Role::EMPLOYEE)
+            ->where('area_id', Auth::user()->area_id)
             ->with(['role', 'area', 'tests'])
             ->get();
 
