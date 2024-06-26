@@ -128,7 +128,7 @@ return new class extends Migration
             $table->foreignId(self::TEST_ID)->constrained()->onDelete('cascade');
             $table->foreignId(self::USER_ID)->constrained()->onDelete('cascade');
             $table->foreignId(self::STATUS_ID)->constrained('statuses')->onDelete('cascade');
-            $table->integer('score')->default(0);
+            $table->float('score')->default(0);
             $table->timestamps();
         });
     }

@@ -58,7 +58,7 @@ class User extends Authenticatable
         return "{$this->name} {$this->last_name} {$this->second_last_name}";
     }
 
-    public function getScoreAttribute(): int
+    public function getScoreAttribute(): float
     {
         $score = 0;
 
@@ -74,9 +74,9 @@ class User extends Authenticatable
         $totalTests = $this->tests->count();
 
         if ($totalTests > 0) {
-            return $this->score / $totalTests;
+            return  round($this->score / $totalTests, 2);
         } else {
-            return null; // Opcional: Devolver null si no hay tests asociados
+            return null;
         }
     }
 

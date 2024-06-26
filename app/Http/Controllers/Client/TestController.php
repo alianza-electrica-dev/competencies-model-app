@@ -44,7 +44,7 @@ class TestController extends Controller
 
         $user->tests()->updateExistingPivot($testId, [
             'status_id' => Status::POR_REVISAR,
-            'score' => $score,
+            'score' => $score / count($request->responses),
         ]);
 
 

@@ -46,7 +46,7 @@ class TestController extends Controller
 
         $user->tests()->updateExistingPivot($testId, [
             'status_id' => Status::FINALIZADO,
-            'score' => $totalScore,
+            'score' => $totalScore / count($responses),
         ]);
 
         return response()->json([
