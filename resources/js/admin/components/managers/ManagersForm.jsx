@@ -7,7 +7,7 @@ import { adminValidations } from '../../validations/adminValidations';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 
-export const ManagersForm = ({ isUpdate, rowData, areas }) => {
+export const ManagersForm = ({ isUpdate, rowData, areas, companies }) => {
   const [visible, setVisible] = useState(false);
   const { mutate, isPending } = useAppMutation(
     'admin.managers.upsert',
@@ -22,6 +22,7 @@ export const ManagersForm = ({ isUpdate, rowData, areas }) => {
     password: '',
     rol_id: '',
     area_id: '',
+    company_id: '',
   };
 
   const updateValues = {
@@ -32,6 +33,7 @@ export const ManagersForm = ({ isUpdate, rowData, areas }) => {
     password: '',
     rol_id: rowData?.rol_id,
     area_id: rowData?.area_id,
+    company_id: rowData?.company_id,
   };
 
   const onSubmit = values => {
@@ -107,9 +109,19 @@ export const ManagersForm = ({ isUpdate, rowData, areas }) => {
                 optionValue='id'
               />
 
+              <CustomInputSelect
+                label='Empresa'
+                name='company_id'
+                options={companies}
+                optionLabel='name'
+                optionValue='id'
+              />
+
               <div className='col-12 flex justify-content-center mt-5'>
                 <Button
-                  label={`${!isUpdate ? 'Agregar' : 'Actualizar'} administrador`}
+                  label={`${
+                    !isUpdate ? 'Agregar' : 'Actualizar'
+                  } administrador`}
                   rounded
                   type='submit'
                   loading={isPending}
@@ -126,6 +138,7 @@ export const ManagersForm = ({ isUpdate, rowData, areas }) => {
 
 ManagersForm.propTypes = {
   areas: PropTypes.arrayOf(PropTypes.object).isRequired,
+  companies: PropTypes.arrayOf(PropTypes.object).isRequired,
   isUpdate: PropTypes.bool,
   rowData: PropTypes.object,
 };

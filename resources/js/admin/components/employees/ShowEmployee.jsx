@@ -66,7 +66,7 @@ export const ShowEmployee = ({ rowData, tooltipText }) => {
               Promedio genereal:
             </p>
             <p className='col-6 py-0 text-lg font-semibold text-secondary'>
-              {rowData.average}%
+              {rowData.average}
             </p>
           </div>
         </div>

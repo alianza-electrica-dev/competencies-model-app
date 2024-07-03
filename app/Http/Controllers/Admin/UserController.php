@@ -22,13 +22,14 @@ class UserController extends Controller
     {
         $managers = User::query()
             ->where('role_id', Role::ADMIN)
-            ->with(['role', 'area'])
+            ->with(['role', 'area', 'company'])
             ->get();
 
         return response()->json([
             'success' => true,
             'managers' => $managers,
             'areas' => Area::all(),
+            'companies' => Company::all(),
         ]);
     }
 
@@ -291,6 +292,7 @@ class UserController extends Controller
                 return User::query()
                     ->where('role_id', Role::EMPLOYEE)
                     ->where('area_id', Auth::user()->area_id)
+                    ->where('company_id', Auth::user()->company_id)
                     ->with(['role', 'area', 'tests', 'company'])
                     ->get();
         }
