@@ -8,7 +8,7 @@ import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { ImageForm } from './ImageForm';
 
-export const RegisterForm = ({ areas }) => {
+export const RegisterForm = ({ areas, companies }) => {
   const navigate = useNavigate();
   const { mutate, isPending, isError } = useAuthMutation('auth.register');
 
@@ -21,6 +21,7 @@ export const RegisterForm = ({ areas }) => {
     confirm_password: '',
     role_id: 2,
     area_id: '',
+    company_id: '',
   };
 
   return (
@@ -70,6 +71,14 @@ export const RegisterForm = ({ areas }) => {
                 optionValue='id'
               />
 
+              <CustomInputSelect
+                label='Compañia'
+                name='company_id'
+                options={companies}
+                optionLabel='name'
+                optionValue='id'
+              />
+
               {isError && (
                 <div className='field mb-4 col-12 flex justify-content-center'>
                   <p className='font-medium text-red-500'>
@@ -105,4 +114,5 @@ export const RegisterForm = ({ areas }) => {
 
 RegisterForm.propTypes = {
   areas: PropTypes.arrayOf(PropTypes.object).isRequired,
+  companies: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Area;
+use App\Models\Company;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -81,6 +82,7 @@ class AuthController extends Controller
     {
         return response()->json([
             'areas' => Area::all(),
+            'companies' => Company::all(),
         ]);
     }
 }

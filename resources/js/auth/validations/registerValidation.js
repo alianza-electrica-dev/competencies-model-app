@@ -14,4 +14,5 @@ export const registerValidations = Yup.object({
     'Las contraseñas deben coincidir',
   ),
   area_id: Yup.number().required('Favor de ingresar el área al que pertenece'),
+  company_id: Yup.number().required('Favor de ingresar la compañia al que pertenece'),
 });

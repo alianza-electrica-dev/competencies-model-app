@@ -2,7 +2,10 @@ import { useAppQuery } from '../../hooks';
 import { RegisterForm } from '../components';
 
 export const RegisterPage = () => {
-  const { isPending, isError, data, error } = useAppQuery('areas', 'auth.get_areas');
+  const { isPending, isError, data, error } = useAppQuery(
+    'areas',
+    'auth.get_areas',
+  );
 
   if (isPending) {
     return <span>Loading...</span>;
@@ -12,5 +15,5 @@ export const RegisterPage = () => {
     return <span>Error: {error.message}</span>;
   }
 
-  return <RegisterForm areas={data.areas} />;
+  return <RegisterForm areas={data.areas} companies={data.companies} />;
 };
