@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Area;
+use App\Models\Company;
 use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,7 +27,8 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('C0MP3T3NC&APP$'),
                 'active' => true,
                 'role_id' => Role::ADMIN,
-                'area_id' => Area::TECNOLOGIA_INFORMACION,
+                'area_id' => Area::TECNOLOGIAS_INFORMACION,
+                'company_id' => Company::ALIANZA_ELECTRICA,
             ],
         ]);
     }

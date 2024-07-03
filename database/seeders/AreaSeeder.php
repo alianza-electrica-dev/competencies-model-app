@@ -14,21 +14,23 @@ class AreaSeeder extends Seeder
     public function run(): void
     {
         DB::table('areas')->insert([
-            ['id' => 1,  'name' => 'Atención a clientes'],
-            ['id' => 2,  'name' => 'Auditoria externa'],
-            ['id' => 3,  'name' => 'Auditoria interna'],
-            ['id' => 4,  'name' => 'Compras y materiales'],
-            ['id' => 5,  'name' => 'Desarrollo de nuevos negocios'],
-            ['id' => 6,  'name' => 'Finanzas'],
-            ['id' => 7,  'name' => 'Ingenería y desarrollo'],
-            ['id' => 8,  'name' => 'Investigación y desarrollo'],
-            ['id' => 9,  'name' => 'Logística y distribución'],
-            ['id' => 10, 'name' => 'Manufactura'],
-            ['id' => 11, 'name' => 'Mercadotecnia'],
-            ['id' => 12, 'name' => 'Recursos humanos'],
-            ['id' => 13, 'name' => 'Soporte administrativo'],
-            ['id' => 14, 'name' => 'Tecnologías de la información'],
-            ['id' => 15, 'name' => 'Ventas'],
+            ['id' => 1,   'name' => 'Administración'],
+            ['id' => 2,   'name' => 'Almacén'],
+            ['id' => 3,   'name' => 'Atención a clientes'],
+            ['id' => 4,   'name' => 'Auditoría Externa'],
+            ['id' => 5,   'name' => 'Auditoría Interna'],
+            ['id' => 6,   'name' => 'Calidad'],
+            ['id' => 7,   'name' => 'Compras'],
+            ['id' => 8,   'name' => 'Ingeniería'],
+            ['id' => 9,   'name' => 'Logística'],
+            ['id' => 10,  'name' => 'Mantenimiento'],
+            ['id' => 11,  'name' => 'Manufactura'],
+            ['id' => 12,  'name' => 'Mercadotecnia'],
+            ['id' => 13,  'name' => 'Producción'],
+            ['id' => 14,  'name' => 'Recursos Humanos'],
+            ['id' => 15,  'name' => 'Seguridad e Higiene'],
+            ['id' => 16,  'name' => 'Tecnologías de la Información'],
+            ['id' => 17,  'name' => 'Ventas'],
         ]);
     }
 }

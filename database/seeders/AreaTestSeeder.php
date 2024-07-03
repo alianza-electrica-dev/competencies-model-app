@@ -38,142 +38,108 @@ class AreaTestSeeder extends Seeder
                 'test_id' => Test::RELACIONES_EXTERNAS
             ],
             
-            //? LOGISTICA Y DISTRIBUCIÓN
+            //? LOGISTICA
             [
-                'area_id' => Area::LOGISTICA_DISTRIBUCION,
+                'area_id' => Area::LOGISTICA,
                 'test_id' => Test::ENTENDIMIENTO_NEGOCIO
             ],
             [
-                'area_id' => Area::LOGISTICA_DISTRIBUCION,
+                'area_id' => Area::LOGISTICA,
                 'test_id' => Test::EFICIENCIA_OPERATIVA
             ],
             [
-                'area_id' => Area::LOGISTICA_DISTRIBUCION,
+                'area_id' => Area::LOGISTICA,
                 'test_id' => Test::GENERACION_LEALTAD_CLIENTE
             ],
             [
-                'area_id' => Area::LOGISTICA_DISTRIBUCION,
+                'area_id' => Area::LOGISTICA,
                 'test_id' => Test::GESTION_PROCESOS_GLOBALES
             ],
             [
-                'area_id' => Area::LOGISTICA_DISTRIBUCION,
+                'area_id' => Area::LOGISTICA,
                 'test_id' => Test::INNOVACION
             ],
             [
-                'area_id' => Area::LOGISTICA_DISTRIBUCION,
+                'area_id' => Area::LOGISTICA,
                 'test_id' => Test::NEGOCIACION
             ],
             [
-                'area_id' => Area::LOGISTICA_DISTRIBUCION,
-                'test_id' => Test::PLANEACION_ORGANIZACION
-            ],
-            [
-                'area_id' => Area::LOGISTICA_DISTRIBUCION,
+                'area_id' => Area::LOGISTICA,
                 'test_id' => Test::REPUTACION_SERVICIO
             ],
 
-            //? COMPRAS Y MATERIALES 
+            //? COMPRAS 
             [
-                'area_id' => Area::COMPRAS_MATERIALES,
+                'area_id' => Area::COMPRAS,
                 'test_id' => Test::ENTENDIMIENTO_NEGOCIO
             ],
             [
-                'area_id' => Area::COMPRAS_MATERIALES,
+                'area_id' => Area::COMPRAS,
                 'test_id' => Test::ENTENDIMIENTO_GLOBAL
             ],
             [
-                'area_id' => Area::COMPRAS_MATERIALES,
+                'area_id' => Area::COMPRAS,
                 'test_id' => Test::GESTION_PROCESOS_GLOBALES
             ],
             [
-                'area_id' => Area::COMPRAS_MATERIALES,
+                'area_id' => Area::COMPRAS,
                 'test_id' => Test::NEGOCIACION
             ],
             [
-                'area_id' => Area::COMPRAS_MATERIALES,
+                'area_id' => Area::COMPRAS,
                 'test_id' => Test::PLANEACION_ORGANIZACION
             ],
 
-            //? DESARROLLO DE NUEVOS NEGOCIOS
+            //? ADMINITRACION
             [
-                'area_id' => Area::DESARROLLO_NUEVOS_NEGOCIOS,
-                'test_id' => Test::ENTENDIMIENTO_GLOBAL
+                'area_id' => Area::ADMINISTRACION,
+                'test_id' => Test::ENTENDIMIENTO_NEGOCIO
             ],
             [
-                'area_id' => Area::DESARROLLO_NUEVOS_NEGOCIOS,
-                'test_id' => Test::ESPIRITU_EMPRENDEDOR
-            ],
-            [
-                'area_id' => Area::DESARROLLO_NUEVOS_NEGOCIOS,
-                'test_id' => Test::GENERACION_LEALTAD_CLIENTE
-            ],
-            [
-                'area_id' => Area::DESARROLLO_NUEVOS_NEGOCIOS,
-                'test_id' => Test::GENERACION_OPORTUNIDADES_NEGOCIO
-            ],
-            [
-                'area_id' => Area::DESARROLLO_NUEVOS_NEGOCIOS,
-                'test_id' => Test::LIDERAZGO_ESTRATEGIA_NEGOCIO
-            ],
-            [
-                'area_id' => Area::DESARROLLO_NUEVOS_NEGOCIOS,
-                'test_id' => Test::NEGOCIACION
-            ],
-            [
-                'area_id' => Area::DESARROLLO_NUEVOS_NEGOCIOS,
-                'test_id' => Test::PLANEACION_VENTAS_ESTRATEGICAS
-            ],
-            [
-                'area_id' => Area::DESARROLLO_NUEVOS_NEGOCIOS,
-                'test_id' => Test::RELACIONES_CONFIANZA
-            ],
-
-            //? FINANZAS
-            [
-                'area_id' => Area::FINANZAS,
+                'area_id' => Area::ADMINISTRACION,
                 'test_id' => Test::POLITICAS_FINANCIERAS
             ],
             [
-                'area_id' => Area::FINANZAS,
-                'test_id' => Test::ENTENDIMIENTO_NEGOCIO
-            ],
-            [
-                'area_id' => Area::FINANZAS,
+                'area_id' => Area::ADMINISTRACION,
                 'test_id' => Test::CONSULTOR_CONFIABLE
             ],
             [
-                'area_id' => Area::FINANZAS,
+                'area_id' => Area::ADMINISTRACION,
                 'test_id' => Test::EXCELENCIA_PROCESOS_FINANCIEROS
             ],
             [
-                'area_id' => Area::FINANZAS,
+                'area_id' => Area::ADMINISTRACION,
                 'test_id' => Test::LIDERAZGO_ESTRATEGIA_NEGOCIO
             ],
 
-            //? INVESTIGACION Y DESARROLLO
+            //? ALMACEN
             [
-                'area_id' => Area::INVESTIGACION_DESARROLLO,
-                'test_id' => Test::ADMINISTRACION_PROYECTOS
-            ],
-            [
-                'area_id' => Area::INVESTIGACION_DESARROLLO,
+                'area_id' => Area::ALMACEN,
                 'test_id' => Test::ENTENDIMIENTO_NEGOCIO
             ],
             [
-                'area_id' => Area::INVESTIGACION_DESARROLLO,
+                'area_id' => Area::ALMACEN,
                 'test_id' => Test::EFICIENCIA_OPERATIVA
             ],
             [
-                'area_id' => Area::INVESTIGACION_DESARROLLO,
-                'test_id' => Test::ENFOQUE_CALIDAD
+                'area_id' => Area::ALMACEN,
+                'test_id' => Test::GENERACION_LEALTAD_CLIENTE
             ],
             [
-                'area_id' => Area::INVESTIGACION_DESARROLLO,
-                'test_id' => Test::EXCELENCIA_TECNICA_PRODUCTO
+                'area_id' => Area::ALMACEN,
+                'test_id' => Test::GESTION_PROCESOS_GLOBALES
             ],
             [
-                'area_id' => Area::INVESTIGACION_DESARROLLO,
+                'area_id' => Area::ALMACEN,
                 'test_id' => Test::INNOVACION
+            ],
+            [
+                'area_id' => Area::ALMACEN,
+                'test_id' => Test::NEGOCIACION
+            ],
+            [
+                'area_id' => Area::ALMACEN,
+                'test_id' => Test::REPUTACION_SERVICIO
             ],
 
             //? AUDITORIA EXTERNA
@@ -192,6 +158,10 @@ class AreaTestSeeder extends Seeder
             [
                 'area_id' => Area::AUDITORIA_EXTERNA,
                 'test_id' => Test::PLANEACION_ORGANIZACION
+            ],
+            [
+                'area_id' => Area::AUDITORIA_EXTERNA,
+                'test_id' => Test::LIDERAZGO_ESTRATEGIA_NEGOCIO
             ],
 
             //? MANUFACTURA
@@ -245,42 +215,38 @@ class AreaTestSeeder extends Seeder
                 'area_id' => Area::MERCADOTECNIA,
                 'test_id' => Test::INNOVACION
             ],
-            [
-                'area_id' => Area::MERCADOTECNIA,
-                'test_id' => Test::LIDERAZGO_ESTRATEGIA_NEGOCIO
-            ],
 
-            //? INGENERIA Y DESARROLLO
+            //? INGENERIA
             [
-                'area_id' => Area::INGENERIA_DESARROLLO,
+                'area_id' => Area::INGENIERIA,
                 'test_id' => Test::ADMINISTRACION_PROYECTOS
             ],
             [
-                'area_id' => Area::INGENERIA_DESARROLLO,
+                'area_id' => Area::INGENIERIA,
                 'test_id' => Test::ENTENDIMIENTO_NEGOCIO
             ],
             [
-                'area_id' => Area::INGENERIA_DESARROLLO,
+                'area_id' => Area::INGENIERIA,
                 'test_id' => Test::EFICIENCIA_OPERATIVA
             ],
             [
-                'area_id' => Area::INGENERIA_DESARROLLO,
+                'area_id' => Area::INGENIERIA,
                 'test_id' => Test::ENFOQUE_CALIDAD
             ],
             [
-                'area_id' => Area::INGENERIA_DESARROLLO,
+                'area_id' => Area::INGENIERIA,
                 'test_id' => Test::EXCELENCIA_TECNICA_PRODUCTO
             ],
             [
-                'area_id' => Area::INGENERIA_DESARROLLO,
+                'area_id' => Area::INGENIERIA,
                 'test_id' => Test::GENERACION_OPORTUNIDADES_NEGOCIO
             ],
             [
-                'area_id' => Area::INGENERIA_DESARROLLO,
+                'area_id' => Area::INGENIERIA,
                 'test_id' => Test::INNOVACION
             ],
             [
-                'area_id' => Area::INGENERIA_DESARROLLO,
+                'area_id' => Area::INGENIERIA,
                 'test_id' => Test::LIDERAZGO_ESTRATEGIA_NEGOCIO
             ],
 
@@ -340,35 +306,25 @@ class AreaTestSeeder extends Seeder
                 'test_id' => Test::SEGUIMIENTO
             ],
 
-            //? SOPORTE ADMINISTRATIVO
-            [
-                'area_id' => Area::SOPORTE_ADMINISTRATIVO,
-                'test_id' => Test::PLANEACION_ORGANIZACION
-            ],
-            [
-                'area_id' => Area::SOPORTE_ADMINISTRATIVO,
-                'test_id' => Test::SEGUIMIENTO
-            ],
-
             //? TICS
             [
-                'area_id' => Area::TECNOLOGIA_INFORMACION,
+                'area_id' => Area::TECNOLOGIAS_INFORMACION,
                 'test_id' => Test::ADMINISTRACION_PROYECTOS
             ],
             [
-                'area_id' => Area::TECNOLOGIA_INFORMACION,
+                'area_id' => Area::TECNOLOGIAS_INFORMACION,
                 'test_id' => Test::CONSULTOR_CONFIABLE
             ],
             [
-                'area_id' => Area::TECNOLOGIA_INFORMACION,
+                'area_id' => Area::TECNOLOGIAS_INFORMACION,
                 'test_id' => Test::EFICIENCIA_OPERATIVA
             ],
             [
-                'area_id' => Area::TECNOLOGIA_INFORMACION,
+                'area_id' => Area::TECNOLOGIAS_INFORMACION,
                 'test_id' => Test::INNOVACION
             ],
             [
-                'area_id' => Area::TECNOLOGIA_INFORMACION,
+                'area_id' => Area::TECNOLOGIAS_INFORMACION,
                 'test_id' => Test::REPUTACION_SERVICIO
             ],
 
@@ -396,6 +352,90 @@ class AreaTestSeeder extends Seeder
             [
                 'area_id' => Area::VENTAS,
                 'test_id' => Test::PLANEACION_VENTAS_ESTRATEGICAS
+            ],
+            
+            //? PRODUCCION
+            [
+                'area_id' => Area::PRODUCCION,
+                'test_id' => Test::ADMINISTRACION_PROYECTOS
+            ],
+            [
+                'area_id' => Area::PRODUCCION,
+                'test_id' => Test::EFICIENCIA_OPERATIVA
+            ],
+            [
+                'area_id' => Area::PRODUCCION,
+                'test_id' => Test::ENFOQUE_CALIDAD
+            ],
+            [
+                'area_id' => Area::PRODUCCION,
+                'test_id' => Test::EXCELENCIA_TECNICA_PRODUCTO
+            ],
+            
+            //? CALIDAD
+            [
+                'area_id' => Area::CALIDAD,
+                'test_id' => Test::PLANEACION_ORGANIZACION
+            ],
+            [
+                'area_id' => Area::CALIDAD,
+                'test_id' => Test::SEGUIMIENTO
+            ],
+            [
+                'area_id' => Area::CALIDAD,
+                'test_id' => Test::CONSULTOR_CONFIABLE
+            ],
+            [
+                'area_id' => Area::CALIDAD,
+                'test_id' => Test::ENFOQUE_CALIDAD
+            ],
+            [
+                'area_id' => Area::CALIDAD,
+                'test_id' => Test::EFICIENCIA_OPERATIVA
+            ],
+            [
+                'area_id' => Area::CALIDAD,
+                'test_id' => Test::EXCELENCIA_TECNICA_PRODUCTO
+            ],
+
+            //? SEGURIDAD HIGIENE
+            [
+                'area_id' => Area::SEGURIDAD_HIGIENE,
+                'test_id' => Test::CONSULTOR_CONFIABLE
+            ],
+            [
+                'area_id' => Area::SEGURIDAD_HIGIENE,
+                'test_id' => Test::REPUTACION_SERVICIO
+            ],
+            [
+                'area_id' => Area::SEGURIDAD_HIGIENE,
+                'test_id' => Test::SEGUIMIENTO
+            ],
+            [
+                'area_id' => Area::SEGURIDAD_HIGIENE,
+                'test_id' => Test::PLANEACION_ORGANIZACION
+            ],
+            [
+                'area_id' => Area::SEGURIDAD_HIGIENE,
+                'test_id' => Test::RELACIONES_CONFIANZA
+            ],
+            
+            //? MENTENIMIENTO
+            [
+                'area_id' => Area::MANTENIMIENTO,
+                'test_id' => Test::REPUTACION_SERVICIO
+            ],
+            [
+                'area_id' => Area::MANTENIMIENTO,
+                'test_id' => Test::SEGUIMIENTO
+            ],
+            [
+                'area_id' => Area::MANTENIMIENTO,
+                'test_id' => Test::PLANEACION_ORGANIZACION
+            ],
+            [
+                'area_id' => Area::MANTENIMIENTO,
+                'test_id' => Test::EFICIENCIA_OPERATIVA
             ],
         ]);
     }

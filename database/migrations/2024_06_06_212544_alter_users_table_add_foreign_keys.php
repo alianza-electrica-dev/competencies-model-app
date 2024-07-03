@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
             $table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
+            $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
         });
     }
 
@@ -25,8 +26,10 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['role_id']);
             $table->dropForeign(['area_id']);
+            $table->dropForeign(['company_id']);
             $table->dropColumn('role_id');
             $table->dropColumn('area_id');
+            $table->dropColumn('company_id');
         });
     }
 };
