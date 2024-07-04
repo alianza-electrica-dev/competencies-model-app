@@ -227,6 +227,15 @@ class UserController extends Controller
                                         Company::FG_ELECTRICAL,
                                         Company::TABLEROS_ARRANCADORES,
                                     ]);
+                            })
+                            ->orWhere(function ($query) {
+                                $query->where('area_id', Area::MERCADOTECNIA)
+                                    ->whereIn('company_id', [
+                                        Company::ALIANZA_ELECTRICA,
+                                        Company::MANOFACTURING,
+                                        Company::FG_ELECTRICAL,
+                                        Company::TABLEROS_ARRANCADORES,
+                                    ]);
                             });
                     })
                     ->with(['role', 'area', 'tests', 'company'])
@@ -271,7 +280,15 @@ class UserController extends Controller
                                     Company::MANOFACTURING,
                                     Company::TABLEROS_ARRANCADORES
                                 ]);
-                        });
+                        })
+                            ->orWhere(function ($query) {
+                                $query->where('area_id', Area::MANTENIMIENTO)
+                                    ->whereIn('company_id', [Company::ALIANZA_ELECTRICA]);
+                            })
+                            ->orWhere(function ($query) {
+                                $query->where('area_id', Area::SEGURIDAD_HIGIENE)
+                                    ->whereIn('company_id', [Company::FG_ELECTRICAL]);
+                            });
                     })
                     ->with(['role', 'area', 'tests', 'company'])
                     ->get();
