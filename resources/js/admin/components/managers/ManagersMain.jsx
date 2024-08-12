@@ -22,9 +22,16 @@ export const ManagersMain = () => {
   const tableHeader = (
     <div className='flex justify-content-between align-items-center px-4 pt-4'>
       <span className='text-3xl text-900 font-bold text-secondary'>
-        Lideres
+        Gerentes y Administradores
       </span>
-      <ManagersForm areas={data.areas} companies={data.companies} />
+
+      <ManagersForm
+        areas={data.areas}
+        branches={data.branches}
+        companies={data.companies}
+        managers={data.managers}
+        roles={data.roles}
+      />
     </div>
   );
 
@@ -42,7 +49,10 @@ export const ManagersMain = () => {
             isUpdate={true}
             rowData={rowData}
             areas={data.areas}
+            branches={data.branches}
             companies={data.companies}
+            managers={data.managers}
+            roles={data.roles}
           />
         )}
       />

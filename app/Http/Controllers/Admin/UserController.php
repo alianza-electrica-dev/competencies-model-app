@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\AreaTest;
+use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Competency;
 use App\Models\Role;
@@ -21,15 +22,18 @@ class UserController extends Controller
     public function getManagers()
     {
         $managers = User::query()
-            ->where('role_id', Role::ADMIN)
-            ->with(['role', 'area', 'company'])
+            ->whereIn('role_id', [Role::ADMIN, Role::MANAGERS, Role::LEADERS])
+            ->where('id', '!=', 1)
+            ->with(['role', 'area', 'company', 'branch', 'supervisor'])
             ->get();
 
         return response()->json([
             'success' => true,
             'managers' => $managers,
             'areas' => Area::all(),
+            'branches' => Branch::all(),
             'companies' => Company::all(),
+            'roles' => Role::query()->where('id', '!=', Role::EMPLOYEE)->get(),
         ]);
     }
 
@@ -49,9 +53,8 @@ class UserController extends Controller
 
         try {
             $user = User::firstOrNew(['id' => $id]);
-            $user->fill($request->all());
-            $user->password = Hash::make($request->password);
-            $user->role_id = Role::ADMIN;
+            $user->fill($request->except(['password']));
+            (!empty($request->password)) && $user->password = Hash::make($request->password);
             $user->saveOrFail();
 
             if ($id === 'FAKE_ID') {
@@ -306,12 +309,10 @@ class UserController extends Controller
                     ->get();
 
             default:
-                return User::query()
-                    ->where('role_id', Role::EMPLOYEE)
-                    ->where('area_id', Auth::user()->area_id)
-                    ->where('company_id', Auth::user()->company_id)
-                    ->with(['role', 'area', 'tests', 'company'])
-                    ->get();
+                $currentUser = auth()->user();
+                $allSubordinates = $currentUser->getAllSubordinates();
+                $allSubordinates->load(['role', 'area', 'tests', 'company', 'supervisor']);
+                return $allSubordinates;
         }
     }
 

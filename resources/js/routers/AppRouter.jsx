@@ -21,7 +21,7 @@ export const AppRouter = () => {
             </PublicRouter>
           }
         />
-        {user !== null && user.role_id === 1 ? (
+        {user !== null && user.role_id !== 4 ? (
           <>
             {user.hasPermission ? (
               <Route

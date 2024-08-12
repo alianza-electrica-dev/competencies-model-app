@@ -7,7 +7,15 @@ import { adminValidations } from '../../validations/adminValidations';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 
-export const ManagersForm = ({ isUpdate, rowData, areas, companies }) => {
+export const ManagersForm = ({
+  isUpdate,
+  rowData,
+  areas,
+  branches,
+  companies,
+  managers,
+  roles,
+}) => {
   const [visible, setVisible] = useState(false);
   const { mutate, isPending } = useAppMutation(
     'admin.managers.upsert',
@@ -20,21 +28,27 @@ export const ManagersForm = ({ isUpdate, rowData, areas, companies }) => {
     second_last_name: '',
     email: '',
     password: '',
-    rol_id: '',
+    role_id: '',
     area_id: '',
     company_id: '',
+    branch_id: '',
+    reports_to: '',
   };
 
   const updateValues = {
-    name: rowData?.name,
-    last_name: rowData?.last_name,
-    second_last_name: rowData?.second_last_name,
-    email: rowData?.email,
+    name: rowData?.name || '',
+    last_name: rowData?.last_name || '',
+    second_last_name: rowData?.second_last_name || '',
+    email: rowData?.email || '',
     password: '',
-    rol_id: rowData?.rol_id,
-    area_id: rowData?.area_id,
-    company_id: rowData?.company_id,
+    role_id: rowData?.role_id || '',
+    area_id: rowData?.area_id || '',
+    company_id: rowData?.company_id || '',
+    branch_id: rowData?.branch_id || '',
+    reports_to: rowData?.reports_to || '',
   };
+
+  const validationSchema = adminValidations(isUpdate);
 
   const onSubmit = values => {
     mutate({
@@ -71,7 +85,7 @@ export const ManagersForm = ({ isUpdate, rowData, areas, companies }) => {
       <Dialog
         header={`${!isUpdate ? 'Agregar' : 'Actualizar'} Administrador`}
         visible={visible}
-        style={{ width: '30vw' }}
+        style={{ width: '50vw' }}
         onHide={() => {
           if (!visible) return;
           setVisible(false);
@@ -80,17 +94,22 @@ export const ManagersForm = ({ isUpdate, rowData, areas, companies }) => {
         <Formik
           initialValues={!isUpdate ? initialValues : updateValues}
           onSubmit={values => onSubmit(values)}
-          validationSchema={adminValidations}
+          validationSchema={validationSchema}
         >
           {formik => (
             <Form className='formgrid grid'>
               <CustomInputText label='Nombre' name='name' />
 
-              <CustomInputText label='Apellido paterno' name='last_name' />
+              <CustomInputText
+                label='Apellido paterno'
+                name='last_name'
+                col='6'
+              />
 
               <CustomInputText
                 label='Apellido materno'
                 name='second_last_name'
+                col='6'
               />
 
               <CustomInputText label='Correo electronico' name='email' />
@@ -99,6 +118,11 @@ export const ManagersForm = ({ isUpdate, rowData, areas, companies }) => {
                 label='Contraseña'
                 name='password'
                 type='password'
+                placeholder={`${
+                  isUpdate
+                    ? 'Si desea conservar su contraseña deje este campo vacio'
+                    : ''
+                }`}
               />
 
               <CustomInputSelect
@@ -115,6 +139,33 @@ export const ManagersForm = ({ isUpdate, rowData, areas, companies }) => {
                 options={companies}
                 optionLabel='name'
                 optionValue='id'
+                col='6'
+              />
+
+              <CustomInputSelect
+                label='Sucursal'
+                name='branch_id'
+                options={branches}
+                optionLabel='name'
+                optionValue='id'
+                col='6'
+              />
+
+              <CustomInputSelect
+                label='Rol'
+                name='role_id'
+                options={roles}
+                optionLabel='name'
+                optionValue='id'
+              />
+
+              <CustomInputSelect
+                label='A quien reporta'
+                name='reports_to'
+                options={managers}
+                optionLabel='full_name'
+                optionValue='id'
+                placeholder='Si usted sera administrador deje este campo vacio'
               />
 
               <div className='col-12 flex justify-content-center mt-5'>
@@ -138,7 +189,10 @@ export const ManagersForm = ({ isUpdate, rowData, areas, companies }) => {
 
 ManagersForm.propTypes = {
   areas: PropTypes.arrayOf(PropTypes.object).isRequired,
+  branches: PropTypes.arrayOf(PropTypes.object).isRequired,
   companies: PropTypes.arrayOf(PropTypes.object).isRequired,
   isUpdate: PropTypes.bool,
+  managers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  roles: PropTypes.arrayOf(PropTypes.object).isRequired,
   rowData: PropTypes.object,
 };

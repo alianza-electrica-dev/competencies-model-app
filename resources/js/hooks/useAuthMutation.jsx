@@ -13,13 +13,9 @@ export const useAuthMutation = url => {
 
     onSuccess: data => {
       const { data: response } = data;
-      if (response.success && response.isLogin && response.user.role_id === 1) {
+      if (response.success && response.isLogin && response.user.role_id !== 4) {
         adminNavigationAlert(response.user);
-      } else if (
-        response.success &&
-        response.isLogin &&
-        response.user.role_id === 2
-      ) {
+      } else if (response.success && response.isLogin) {
         const login = useAuthUserStore.getState().setAuthUser;
         login(response.user);
       } else if (response.success) {

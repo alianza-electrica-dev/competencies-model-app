@@ -8,7 +8,7 @@ import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { ImageForm } from './ImageForm';
 
-export const RegisterForm = ({ areas, companies }) => {
+export const RegisterForm = ({ areas, branches, companies, managers }) => {
   const navigate = useNavigate();
   const { mutate, isPending, isError } = useAuthMutation('auth.register');
 
@@ -19,9 +19,11 @@ export const RegisterForm = ({ areas, companies }) => {
     email: '',
     password: '',
     confirm_password: '',
-    role_id: 2,
+    role_id: 4,
     area_id: '',
     company_id: '',
+    branch_id: '',
+    reports_to: '',
   };
 
   return (
@@ -72,10 +74,26 @@ export const RegisterForm = ({ areas, companies }) => {
               />
 
               <CustomInputSelect
-                label='Compañia'
+                label='Empresa'
                 name='company_id'
                 options={companies}
                 optionLabel='name'
+                optionValue='id'
+              />
+
+              <CustomInputSelect
+                label='Sucursal'
+                name='branch_id'
+                options={branches}
+                optionLabel='name'
+                optionValue='id'
+              />
+
+              <CustomInputSelect
+                label='A quien reporta'
+                name='reports_to'
+                options={managers}
+                optionLabel='full_name'
                 optionValue='id'
               />
 
@@ -114,5 +132,7 @@ export const RegisterForm = ({ areas, companies }) => {
 
 RegisterForm.propTypes = {
   areas: PropTypes.arrayOf(PropTypes.object).isRequired,
+  branches: PropTypes.arrayOf(PropTypes.object).isRequired,
   companies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  managers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -11,7 +11,9 @@ class Role extends Model
     use HasFactory;
 
     const ADMIN       = 1;
-    const EMPLOYEE    = 2;
+    const MANAGERS    = 2;
+    const LEADERS     = 3;
+    const EMPLOYEE    = 4;
 
     public function users(): HasMany
     {

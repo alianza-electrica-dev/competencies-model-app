@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Area;
+use App\Models\Branch;
 use App\Models\Company;
+use App\Models\Role;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -78,11 +80,18 @@ class AuthController extends Controller
         }
     }
 
-    public function getAreas()
+    public function getCatalogs()
     {
+        $managers = User::query()
+            ->whereIn('role_id', [Role::ADMIN, Role::MANAGERS, Role::LEADERS])
+            ->where('id', '!=', 1)
+            ->get();
+
         return response()->json([
             'areas' => Area::all(),
+            'branches' => Branch::all(),
             'companies' => Company::all(),
+            'managers' => $managers,
         ]);
     }
 }

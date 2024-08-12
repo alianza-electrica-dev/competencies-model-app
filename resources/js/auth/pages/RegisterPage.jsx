@@ -3,8 +3,8 @@ import { RegisterForm } from '../components';
 
 export const RegisterPage = () => {
   const { isPending, isError, data, error } = useAppQuery(
-    'areas',
-    'auth.get_areas',
+    'catalog',
+    'auth.get_catalogs',
   );
 
   if (isPending) {
@@ -15,5 +15,12 @@ export const RegisterPage = () => {
     return <span>Error: {error.message}</span>;
   }
 
-  return <RegisterForm areas={data.areas} companies={data.companies} />;
+  return (
+    <RegisterForm
+      areas={data.areas}
+      branches={data.branches}
+      companies={data.companies}
+      managers={data.managers}
+    />
+  );
 };

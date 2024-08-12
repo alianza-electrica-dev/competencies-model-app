@@ -12,7 +12,7 @@ Route::prefix('/auth')->name('auth.')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
-    Route::get('/get-areas', [AuthController::class, 'getAreas'])->name('get_areas');
+    Route::get('/get-areas', [AuthController::class, 'getCatalogs'])->name('get_catalogs');
 })->middleware(['guest']);
 
 Route::get('/auth/check', function () {

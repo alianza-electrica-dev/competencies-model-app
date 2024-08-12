@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -27,6 +29,8 @@ class User extends Authenticatable
         'role_id',
         'area_id',
         'company_id',
+        'branch_id',
+        'reports_to',
     ];
 
     /**
@@ -114,5 +118,32 @@ class User extends Authenticatable
             ->using(TestUser::class)
             ->withPivot('status_id', 'score')
             ->withTimestamps();
+    }
+
+    public function supervisor()
+    {
+        return $this->belongsTo(User::class, 'reports_to');
+    }
+
+    public function subordinates()
+    {
+        return $this->hasMany(User::class, 'reports_to');
+    }
+
+    public function getAllSubordinates(): EloquentCollection
+    {
+        $subordinates = new EloquentCollection();
+
+        foreach ($this->subordinates as $subordinate) {
+            $subordinates->push($subordinate);
+            $subordinates = $subordinates->merge($subordinate->getAllSubordinates());
+        }
+
+        return $subordinates;
+    }
+
+    public function hasSupervisor()
+    {
+        return $this->reports_to !== null;
     }
 }
