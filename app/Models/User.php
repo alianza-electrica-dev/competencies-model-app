@@ -103,6 +103,11 @@ class User extends Authenticatable
         return $this->belongsTo(Company::class);
     }
 
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
     public function tests(): BelongsToMany
     {
         return $this->belongsToMany(Test::class)
