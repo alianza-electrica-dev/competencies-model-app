@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Area;
+use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
                 'role_id' => Role::ADMIN,
                 'area_id' => Area::TECNOLOGIAS_INFORMACION,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             // [
             //     'id' => 2,
@@ -64,66 +66,6 @@ class UserSeeder extends Seeder
             //     'active' => true,
             //     'role_id' => Role::ADMIN,
             //     'area_id' => Area::ADMINISTRACION,
-            //     'company_id' => Company::MANOFACTURING,
-            // ],
-            // [
-            //     'id' => 5,
-            //     'name' => 'test',
-            //     'last_name' => 'test',
-            //     'second_last_name' => 'test',
-            //     'email' => 'test1@alianzaelectrica.com',
-            //     'password' => Hash::make('prueba123'),
-            //     'active' => true,
-            //     'role_id' => Role::EMPLOYEE,
-            //     'area_id' => Area::RECURSOS_HUMANOS,
-            //     'company_id' => Company::ALIANZA_ELECTRICA,
-            // ],
-            // [
-            //     'id' => 6,
-            //     'name' => 'test',
-            //     'last_name' => 'test',
-            //     'second_last_name' => 'test',
-            //     'email' => 'test2@alianzaelectrica.com',
-            //     'password' => Hash::make('prueba123'),
-            //     'active' => true,
-            //     'role_id' => Role::EMPLOYEE,
-            //     'area_id' => Area::LOGISTICA,
-            //     'company_id' => Company::TABLEROS_ARRANCADORES,
-            // ],
-            // [
-            //     'id' => 7,
-            //     'name' => 'test',
-            //     'last_name' => 'test',
-            //     'second_last_name' => 'test',
-            //     'email' => 'test3@alianzaelectrica.com',
-            //     'password' => Hash::make('prueba123'),
-            //     'active' => true,
-            //     'role_id' => Role::EMPLOYEE,
-            //     'area_id' => Area::VENTAS,
-            //     'company_id' => Company::ALIANZA_ELECTRICA,
-            // ],
-            // [
-            //     'id' => 8,
-            //     'name' => 'test',
-            //     'last_name' => 'test',
-            //     'second_last_name' => 'test',
-            //     'email' => 'test4@alianzaelectrica.com',
-            //     'password' => Hash::make('prueba123'),
-            //     'active' => true,
-            //     'role_id' => Role::EMPLOYEE,
-            //     'area_id' => Area::ATENCION_CLIENTES,
-            //     'company_id' => Company::MANOFACTURING,
-            // ],
-            // [
-            //     'id' => 9,
-            //     'name' => 'test',
-            //     'last_name' => 'test',
-            //     'second_last_name' => 'test',
-            //     'email' => 'test5@alianzaelectrica.com',
-            //     'password' => Hash::make('prueba123'),
-            //     'active' => true,
-            //     'role_id' => Role::EMPLOYEE,
-            //     'area_id' => Area::INGENIERIA,
             //     'company_id' => Company::MANOFACTURING,
             // ],
         ]);

@@ -8,6 +8,7 @@ return new class extends Migration
 {
     protected const
         AREAS = 'areas',
+        BRANCHES = 'branches',
         COMPANIES = 'companies',
         COMPETENCIES = 'competencies',
         QUESTIONS = 'questions',
@@ -34,6 +35,7 @@ return new class extends Migration
     {
         self::createRolesTable();
         self::createCompaniesTable();
+        self::createBranchesTable();
         self::createStatusesTable();
         self::createAreasTable();
         self::createCompetenciesTable();
@@ -58,6 +60,7 @@ return new class extends Migration
             self::COMPETENCIES,
             self::AREAS,
             self::STATUSES,
+            self::BRANCHES,
             self::COMPANIES,
             self::ROLES,
         ];
@@ -74,10 +77,18 @@ return new class extends Migration
             $table->string('name');
         });
     }
-    
+
     private static function createCompaniesTable()
     {
         Schema::create(self::COMPANIES, function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+    }
+
+    private static function createBranchesTable()
+    {
+        Schema::create(self::BRANCHES, function (Blueprint $table) {
             $table->id();
             $table->string('name');
         });
