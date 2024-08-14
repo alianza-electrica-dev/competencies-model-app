@@ -24,7 +24,7 @@ class UserController extends Controller
         $managers = User::query()
             ->whereIn('role_id', [Role::ADMIN, Role::MANAGERS, Role::LEADERS])
             ->where('id', '!=', 1)
-            ->with(['role', 'area', 'company', 'branch', 'supervisor'])
+            ->with(['role', 'area', 'company', 'branch', 'supervisor', 'subordinates'])
             ->get();
 
         return response()->json([
@@ -39,9 +39,19 @@ class UserController extends Controller
 
     public function indexContent()
     {
+        if (Auth::user()->email === 'admin@alianzaelectrica.com') {
+            $employees = User::query()
+                ->where('id', '!=', 1)
+                ->with(['role', 'area', 'tests', 'company', 'supervisor', 'subordinates', 'branch'])
+                ->get();
+        } else {
+            $employees = Auth::user()->getAllSubordinates();
+            $employees->load(['role', 'area', 'tests', 'company', 'supervisor', 'subordinates', 'branch']);
+        }
+
         return response()->json([
             'success' => true,
-            'employees' => $this->getEmployeesByAdminMail(),
+            'employees' => $employees,
             'competencies' => Competency::all(),
             'tests' => Test::all(),
         ]);
@@ -141,181 +151,7 @@ class UserController extends Controller
             'textAlert' => 'Este empleado ya tiene todas las evaluaciones asignadas',
         ]);
     }
-
-    private function getEmployeesByAdminMail()
-    {
-        switch (Auth::user()->email) {
-            case 'admin@alianzaelectrica.com':
-                return User::query()
-                    ->with(['role', 'area', 'tests', 'company'])
-                    ->get();
-
-            case 'gonzalo.matac@fgelectrical.com':
-                return User::query()
-                    ->where('role_id', Role::EMPLOYEE)
-                    ->where(function ($query) {
-                        $query->where(function ($query) {
-                            $query->where('area_id', Area::RECURSOS_HUMANOS)
-                                ->whereIn('company_id', [
-                                    Company::ALIANZA_ELECTRICA,
-                                    Company::MANOFACTURING,
-                                    Company::FG_ELECTRICAL,
-                                    Company::TABLEROS_ARRANCADORES,
-                                ]);
-                        })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::LOGISTICA)
-                                    ->whereIn('company_id', [
-                                        Company::ALIANZA_ELECTRICA,
-                                        Company::MANOFACTURING,
-                                        Company::FG_ELECTRICAL,
-                                        Company::TABLEROS_ARRANCADORES,
-                                    ]);
-                            })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::ADMINISTRACION)
-                                    ->whereIn('company_id', [
-                                        Company::ALIANZA_ELECTRICA,
-                                        Company::FG_ELECTRICAL,
-                                        Company::TABLEROS_ARRANCADORES,
-                                    ]);
-                            })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::AUDITORIA_INTERNA)
-                                    ->whereIn('company_id', [
-                                        Company::ALIANZA_ELECTRICA,
-                                        Company::FG_ELECTRICAL,
-                                        Company::TABLEROS_ARRANCADORES,
-                                    ]);
-                            })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::COMPRAS)
-                                    ->whereIn('company_id', [
-                                        Company::ALIANZA_ELECTRICA,
-                                        Company::FG_ELECTRICAL,
-                                        Company::TABLEROS_ARRANCADORES,
-                                    ]);
-                            })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::TECNOLOGIAS_INFORMACION)
-                                    ->whereIn('company_id', [
-                                        Company::ALIANZA_ELECTRICA,
-                                        Company::MANOFACTURING,
-                                        Company::FG_ELECTRICAL,
-                                        Company::TABLEROS_ARRANCADORES,
-                                    ]);
-                            });
-                    })
-                    ->with(['role', 'area', 'tests', 'company'])
-                    ->get();
-
-            case 'fernando.mata@alianzaelectrica.com':
-                return User::query()
-                    ->where('role_id', Role::EMPLOYEE)
-                    ->where(function ($query) {
-                        $query->where(function ($query) {
-                            $query->where('area_id', Area::VENTAS)
-                                ->whereIn('company_id', [
-                                    Company::ALIANZA_ELECTRICA,
-                                    Company::MANOFACTURING,
-                                    Company::FG_ELECTRICAL,
-                                    Company::TABLEROS_ARRANCADORES,
-                                ]);
-                        })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::ATENCION_CLIENTES)
-                                    ->whereIn('company_id', [
-                                        Company::ALIANZA_ELECTRICA,
-                                        Company::MANOFACTURING,
-                                        Company::FG_ELECTRICAL,
-                                        Company::TABLEROS_ARRANCADORES,
-                                    ]);
-                            })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::MERCADOTECNIA)
-                                    ->whereIn('company_id', [
-                                        Company::ALIANZA_ELECTRICA,
-                                        Company::MANOFACTURING,
-                                        Company::FG_ELECTRICAL,
-                                        Company::TABLEROS_ARRANCADORES,
-                                    ]);
-                            });
-                    })
-                    ->with(['role', 'area', 'tests', 'company'])
-                    ->get();
-
-            case 'gonzalo.mata@alianzaelectrica.com':
-                return User::query()
-                    ->where('role_id', Role::EMPLOYEE)
-                    ->where(function ($query) {
-                        $query->where(function ($query) {
-                            $query->where('area_id', Area::INGENIERIA)
-                                ->whereIn('company_id', [Company::MANOFACTURING]);
-                        })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::COMPRAS)
-                                    ->whereIn('company_id', [Company::MANOFACTURING]);
-                            })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::PRODUCCION)
-                                    ->whereIn('company_id', [Company::MANOFACTURING]);
-                            })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::CALIDAD)
-                                    ->whereIn('company_id', [Company::MANOFACTURING]);
-                            })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::ADMINISTRACION)
-                                    ->whereIn('company_id', [Company::MANOFACTURING]);
-                            });
-                    })
-                    ->with(['role', 'area', 'tests', 'company'])
-                    ->get();
-
-            case 'roberto.blasi@alianzaelectrica.com':
-                return User::query()
-                    ->where('role_id', Role::EMPLOYEE)
-                    ->where(function ($query) {
-                        $query->where(function ($query) {
-                            $query->where('area_id', Area::RECURSOS_HUMANOS)
-                                ->whereIn('company_id', [
-                                    Company::FG_ELECTRICAL,
-                                    Company::MANOFACTURING,
-                                    Company::TABLEROS_ARRANCADORES
-                                ]);
-                        })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::MANTENIMIENTO)
-                                    ->whereIn('company_id', [Company::ALIANZA_ELECTRICA]);
-                            })
-                            ->orWhere(function ($query) {
-                                $query->where('area_id', Area::SEGURIDAD_HIGIENE)
-                                    ->whereIn('company_id', [Company::FG_ELECTRICAL]);
-                            });
-                    })
-                    ->with(['role', 'area', 'tests', 'company'])
-                    ->get();
-
-            case 'iselt.olvera@alianzaelectrica.com':
-                return User::query()
-                    ->where('role_id', Role::EMPLOYEE)
-                    ->where(function ($query) {
-                        $query->where(function ($query) {
-                            $query->where('area_id', Area::RECURSOS_HUMANOS)
-                                ->whereIn('company_id', [Company::ALIANZA_ELECTRICA]);
-                        });
-                    })
-                    ->with(['role', 'area', 'tests', 'company'])
-                    ->get();
-
-            default:
-                $currentUser = auth()->user();
-                $allSubordinates = $currentUser->getAllSubordinates();
-                $allSubordinates->load(['role', 'area', 'tests', 'company', 'supervisor']);
-                return $allSubordinates;
-        }
-    }
-
+    
     private function SearchEvaluationsToAssing($id)
     {
         $user = User::query()->findOrFail($id);

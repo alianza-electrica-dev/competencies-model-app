@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useAuthUserStore } from '../../store/authUser';
 import { LogOutBtn } from '../../auth/components';
 import { Button } from 'primereact/button';
 import { MegaMenu } from 'primereact/megamenu';
@@ -6,6 +7,7 @@ import { Ripple } from 'primereact/ripple';
 
 export const Header = () => {
   const navigate = useNavigate();
+  const user = useAuthUserStore(state => state.user);
 
   const itemRenderer = (item, options) => {
     const handleClick = e => {
@@ -61,18 +63,21 @@ export const Header = () => {
 
   const items = [
     {
-      label: 'Lideres y Administradores',
-      root: true,
-      template: itemRenderer,
-      route: '/admin/managers',
-    },
-    {
       label: 'Colaboradores',
       root: true,
       template: itemRenderer,
       route: '/admin/employees',
     },
   ];
+
+  if (user.role_id === 1) {
+    items.unshift({
+      label: 'Lideres y Administradores',
+      root: true,
+      template: itemRenderer,
+      route: '/admin/managers',
+    });
+  }
 
   return (
     <div className='card'>

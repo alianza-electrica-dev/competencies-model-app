@@ -21,10 +21,12 @@ export const AuthChecker = () => {
       }
     };
 
+    checkAuth();
+
     const interval = setInterval(checkAuth, 5 * 60 * 1000);
 
     return () => clearInterval(interval);
-  }, [setAuthUser]);
+  }, [setAuthUser, logout]);
 
   return null;
 };
