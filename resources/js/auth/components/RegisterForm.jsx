@@ -79,6 +79,7 @@ export const RegisterForm = ({ areas, branches, companies, managers }) => {
                 options={companies}
                 optionLabel='name'
                 optionValue='id'
+                col='6'
               />
 
               <CustomInputSelect
@@ -87,6 +88,7 @@ export const RegisterForm = ({ areas, branches, companies, managers }) => {
                 options={branches}
                 optionLabel='name'
                 optionValue='id'
+                col='6'
               />
 
               <CustomInputSelect

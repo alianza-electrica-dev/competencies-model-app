@@ -1,5 +1,5 @@
 import { useAppQuery } from '../../../hooks';
-import { AdminTable, ToggleButton } from '../table';
+import { AdminTable, TableHeader, ToggleButton } from '../table';
 import { Error, Loading } from '../../../common';
 import { ManagersForm } from './';
 import { managersColumns, managersFilters } from '../../helpers';
@@ -19,26 +19,20 @@ export const ManagersMain = () => {
     return <Error errorMessage={error.message} />;
   }
 
-  const tableHeader = (
-    <div className='flex justify-content-between align-items-center px-4 pt-4'>
-      <span className='text-3xl text-900 font-bold text-secondary'>
-        Gerentes y Administradores
-      </span>
-
-      <ManagersForm
-        areas={data.areas}
-        branches={data.branches}
-        companies={data.companies}
-        managers={data.managers}
-        roles={data.roles}
-      />
-    </div>
-  );
-
   return (
     <AdminTable
       tableData={data.managers}
-      tableHeader={tableHeader}
+      tableHeader={
+        <TableHeader tableTitle='Gerentes y Administradores'>
+          <ManagersForm
+            areas={data.areas}
+            branches={data.branches}
+            companies={data.companies}
+            managers={data.managers}
+            roles={data.roles}
+          />
+        </TableHeader>
+      }
       tableColumns={managersColumns}
       filters={managersFilters}
     >

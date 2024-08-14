@@ -1,5 +1,6 @@
 import { useAppQuery } from '../../hooks';
 import { RegisterForm } from '../components';
+import { Error, Loading } from '../../common';
 
 export const RegisterPage = () => {
   const { isPending, isError, data, error } = useAppQuery(
@@ -8,11 +9,11 @@ export const RegisterPage = () => {
   );
 
   if (isPending) {
-    return <span>Loading...</span>;
+    return <Loading />;
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>;
+    return <Error errorMessage={error.message} />;
   }
 
   return (
