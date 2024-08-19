@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { TableStatusTemplate } from './';
 import { Card } from 'primereact/card';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
@@ -21,15 +22,26 @@ export const AdminTable = ({
         filterDisplay='row'
         emptyMessage='No existe ningun registro'
       >
-        {tableColumns.map(colum => (
-          <Column
-            key={colum.field}
-            field={colum.field}
-            filter
-            filterPlaceholder={`Buscar por ${colum.header.toLowerCase()}`}
-            header={colum.header}
-          />
-        ))}
+        {tableColumns.map(colum =>
+          colum.field === 'pivot.status.name' ? (
+            <Column
+              key={colum.field}
+              field={colum.field}
+              filter
+              filterPlaceholder={`Buscar por ${colum.header.toLowerCase()}`}
+              header={colum.header}
+              body={rowData => <TableStatusTemplate rowData={rowData} />}
+            />
+          ) : (
+            <Column
+              key={colum.field}
+              field={colum.field}
+              filter
+              filterPlaceholder={`Buscar por ${colum.header.toLowerCase()}`}
+              header={colum.header}
+            />
+          ),
+        )}
         {children}
       </DataTable>
     </Card>
