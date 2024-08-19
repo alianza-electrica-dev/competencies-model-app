@@ -2,18 +2,29 @@ import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 import { useAuthUserStore } from '../store/authUser';
 
+const getRedirectPath = user => {
+  if (!user) return null;
+
+  if (user.role_id === 1) {
+    return user.hasPermission ? '/client/competencies' : '/admin/managers';
+  }
+
+  if (user.role_id === 2 || user.role_id === 3) {
+    return user.hasPermission ? '/client/competencies' : '/admin/employees';
+  }
+
+  return '/client/competencies';
+};
+
 export const PublicRouter = ({ children }) => {
   const user = useAuthUserStore(state => state.user);
+  const redirectPath = getRedirectPath(user);
 
-  return !user ? (
-    children
-  ) : user.role_id !== 4 && !user.hasPermission ? (
-    <Navigate to='/admin/managers' />
-  ) : user.role_id !== 1 ? (
-    <Navigate to='/admin/employees' />
-  ) : (
-    <Navigate to='/client/competencies' />
-  );
+  if (redirectPath) {
+    return <Navigate to={redirectPath} />;
+  }
+
+  return children;
 };
 
 PublicRouter.propTypes = {
