@@ -5,6 +5,7 @@ import {
   EmployeesCompetenciesPage,
   EmployeesPage,
   ManagersPage,
+  RiosPage,
 } from '../pages';
 
 export const AdminRoutes = () => {
@@ -26,6 +27,8 @@ export const AdminRoutes = () => {
           path='/employees-competencies/:id'
           element={<EmployeesCompetenciesPage />}
         />
+
+        <Route path='/rios' element={<RiosPage />} />
 
         <Route path='/*' element={<Navigate to='/admin/managers' />} />
       </Route>
