@@ -43,6 +43,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::RECURSOS_HUMANOS,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '3',
@@ -55,6 +56,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::RECURSOS_HUMANOS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '4',
@@ -67,6 +69,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::RECURSOS_HUMANOS,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '5',
@@ -79,6 +82,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '6',
@@ -91,6 +95,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '7',
@@ -103,6 +108,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '8',
@@ -115,6 +121,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::ATENCION_CLIENTES,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '9',
@@ -127,6 +134,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::SEGURIDAD_HIGIENE,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '10',
@@ -139,6 +147,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::RECURSOS_HUMANOS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '12',
@@ -151,6 +160,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::AUDITORIA_INTERNA,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '13',
@@ -163,6 +173,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::LOGISTICA,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '14',
@@ -175,6 +186,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::INGENIERIA,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '15',
@@ -187,6 +199,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ALMACEN,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '16',
@@ -199,6 +212,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::ALMACEN,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '17',
@@ -211,6 +225,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::CALIDAD,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '18',
@@ -223,6 +238,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::PRODUCCION,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '19',
@@ -235,6 +251,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::ALMACEN,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '20',
@@ -247,6 +264,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::PRODUCCION,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '21',
@@ -259,6 +277,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::CALIDAD,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '22',
@@ -271,6 +290,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ATENCION_CLIENTES,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '23',
@@ -283,6 +303,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::COMPRAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '24',
@@ -295,6 +316,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ADMINISTRACION,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '25',
@@ -307,6 +329,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::COMPRAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '26',
@@ -319,6 +342,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '27',
@@ -331,6 +355,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::INGENIERIA,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '28',
@@ -343,6 +368,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '29',
@@ -355,6 +381,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '30',
@@ -367,6 +394,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '31',
@@ -379,6 +407,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '32',
@@ -391,6 +420,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::ALMACEN,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '33',
@@ -403,6 +433,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '40',
@@ -415,6 +446,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::INGENIERIA,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '41',
@@ -427,6 +459,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '42',
@@ -439,6 +472,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '43',
@@ -451,6 +485,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '44',
@@ -463,6 +498,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::SEGURIDAD_HIGIENE,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '45',
@@ -475,6 +511,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ATENCION_CLIENTES,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '46',
@@ -487,6 +524,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '47',
@@ -499,6 +537,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '48',
@@ -511,6 +550,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ATENCION_CLIENTES,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '50',
@@ -523,6 +563,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '51',
@@ -535,6 +576,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ATENCION_CLIENTES,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '52',
@@ -547,6 +589,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '53',
@@ -559,6 +602,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '54',
@@ -571,6 +615,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '56',
@@ -583,6 +628,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::ADMINISTRACION,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '64',
@@ -595,6 +641,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '65',
@@ -607,6 +654,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::LOGISTICA,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '67',
@@ -619,6 +667,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::PRODUCCION,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '68',
@@ -631,6 +680,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::PRODUCCION,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '69',
@@ -643,6 +693,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::PRODUCCION,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '71',
@@ -655,6 +706,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::PRODUCCION,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '72',
@@ -667,6 +719,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::ALMACEN,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '73',
@@ -679,6 +732,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::ALMACEN,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '74',
@@ -691,6 +745,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::CALIDAD,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '76',
@@ -703,6 +758,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ADMINISTRACION,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '78',
@@ -715,6 +771,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::LOGISTICA,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '79',
@@ -727,6 +784,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::RECURSOS_HUMANOS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '81',
@@ -739,6 +797,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::CALIDAD,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '83',
@@ -751,6 +810,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::CALIDAD,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '84',
@@ -763,6 +823,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::ALMACEN,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '85',
@@ -775,6 +836,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::LOGISTICA,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '86',
@@ -787,6 +849,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::PRODUCCION,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '87',
@@ -799,6 +862,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ALMACEN,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '88',
@@ -811,6 +875,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ATENCION_CLIENTES,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '89',
@@ -823,6 +888,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '93',
@@ -835,6 +901,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '94',
@@ -847,6 +914,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ATENCION_CLIENTES,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '95',
@@ -859,6 +927,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ATENCION_CLIENTES,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '104',
@@ -871,6 +940,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::MANTENIMIENTO,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '106',
@@ -883,6 +953,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ALMACEN,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '107',
@@ -895,6 +966,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ALMACEN,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '108',
@@ -907,6 +979,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ATENCION_CLIENTES,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '109',
@@ -919,6 +992,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ATENCION_CLIENTES,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '110',
@@ -931,6 +1005,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ATENCION_CLIENTES,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '111',
@@ -943,6 +1018,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ALMACEN,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '112',
@@ -955,6 +1031,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::INGENIERIA,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '113',
@@ -967,6 +1044,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::INGENIERIA,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '114',
@@ -979,6 +1057,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::INGENIERIA,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '115',
@@ -991,6 +1070,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::INGENIERIA,
                 'company_id' => Company::MANOFACTURING,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '116',
@@ -1003,6 +1083,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::MANTENIMIENTO,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '117',
@@ -1015,6 +1096,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::MANTENIMIENTO,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '118',
@@ -1027,6 +1109,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::RECURSOS_HUMANOS,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '122',
@@ -1039,6 +1122,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '123',
@@ -1051,6 +1135,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '124',
@@ -1063,6 +1148,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::MERCADOTECNIA,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '125',
@@ -1075,6 +1161,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::FG_ELECTRICAL,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '126',
@@ -1087,6 +1174,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::MERCADOTECNIA,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '127',
@@ -1099,6 +1187,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::MERCADOTECNIA,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '128',
@@ -1111,6 +1200,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::MERCADOTECNIA,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '129',
@@ -1123,6 +1213,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::MERCADOTECNIA,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '130',
@@ -1135,6 +1226,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::MERCADOTECNIA,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '131',
@@ -1147,6 +1239,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::MANAGERS,
                 'area_id' => Area::ADMINISTRACION,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '132',
@@ -1159,6 +1252,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::VENTAS,
                 'company_id' => Company::TABLEROS_ARRANCADORES,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '133',
@@ -1171,6 +1265,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ADMINISTRACION,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '134',
@@ -1183,6 +1278,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ADMINISTRACION,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => '135',
@@ -1195,6 +1291,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ADMINISTRACION,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
             [
                 'id' => 136,
@@ -1207,6 +1304,7 @@ class UserProdSeeder extends Seeder
                 'role_id' => Role::EMPLOYEE,
                 'area_id' => Area::ADMINISTRACION,
                 'company_id' => Company::ALIANZA_ELECTRICA,
+                'branch_id' => Branch::ATIZAPAN,
             ],
         ]);
     }
