@@ -16,5 +16,4 @@ export const registerValidations = Yup.object({
   area_id: Yup.number().required('El área es requerida.'),
   company_id: Yup.number().required('La compañia es requerida.'),
   branch_id: Yup.number().required('La sucursal es requerida.'),
-  reports_to: Yup.number().required('Debe indicar a quien reporta.'),
 });
