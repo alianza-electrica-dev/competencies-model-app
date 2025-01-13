@@ -16,6 +16,7 @@ export const RiosTable = ({ rios }) => {
         text
         className='text-secondary hover:surface-200'
         onClick={() => setDialogVisible(true)}
+        type='button'
       />
       <Dialog
         header='Documento RIO'

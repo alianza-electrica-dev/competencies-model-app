@@ -42,11 +42,11 @@ class UserController extends Controller
         if (Auth::user()->email === 'admin@alianzaelectrica.com') {
             $employees = User::query()
                 ->where('id', '!=', 1)
-                ->with(['role', 'area', 'tests', 'company', 'supervisor', 'subordinates', 'branch'])
+                ->with(['role', 'area', 'tests', 'company', 'supervisor', 'subordinates', 'branch', 'rios.dataRios'])
                 ->get();
         } else {
             $employees = Auth::user()->getAllSubordinates();
-            $employees->load(['role', 'area', 'tests', 'company', 'supervisor', 'subordinates', 'branch']);
+            $employees->load(['role', 'area', 'tests', 'company', 'supervisor', 'subordinates', 'branch', 'rios.dataRios']);
         }
 
         return response()->json([
@@ -151,7 +151,7 @@ class UserController extends Controller
             'textAlert' => 'Este empleado ya tiene todas las evaluaciones asignadas',
         ]);
     }
-    
+
     private function SearchEvaluationsToAssing($id)
     {
         $user = User::query()->findOrFail($id);

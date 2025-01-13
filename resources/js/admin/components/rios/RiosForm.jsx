@@ -10,6 +10,7 @@ import { Button } from 'primereact/button';
 import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
 import { RiosTable } from './RiosTable';
+import { useAppMutation } from '../../../hooks';
 
 export const RiosForm = ({ employees, periods }) => {
   const initialValues = {
@@ -21,11 +22,13 @@ export const RiosForm = ({ employees, periods }) => {
     rios: [],
   };
 
+  const { isPending, mutate } = useAppMutation('admin.rios.create_rio');
+
   const { activeStep, onNextStep, onPrevStep, setActiveStep, stepperRef } =
     useRioStepper();
 
   const onSaveRioData = values => {
-    console.log('Valores guardados:', values);
+    mutate({ request: values });
   };
 
   const onPushRioData = (formik, push) => {
@@ -83,6 +86,7 @@ export const RiosForm = ({ employees, periods }) => {
               label='Generar docuento'
               className='btn-primary'
               icon='pi pi-save'
+              loading={isPending}
             />
             <RiosTable rios={formik.values.rios} />
           </div>
@@ -166,7 +170,7 @@ export const RiosForm = ({ employees, periods }) => {
                       className='btn-primary'
                       label='Guardar'
                       onClick={e => onPushRioData(formik, push)}
-                      type='button'
+                      // type='button'
                     />
                   </div>
                 </StepperPanel>

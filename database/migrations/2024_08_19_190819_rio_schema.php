@@ -63,9 +63,9 @@ return new class extends Migration
             $table->longText('responsibility');
             $table->longText('indicator');
             $table->float('weighing');
-            $table->float('real');
-            $table->float('compliance');
-            $table->longText('observations');
+            $table->float('real')->nullable();
+            $table->float('compliance')->nullable();
+            $table->longText('observations')->nullable();
             $table->foreignId(self::RIO_ID)->constrained()->onDelete('cascade');
         });
     }

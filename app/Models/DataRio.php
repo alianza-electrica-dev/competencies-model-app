@@ -11,6 +11,8 @@ class DataRio extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function rio(): BelongsTo
     {
         return $this->belongsTo(Rio::class);
