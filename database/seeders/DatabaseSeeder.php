@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             StatusSeeder::class,
             AreaSeeder::class,
             CompetencySeeder::class,
+            PeriodSeeder::class,
             UserSeeder::class,
             // UserProdSeeder::class,
             TestSeeder::class,

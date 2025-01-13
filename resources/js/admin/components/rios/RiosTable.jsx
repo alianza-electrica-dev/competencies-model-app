@@ -18,7 +18,7 @@ export const RiosTable = ({ rios }) => {
         onClick={() => setDialogVisible(true)}
       />
       <Dialog
-        header='Flex Scroll'
+        header='Documento RIO'
         visible={dialogVisible}
         style={{ width: '75vw' }}
         maximizable
@@ -32,9 +32,9 @@ export const RiosTable = ({ rios }) => {
           scrollHeight='flex'
           tableStyle={{ minWidth: '50rem' }}
         >
-          <Column field='responsability' header='Responsabilidad'></Column>
-          <Column field='indicator' header='Indicador'></Column>
-          <Column field='weighing' header='Ponderación'></Column>
+          <Column field='responsability' header='Responsabilidad' />
+          <Column field='indicator' header='Indicador' />
+          <Column field='weighing' header='Ponderación' />
         </DataTable>
       </Dialog>
     </div>

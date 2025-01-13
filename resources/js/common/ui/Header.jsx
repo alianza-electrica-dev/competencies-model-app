@@ -68,12 +68,12 @@ export const Header = () => {
       template: itemRenderer,
       route: '/admin/employees',
     },
-    // {
-    //   label: 'RIO',
-    //   root: true,
-    //   template: itemRenderer,
-    //   route: '/admin/rios',
-    // },
+    {
+      label: 'RIO',
+      root: true,
+      template: itemRenderer,
+      route: '/admin/rios',
+    },
   ];
 
   if (user.role_id === 1) {

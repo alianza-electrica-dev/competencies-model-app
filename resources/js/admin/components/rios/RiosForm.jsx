@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { Formik, Form, FieldArray } from 'formik';
 import {
-  CustomCalendar,
   CustomEditor,
   CustomInputSelect,
   CustomInputText,
@@ -12,10 +11,10 @@ import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
 import { RiosTable } from './RiosTable';
 
-export const RiosForm = ({ managers }) => {
+export const RiosForm = ({ employees, periods }) => {
   const initialValues = {
-    start_date: '',
     user_id: '',
+    period_id: '',
     responsability: '',
     indicator: '',
     weighing: '',
@@ -46,6 +45,14 @@ export const RiosForm = ({ managers }) => {
     stepperRef.current.setActiveStep(0);
   };
 
+  const onDisableButtons = inputValue => {
+    if (inputValue === null || inputValue === '') {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -53,23 +60,30 @@ export const RiosForm = ({ managers }) => {
     >
       {formik => (
         <Form className='grid'>
-          <CustomCalendar
-            label='Fecha de evaluación'
-            name='start_date'
+          <CustomInputSelect
+            label='Periodo de evaluación'
+            name='period_id'
             col='4'
+            options={periods}
+            optionLabel='name'
+            optionValue='id'
           />
 
           <CustomInputSelect
             label='¿A quién se le asigna?'
             name='user_id'
             col='4'
-            options={managers}
-            optionLabel='name'
+            options={employees}
+            optionLabel='full_name'
             optionValue='id'
           />
 
-          <div className='col-4 flex justify-content-center align-items-center gap-5'>
-            <Button label='Guardar' />
+          <div className='col-4 flex justify-content-around align-items-center'>
+            <Button
+              label='Generar docuento'
+              className='btn-primary'
+              icon='pi pi-save'
+            />
             <RiosTable rios={formik.values.rios} />
           </div>
 
@@ -85,7 +99,7 @@ export const RiosForm = ({ managers }) => {
                     <CustomEditor
                       name='responsability'
                       onTextChange={e =>
-                        formik.setFieldValue('responsability', e.htmlValue)
+                        formik.setFieldValue('responsability', e.textValue)
                       }
                     />
                   </div>
@@ -97,6 +111,7 @@ export const RiosForm = ({ managers }) => {
                       icon='pi pi-arrow-right'
                       iconPos='right'
                       onClick={onNextStep}
+                      disabled={onDisableButtons(formik.values.responsability)}
                     />
                   </div>
                 </StepperPanel>
@@ -106,7 +121,7 @@ export const RiosForm = ({ managers }) => {
                     <CustomEditor
                       name='indicator'
                       onTextChange={e =>
-                        formik.setFieldValue('indicator', e.htmlValue)
+                        formik.setFieldValue('indicator', e.textValue)
                       }
                     />
                   </div>
@@ -165,5 +180,6 @@ export const RiosForm = ({ managers }) => {
 };
 
 RiosForm.propTypes = {
-  managers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  employees: PropTypes.arrayOf(PropTypes.object).isRequired,
+  periods: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -1,12 +1,12 @@
 import { useAppQuery } from '../../../hooks';
 import { Error, Loading } from '../../../common';
-import { RiosForm } from './';
+import { RiosForm, RiosInfo } from './';
 import styles from '../../styles/RiosMain.module.css';
 
 export const RiosMain = () => {
   const { isPending, isError, data, error } = useAppQuery(
     'managers_rio',
-    'admin.managers.get.managers',
+    'admin.rios.rios_employees',
   );
 
   if (isPending) {
@@ -20,7 +20,10 @@ export const RiosMain = () => {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <RiosForm managers={data.managers} />
+        <RiosForm employees={data.employees} periods={data.periods} />
+      </div>
+      <div className={styles.card}>
+        <RiosInfo />
       </div>
     </div>
   );

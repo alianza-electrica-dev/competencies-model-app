@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\RioController;
 use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Middleware\IsAdmin;
@@ -29,5 +30,10 @@ Route::prefix('/admin')->name('admin.')->group(function () {
 
     Route::post('employee/evaluation/close/{userId}/{testId}', [TestController::class, 'closeEvaluation'])
       ->name('close.evaluation');
+  });
+
+  //? ****** RIOS ROUTES ****** //
+  Route::prefix('/rios')->name('rios.')->group(function () {
+    Route::get('/employees', [RioController::class, 'getRiosEmployees'])->name('rios_employees');
   });
 })->middleware([IsAdmin::class]);

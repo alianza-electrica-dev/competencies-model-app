@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     protected const
+        PERIODS = 'periods',
         RIOS = 'rios',
         DATA_RIOS = 'data_rios';
 
     protected const
+        PERIOD_ID = 'period_id',
         RIO_ID = 'rio_id',
         USER_ID = 'user_id';
     /**
@@ -18,6 +20,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        self::createPeriodsTable();
         self::createRiosTable();
         self::createDataRioTable();
     }
@@ -27,21 +30,28 @@ return new class extends Migration
      */
     public function down(): void
     {
-        $drops = [self::DATA_RIOS, self::RIOS];
+        $drops = [self::DATA_RIOS, self::RIOS, self::PERIODS];
 
         foreach ($drops as $tableName) {
             Schema::dropIfExists($tableName);
         }
     }
 
+    private static function createPeriodsTable()
+    {
+        Schema::create(self::PERIODS, function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+    }
+
     private static function createRiosTable()
     {
         Schema::create(self::RIOS, function (Blueprint $table) {
             $table->id();
-            $table->date('start_date');
-            $table->date('end_date')->nullable();
             $table->float('total')->nullable();
             $table->foreignId(self::USER_ID)->constrained()->onDelete('cascade');
+            $table->foreignId(self::PERIOD_ID)->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

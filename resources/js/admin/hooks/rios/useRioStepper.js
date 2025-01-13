@@ -17,11 +17,20 @@ export const useRioStepper = () => {
   const onStepDescription = () => {
     switch (activeStep) {
       case 0:
-        return 'Descripción para el paso 1: Responsabilidad';
+        return {
+          title: 'Responsabilidad',
+          description: 'Descripción para el paso 1: Responsabilidad',
+        };
       case 1:
-        return 'Descripción para el paso 2: Indicador';
+        return {
+          title: 'Indicador',
+          description: 'Descripción para el paso 2: Indicador',
+        };
       case 2:
-        return 'Descripción para el paso 3: Ponderación';
+        return {
+          title: 'Ponderación',
+          description: 'Descripción para el paso 3: Ponderación',
+        };
       default:
         return '';
     }
