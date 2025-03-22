@@ -54,6 +54,12 @@ class UserController extends Controller
             'employees' => $employees,
             'competencies' => Competency::all(),
             'tests' => Test::all(),
+            'areas' => Area::all(),
+            'branches' => Branch::all(),
+            'companies' => Company::all(),
+            'roles' => Role::query()->where('id', '!=', Role::EMPLOYEE)->get(),
+            'managers' => User::query()->whereIn('role_id', [Role::ADMIN, Role::MANAGERS, Role::LEADERS])
+                ->where('id', '!=', 1)->get(),
         ]);
     }
 
@@ -97,6 +103,38 @@ class UserController extends Controller
         }
     }
 
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            $user = User::findOrFail($id);
+
+            $userData = $request->except(['password']);
+
+            if (!empty($request->password)) {
+                $userData['password'] = Hash::make($request->password);
+            }
+
+            $user->updateOrFail($userData);
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'titleAlert' => '¡Colaborador actualizado!',
+                'textAlert' => 'El colaborador ha sido actualizado correctamente',
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'error' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+            ], 500);
+        }
+    }
     public function status($id)
     {
         DB::beginTransaction();

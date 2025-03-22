@@ -1,7 +1,7 @@
 import { useAppQuery } from '../../../hooks';
 import { AdminTable, LinkButton, ToggleButton } from '../table';
 import { Error, Loading } from '../../../common';
-import { AssignEvaluationForm, ShowEmployee } from './';
+import { AssignEvaluationForm, ShowEmployee, EditEmployees } from './';
 import { employeesColumns, employeesFilters } from '../../helpers';
 import { Column } from 'primereact/column';
 
@@ -52,6 +52,21 @@ export const EmployeesMain = () => {
             userId={rowData.id}
             areaId={rowData.area_id}
             competencies={data.competencies}
+          />
+        )}
+      />
+
+      <Column
+        header=''
+        body={rowData => (
+          <EditEmployees
+          updateValues={true}
+          rowData={rowData}
+          areas={data.areas}
+          branches={data.branches}
+          companies={data.companies}
+          managers={data.managers}
+          roles={data.roles}
           />
         )}
       />

@@ -19,6 +19,8 @@ Route::prefix('/admin')->name('admin.')->group(function () {
   Route::prefix('/employees')->name('employees.')->group(function () {
     Route::get('/employees', [UserController::class, 'indexContent'])->name('index_content');
 
+    Route::post('/update/{id}', [UserController::class, 'update'])->name('update');
+
     Route::get('/competencies/{competencyId}/{areaId}', [TestController::class, 'getCompetencies'])
       ->name('get.competencies');
 
