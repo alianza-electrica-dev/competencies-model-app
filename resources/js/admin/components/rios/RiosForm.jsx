@@ -12,13 +12,14 @@ import { StepperPanel } from 'primereact/stepperpanel';
 import { RiosTable } from './RiosTable';
 import { useAppMutation } from '../../../hooks';
 
-export const RiosForm = ({ employees, periods }) => {
+export const RiosForm = ({ employees, periods, setRios }) => {
   const initialValues = {
     user_id: '',
     period_id: '',
     responsability: '',
     indicator: '',
     weighing: '',
+    purpose: '',
     rios: [],
   };
 
@@ -36,13 +37,18 @@ export const RiosForm = ({ employees, periods }) => {
       responsability: formik.values.responsability,
       indicator: formik.values.indicator,
       weighing: formik.values.weighing,
+      purpose: formik.values.purpose,
     };
 
+    const updatedRios = [...formik.values.rios, newRio];
+
     push(newRio);
+    setRios(updatedRios);
 
     formik.setFieldValue('responsability', '');
     formik.setFieldValue('indicator', '');
     formik.setFieldValue('weighing', '');
+    formik.setFieldValue('purpose', '');
 
     setActiveStep(0);
     stepperRef.current.setActiveStep(0);
@@ -88,7 +94,7 @@ export const RiosForm = ({ employees, periods }) => {
               icon='pi pi-save'
               loading={isPending}
             />
-            <RiosTable rios={formik.values.rios} />
+            <RiosTable rios={formik.values.rios} formikContext={formik} />
           </div>
 
           <FieldArray name='rios'>
@@ -158,6 +164,34 @@ export const RiosForm = ({ employees, periods }) => {
                     />
                   </div>
 
+                  <div className='flex justify-content-between'>
+                    <Button
+                      label='Atras'
+                      icon='pi pi-arrow-left'
+                      iconPos='right'
+                      onClick={onPrevStep}
+                      className='btn-secondary'
+                    />
+                    <Button
+                      className='btn-primary'
+                      label='Siguiente'
+                      icon='pi pi-arrow-right'
+                      iconPos='right'
+                      onClick={onNextStep}
+                    />
+                  </div>
+                </StepperPanel>
+
+                <StepperPanel header='Objetivo'>
+                  <div className='border-dashed border-round-md mb-4 border-400 flex justify-content-center pt-3'>
+                    <CustomInputText
+                      label='Añade una objetivo'
+                      name='purpose'
+                      col='3'
+                      type='number'
+                    />
+                  </div>
+
                   <div className='flex justify-content-around'>
                     <Button
                       label='Atras'
@@ -186,4 +220,5 @@ export const RiosForm = ({ employees, periods }) => {
 RiosForm.propTypes = {
   employees: PropTypes.arrayOf(PropTypes.object).isRequired,
   periods: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setRios: PropTypes.func.isRequired,
 };

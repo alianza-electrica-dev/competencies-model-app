@@ -7,7 +7,7 @@ import { useAppMutation } from '../../../hooks';
 import { employeesValidations } from '../../validations/employeesValidations';
 import { CustomInputSelect, CustomInputText } from '../../../formik';
 
-export const EditEmployees = ({
+export const EmployeesForm = ({
   rowData,
   areas,
   companies,
@@ -157,7 +157,7 @@ export const EditEmployees = ({
   );
 };
 
-EditEmployees.propTypes = {
+EmployeesForm.propTypes = {
   areas: PropTypes.arrayOf(PropTypes.object).isRequired,
   rowData: PropTypes.object,
   branches: PropTypes.arrayOf(PropTypes.object).isRequired,

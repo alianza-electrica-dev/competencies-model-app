@@ -57,4 +57,14 @@ class RioController extends Controller
             ], 500);
         }
     }
+
+    public function updateRio(Request $request)
+    {
+
+    }
+
+    public function destroyRio(Request $request)
+    {
+        return $request;
+    }
 }

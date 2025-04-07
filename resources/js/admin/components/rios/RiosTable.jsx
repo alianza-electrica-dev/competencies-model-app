@@ -4,8 +4,9 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { RiosUpdate, RiosDelete } from './';
 
-export const RiosTable = ({ rios }) => {
+export const RiosTable = ({ rios, formikContext }) => {
   const [dialogVisible, setDialogVisible] = useState(false);
 
   return (
@@ -34,8 +35,27 @@ export const RiosTable = ({ rios }) => {
           tableStyle={{ minWidth: '50rem' }}
         >
           <Column field='responsability' header='Responsabilidad' />
+
           <Column field='indicator' header='Indicador' />
+
           <Column field='weighing' header='Ponderación' />
+
+          <Column field='purpose' header='Objetivo' />
+
+          <Column
+            header=''
+            style={{ width: '5vw' }}
+            body={rowData => (
+              <RiosUpdate rowData={rowData} formikUpdate={formikContext} />
+            )}
+          />
+          <Column
+            header=''
+            style={{ width: '5vw' }}
+            body={rowData => (
+              <RiosDelete rowData={rowData} formikDelete={formikContext} />
+            )}
+          />
         </DataTable>
       </Dialog>
     </div>
@@ -44,4 +64,7 @@ export const RiosTable = ({ rios }) => {
 
 RiosTable.propTypes = {
   rios: PropTypes.arrayOf(PropTypes.object).isRequired,
+  formikContext: PropTypes.object,
+  formikUpdate: PropTypes.object,
+  formikDelete: PropTypes.object,
 };

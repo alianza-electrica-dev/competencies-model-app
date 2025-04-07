@@ -38,5 +38,6 @@ Route::prefix('/admin')->name('admin.')->group(function () {
   Route::prefix('/rios')->name('rios.')->group(function () {
     Route::get('/employees', [RioController::class, 'getRiosEmployees'])->name('rios_employees');
     Route::post('/create-rio', [RioController::class, 'createRio'])->name('create_rio');
+    // Route::delete('/destroy-rio', [RioController::class, 'destroyRio'])->name('destroy_rio');
   });
 })->middleware([IsAdmin::class]);
