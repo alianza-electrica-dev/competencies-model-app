@@ -53,7 +53,7 @@ export const EmployeesForm = ({
         icon='pi pi-pencil'
         rounded
         text
-        tooltip='Editar'
+        tooltip='Editar información'
         tooltipOptions={{ position: 'top' }}
         type='button'
       />
