@@ -59,6 +59,16 @@ export const EmployeesMain = () => {
       <Column
         header=''
         body={rowData => (
+          <LinkButton
+            icon='pi pi-objects-column'
+            tooltipText='Evaluación RIO'
+          />
+        )}
+      />
+
+      <Column
+        header=''
+        body={rowData => (
           <EmployeesForm
             updateValues={true}
             rowData={rowData}
