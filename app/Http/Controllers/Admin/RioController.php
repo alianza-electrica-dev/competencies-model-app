@@ -23,6 +23,7 @@ class RioController extends Controller
 
     public function createRio(Request $request)
     {
+        // dd($request);
 
         DB::beginTransaction();
 
@@ -37,6 +38,7 @@ class RioController extends Controller
                 $dataRio->responsibility = $rioData['responsability'];
                 $dataRio->indicator = $rioData['indicator'];
                 $dataRio->weighing = $rioData['weighing'];
+                $dataRio->purpose = $rioData['purpose'];
                 $dataRio->rio_id = $rio->id;
                 $dataRio->saveOrFail();
             }
