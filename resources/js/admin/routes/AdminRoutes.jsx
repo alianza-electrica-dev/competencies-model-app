@@ -3,6 +3,7 @@ import { ProtectedRoute } from '../../routers';
 import { PrivateLayout } from '../../layouts';
 import {
   EmployeesCompetenciesPage,
+  RiosCompetenciesPage,
   EmployeesPage,
   ManagersPage,
   RiosPage,
@@ -29,6 +30,11 @@ export const AdminRoutes = () => {
         />
 
         <Route path='/rios' element={<RiosPage />} />
+
+        <Route
+          path='/rios-competencies/:id'
+          element={<RiosCompetenciesPage />}
+        />
 
         <Route path='/*' element={<Navigate to='/admin/managers' />} />
       </Route>
