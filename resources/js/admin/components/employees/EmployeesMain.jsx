@@ -62,6 +62,7 @@ export const EmployeesMain = () => {
           <LinkButton
             icon='pi pi-objects-column'
             tooltipText='Evaluación RIO'
+            linkTo={`/admin/rios-competencies/${rowData.id}`}
           />
         )}
       />
