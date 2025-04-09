@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DataRio;
 use App\Models\Period;
 use App\Models\Rio;
+// use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -60,13 +61,11 @@ class RioController extends Controller
         }
     }
 
-    public function updateRio(Request $request)
+    public function getEmployeeTest($id)
     {
+        // $user = User::query()->findOrFail($id);
 
+        dd('Hola');
     }
 
-    public function destroyRio(Request $request)
-    {
-        return $request;
-    }
 }
