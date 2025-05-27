@@ -58,4 +58,44 @@ class RioController extends Controller
             ], 500);
         }
     }
+
+    public function updateRio(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $rio = Rio::findOrFail($id);
+            
+            // Solo actualizar objective y total en la tabla rios
+            if ($request->has('objective')) $rio->objective = $request->objective;
+            if ($request->has('total')) $rio->total = $request->total;
+            $rio->saveOrFail();
+
+            // Actualizar solo los campos permitidos en data_rios
+            if ($request->has('data_rios')) {
+                foreach ($request->data_rios as $dataRio) {
+                    $dataRioModel = DataRio::findOrFail($dataRio['id']);
+                    if (isset($dataRio['responsability'])) $dataRioModel->responsibility = $dataRio['responsability'];
+                    if (isset($dataRio['indicator'])) $dataRioModel->indicator = $dataRio['indicator'];
+                    if (isset($dataRio['weighing'])) $dataRioModel->weighing = $dataRio['weighing'];
+                    $dataRioModel->saveOrFail();
+                }
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'titleAlert' => '¡Documento actualizado!',
+                'textAlert' => 'El documento RIO ha sido actualizado correctamente',
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                'error' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+            ], 500);
+        }
+    }
 }
