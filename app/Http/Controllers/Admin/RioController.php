@@ -23,14 +23,12 @@ class RioController extends Controller
 
     public function createRio(Request $request)
     {
-
         DB::beginTransaction();
 
         try {
             $rio = new Rio;
             $rio->user_id = $request->user_id;
             $rio->period_id = $request->period_id;
-            $rio->objective = $request->objective;
             $rio->saveOrFail();
 
             foreach ($request->rios as $rioData) {
@@ -38,6 +36,7 @@ class RioController extends Controller
                 $dataRio->responsibility = $rioData['responsability'];
                 $dataRio->indicator = $rioData['indicator'];
                 $dataRio->weighing = $rioData['weighing'];
+                $dataRio->objective = $rioData['objective'] ?? null;
                 $dataRio->rio_id = $rio->id;
                 $dataRio->saveOrFail();
             }
@@ -66,8 +65,7 @@ class RioController extends Controller
         try {
             $rio = Rio::findOrFail($id);
             
-            // Solo actualizar objective y total en la tabla rios
-            if ($request->has('objective')) $rio->objective = $request->objective;
+            // Solo actualizar total en la tabla rios
             if ($request->has('total')) $rio->total = $request->total;
             $rio->saveOrFail();
 
@@ -78,6 +76,7 @@ class RioController extends Controller
                     if (isset($dataRio['responsability'])) $dataRioModel->responsibility = $dataRio['responsability'];
                     if (isset($dataRio['indicator'])) $dataRioModel->indicator = $dataRio['indicator'];
                     if (isset($dataRio['weighing'])) $dataRioModel->weighing = $dataRio['weighing'];
+                    if (isset($dataRio['objective'])) $dataRioModel->objective = $dataRio['objective'];
                     $dataRioModel->saveOrFail();
                 }
             }
