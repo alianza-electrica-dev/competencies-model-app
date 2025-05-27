@@ -30,6 +30,7 @@ class RioController extends Controller
             $rio = new Rio;
             $rio->user_id = $request->user_id;
             $rio->period_id = $request->period_id;
+            $rio->objective = $request->objective;
             $rio->saveOrFail();
 
             foreach ($request->rios as $rioData) {
