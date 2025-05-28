@@ -102,4 +102,25 @@ class RioController extends Controller
             ], 500);
         }
     }
+
+    public function getEmployeeRios($employeeId)
+    {
+        try {
+            $rios = Rio::with(['dataRios', 'period'])
+                ->where('user_id', $employeeId)
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'rios' => $rios
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'error' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+            ], 500);
+        }
+    }
 }
