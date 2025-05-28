@@ -35,6 +35,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
   //? ****** RIOS ROUTES ****** //
   Route::prefix('/rios')->name('rios.')->group(function () {
     Route::get('/employees', [RioController::class, 'getRiosEmployees'])->name('rios_employees');
+    Route::get('/employee/{employeeId}', [RioController::class, 'getEmployeeRios'])->name('employee_rios');
     Route::post('/create-rio', [RioController::class, 'createRio'])->name('create_rio');
     Route::put('/update-rio/{id}', [RioController::class, 'updateRio'])->name('update_rio');
   });

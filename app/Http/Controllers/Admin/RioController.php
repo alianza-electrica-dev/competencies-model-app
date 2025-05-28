@@ -70,8 +70,7 @@ class RioController extends Controller
         try {
             $rio = Rio::findOrFail($id);
             
-            // Solo actualizar objective y total en la tabla rios
-            if ($request->has('objective')) $rio->objective = $request->objective;
+            // Solo actualizar total en la tabla rios
             if ($request->has('total')) $rio->total = $request->total;
             $rio->saveOrFail();
 
@@ -82,6 +81,7 @@ class RioController extends Controller
                     if (isset($dataRio['responsability'])) $dataRioModel->responsibility = $dataRio['responsability'];
                     if (isset($dataRio['indicator'])) $dataRioModel->indicator = $dataRio['indicator'];
                     if (isset($dataRio['weighing'])) $dataRioModel->weighing = $dataRio['weighing'];
+                    if (isset($dataRio['objective'])) $dataRioModel->objective = $dataRio['objective'];
                     $dataRioModel->saveOrFail();
                 }
             }
@@ -96,6 +96,27 @@ class RioController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json([
+                'error' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+            ], 500);
+        }
+    }
+
+    public function getEmployeeRios($employeeId)
+    {
+        try {
+            $rios = Rio::with(['dataRios', 'period'])
+                ->where('user_id', $employeeId)
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'rios' => $rios
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
                 'error' => $th->getMessage(),
                 'file' => $th->getFile(),
                 'line' => $th->getLine(),
