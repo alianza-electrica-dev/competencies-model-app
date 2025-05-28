@@ -36,7 +36,9 @@ class RioController extends Controller
                 $dataRio->responsibility = $rioData['responsability'];
                 $dataRio->indicator = $rioData['indicator'];
                 $dataRio->weighing = $rioData['weighing'];
-                $dataRio->objective = $rioData['objective'] ?? null;
+                if (isset($rioData['objective'])) {
+                    $dataRio->objective = $rioData['objective'];
+                }
                 $dataRio->rio_id = $rio->id;
                 $dataRio->saveOrFail();
             }
@@ -50,10 +52,13 @@ class RioController extends Controller
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();
+            \Log::error('Error al crear RIO: ' . $th->getMessage());
+            \Log::error('Stack trace: ' . $th->getTraceAsString());
             return response()->json([
                 'error' => $th->getMessage(),
                 'file' => $th->getFile(),
                 'line' => $th->getLine(),
+                'trace' => $th->getTraceAsString()
             ], 500);
         }
     }
