@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('rios', function (Blueprint $table) {
-            $table->text('objective')->nullable()->after('period_id');
+        Schema::table('data_rios', function (Blueprint $table) {
+            $table->text('objective')->nullable()->after('rio_id');
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('rios', function (Blueprint $table) {
+        Schema::table('data_rios', function (Blueprint $table) {
             $table->dropColumn('objective');
         });
     }

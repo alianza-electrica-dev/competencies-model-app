@@ -31,6 +31,11 @@ export const useRioStepper = () => {
           title: 'Ponderación',
           description: 'Descripción para el paso 3: Ponderación',
         };
+      case 3:
+        return {
+          title: 'Objetivo',
+          description: 'Descripción para el paso 4: Objetivo',
+        };
       default:
         return '';
     }
