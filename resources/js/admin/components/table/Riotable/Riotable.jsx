@@ -53,3 +53,4 @@ Riotable.propTypes = {
   filters: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired
 };
+

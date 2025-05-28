@@ -21,29 +21,30 @@ class RioController extends Controller
         ]);
     }
 
-    public function createRio(Request $request)
+       public function createRio(Request $request)
     {
-
         DB::beginTransaction();
-
+ 
         try {
             $rio = new Rio;
             $rio->user_id = $request->user_id;
             $rio->period_id = $request->period_id;
-            $rio->objective = $request->objective;
             $rio->saveOrFail();
-
+ 
             foreach ($request->rios as $rioData) {
                 $dataRio = new DataRio;
                 $dataRio->responsibility = $rioData['responsability'];
                 $dataRio->indicator = $rioData['indicator'];
                 $dataRio->weighing = $rioData['weighing'];
+                if (isset($rioData['objective'])) {
+                    $dataRio->objective = $rioData['objective'];
+                }
                 $dataRio->rio_id = $rio->id;
                 $dataRio->saveOrFail();
             }
-
+ 
             DB::commit();
-
+ 
             return response()->json([
                 'success' => true,
                 'titleAlert' => '¡Documento creado!',
@@ -51,10 +52,13 @@ class RioController extends Controller
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();
+            \Log::error('Error al crear RIO: ' . $th->getMessage());
+            \Log::error('Stack trace: ' . $th->getTraceAsString());
             return response()->json([
                 'error' => $th->getMessage(),
                 'file' => $th->getFile(),
                 'line' => $th->getLine(),
+                'trace' => $th->getTraceAsString()
             ], 500);
         }
     }
