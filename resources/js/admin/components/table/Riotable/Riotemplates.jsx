@@ -62,7 +62,8 @@ import { InputText } from 'primereact/inputtext'
      
   }
     export const responsTemplate = rowdata => {
+      const ultimo = rowdata.data_rios.slice(-1)[0]
       return (
-        <span>{rowdata.data_rios.responsibility}</span>
+        <span>{'ultimo'}</span>
       )
     } 
