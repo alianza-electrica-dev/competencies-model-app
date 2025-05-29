@@ -38,6 +38,16 @@ export const EmployeesMain = () => {
         header=''
         body={rowData => (
           <LinkButton
+            icon='pi pi-user'
+            tooltipText='Ver RIO'
+            linkTo={`/admin/employees-RIO`}// ${rowData.id}
+          />
+        )}
+      />
+      <Column
+        header=''
+        body={rowData => (
+          <LinkButton
             icon='pi pi-file'
             tooltipText='Evaluaciones'
             linkTo={`/admin/employees-competencies/${rowData.id}`}
