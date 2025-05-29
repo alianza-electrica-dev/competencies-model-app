@@ -3,6 +3,7 @@ export const employeesRioColumns = [
   { field: 'responsibility', header: 'Responsabilidad', body: ''},
   { field: 'indicator', header: 'Indicador', body: ''},
   { field: 'weighing', header: 'Ponderación', body: '' },
+  {field: 'objective', header: 'Objetivo', body:''},
   { field: 'real', header: 'Real', body: realTemplate },
   { field: 'compliance', header: 'Cumplimiento', body: complianceTemplate },
   { field: 'observations', header: 'Observaciones', body: observationsTemplate },

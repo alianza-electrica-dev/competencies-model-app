@@ -1,2 +1,2 @@
 export * from './EmployeesCompetenciesForm';
-export * from './EmployeesCompetenciesMain';
+export * from './EmployeesRioMain';
