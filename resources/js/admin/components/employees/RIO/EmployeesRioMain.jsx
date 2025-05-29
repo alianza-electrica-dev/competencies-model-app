@@ -4,8 +4,7 @@ import { Error, Loading } from '../../../../common';
 import { Riotable } from '../../table/Riotable';
 import { employeesRioColumns } from '../../../helpers';
 import { Button } from 'primereact/button';
-
-import { DataRio } from '../../table/help/DataRio'
+import { Column } from 'primereact/column';
 
 export const EmployeesRioMain = () => {
   const navigate = useNavigate();
@@ -47,17 +46,30 @@ export const EmployeesRioMain = () => {
     </div>
   );
 
+  // Transformar los datos para la tabla
+  const tableData =
+    data?.rios?.flatMap(rio =>
+      rio.data_rios.map(dataRio => ({
+        responsibility: dataRio.responsibility,
+        indicator: dataRio.indicator,
+        weighing: dataRio.weighing,
+        real: dataRio.real,
+        compliance: dataRio.compliance,
+        observations: dataRio.observations,
+        period: rio.period?.name || 'Sin período',
+      })),
+    ) || [];
+
   return (
     <>
-
-    <Riotable
-      tableData={data?.rios}
-      tableHeader={tableHeader}
-      tableColumns={employeesRioColumns}
-      filters={{}}
-    >
-      {null}
-    </Riotable>
+      <Riotable
+        tableData={tableData}
+        tableHeader={tableHeader}
+        tableColumns={employeesRioColumns}
+        filters={{}}
+      >
+        <Column header='' />
+      </Riotable>
     </>
   );
 };
