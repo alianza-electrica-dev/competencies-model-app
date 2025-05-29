@@ -1,5 +1,5 @@
-import { EmployeesCompetenciesMain } from '../../../components/employees/RIO';
+import { EmployeesRioMain } from '../../../components/employees/RIO';
 
 export const EmployeesRIOPage = () => {
-  return <EmployeesCompetenciesMain />;
+  return <EmployeesRioMain />;
 };

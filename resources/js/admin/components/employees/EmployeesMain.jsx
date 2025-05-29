@@ -40,7 +40,7 @@ export const EmployeesMain = () => {
           <LinkButton
             icon='pi pi-user'
             tooltipText='Ver RIO'
-            linkTo={`/admin/employees-RIO`}// ${rowData.id}
+            linkTo={`/admin/employees-RIO/${rowData.id}`}// ${rowData.id}
           />
         )}
       />
@@ -86,3 +86,4 @@ export const EmployeesMain = () => {
     </AdminTable>
   );
 };
+

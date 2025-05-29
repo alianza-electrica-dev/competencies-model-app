@@ -29,7 +29,7 @@ export const AdminRoutes = () => {
           element={<EmployeesCompetenciesPage />}
         />
         <Route
-          path='/employees-RIO'// :id
+          path='/employees-RIO/:id'// :id
           element={<EmployeesRIOPage />}
         />
 

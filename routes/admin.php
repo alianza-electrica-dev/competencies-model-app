@@ -40,3 +40,4 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::put('/update-rio/{id}', [RioController::class, 'updateRio'])->name('update_rio');
   });
 })->middleware([IsAdmin::class]);
+

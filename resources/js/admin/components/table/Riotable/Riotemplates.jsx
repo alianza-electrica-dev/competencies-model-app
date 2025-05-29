@@ -1,10 +1,12 @@
 import { InputText } from 'primereact/inputtext'
+ 
+   
+ export const calculateCalif = (Data) => {
+    const calif=17
+    console.log(Data)
+    return calif
+  }
 
-/*     const calculateCalif = (compliance) => {
-        let calif = 0;
-        console.log(compliance)
-        return calif;
-    }; */
     
   export const headerTemplate = tableData => {
       return(
@@ -14,16 +16,11 @@ import { InputText } from 'primereact/inputtext'
       )
   };
   export const footerTemplate = tableData => {
-    let total = 0
-    if (tableData.indicator === null){
-      console.log("Objeto vacio")
-    }else{
-      total=total+1
-    }
+    const calificacion = calculateCalif(tableData.compliance)
     return (
       <>
-        <td colSpan={5}>
-          <div className="flex justify-content-end font-bold w-full">Calificación: {total}</div>
+        <td colSpan={7}>
+          <div className="flex justify-content-end font-bold w-full">Calificación:{calificacion}</div>
         </td>
       </>
     )

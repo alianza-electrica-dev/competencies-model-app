@@ -28,7 +28,6 @@ export const Riotable = ({
         onRowToggle={(e) => setExpandedRows(e.data)}
         sortMode="single" 
         sortField="period" 
-        sortOrder={1}
         rowGroupHeaderTemplate={headerTemplate}
         rowGroupFooterTemplate={footerTemplate} 
       >
