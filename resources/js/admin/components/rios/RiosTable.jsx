@@ -46,3 +46,4 @@ export const RiosTable = ({ rios }) => {
 RiosTable.propTypes = {
   rios: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
+

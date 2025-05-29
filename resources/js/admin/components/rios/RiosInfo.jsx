@@ -1,12 +1,16 @@
-import { useRioStepper } from '../../hooks/rios/useRioStepper';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+
+
 
 export const RiosInfo = () => {
-  const { onStepDescription } = useRioStepper();
-
+  
   return (
     <>
-      <h1>{onStepDescription().title}</h1>
-      <p>información o descripción</p>
+      <h1>Responsabilidades</h1>
+      <DataTable value={""} tableStyle={{ minWidth: '30rem' }}>
+        <Column field="" header="Responsabilidad" />
+      </DataTable>
     </>
   );
 };

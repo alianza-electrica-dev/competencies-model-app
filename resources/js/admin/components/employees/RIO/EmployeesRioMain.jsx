@@ -1,19 +1,17 @@
-import {  useParams, useNavigate } from 'react-router-dom'; import { useAppQuery } from '../../../../hooks';
-import { Error, Loading } from '../../../../common';  
+import { useParams, useNavigate } from 'react-router-dom';
+import { useAppQuery } from '../../../../hooks';
+import { Error, Loading } from '../../../../common';
 import { Riotable } from '../../table/Riotable';
-import {
-  employeesRioColumns,
-} from '../../../helpers';
+import { employeesRioColumns } from '../../../helpers';
 import { Button } from 'primereact/button';
 
 /* import { DataRio } from '../../table/help/DataRio' */
 
-
 export const EmployeesRioMain = () => {
   const navigate = useNavigate();
-const { id } = useParams(); 
+  const { id } = useParams();
 
-   const { isPending, isError, data, error } = useAppQuery(
+  const { isPending, isError, data, error } = useAppQuery(
     'EmployeesEvaluations',
     'admin.rios.employee_rios',
     { id },
@@ -25,16 +23,16 @@ const { id } = useParams();
 
   if (isError) {
     return <Error errorMessage={error.message} />;
-  } 
+  }
 
   const onNavigateBack = () => {
     navigate(-1, { replace: true });
-  }; 
+  };
 
   const tableHeader = (
     <div className='flex justify-content-between align-items-center px-4 pt-4'>
       <span className='text-3xl text-900 font-bold text-secondary'>
-        RIO - Nombre Apellido 
+        RIO - {data?.user?.name || 'Nombre Apellido'}
       </span>
       <Button
         onClick={onNavigateBack}
@@ -50,11 +48,13 @@ const { id } = useParams();
   );
 
   return (
-      <Riotable
-      tableData={data}
+    <Riotable
+      tableData={Array.isArray(data?.periods) ? data.periods : []}
       tableHeader={tableHeader}
       tableColumns={employeesRioColumns}
-      >
+      filters={{}}
+    >
+      {null}
     </Riotable>
   );
 };
