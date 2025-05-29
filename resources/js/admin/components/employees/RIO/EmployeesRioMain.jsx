@@ -5,7 +5,7 @@ import { Riotable } from '../../table/Riotable';
 import { employeesRioColumns } from '../../../helpers';
 import { Button } from 'primereact/button';
 
-/* import { DataRio } from '../../table/help/DataRio' */
+import { DataRio } from '../../table/help/DataRio'
 
 export const EmployeesRioMain = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export const EmployeesRioMain = () => {
   const tableHeader = (
     <div className='flex justify-content-between align-items-center px-4 pt-4'>
       <span className='text-3xl text-900 font-bold text-secondary'>
-        RIO - {data?.user?.name || 'Nombre Apellido'}
+        RIO - Nombre Apellido
       </span>
       <Button
         onClick={onNavigateBack}
@@ -48,13 +48,16 @@ export const EmployeesRioMain = () => {
   );
 
   return (
+    <>
+
     <Riotable
-      tableData={Array.isArray(data?.periods) ? data.periods : []}
+      tableData={data?.rios}
       tableHeader={tableHeader}
       tableColumns={employeesRioColumns}
       filters={{}}
     >
       {null}
     </Riotable>
+    </>
   );
 };

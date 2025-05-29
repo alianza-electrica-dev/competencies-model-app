@@ -1,10 +1,10 @@
-import { realTemplate, complianceTemplate, observationsTemplate } from "../../components/table/Riotable/Riotemplates";
+import { realTemplate, complianceTemplate, observationsTemplate, responsTemplate } from "../../components/table/Riotable/Riotemplates";
 export const employeesRioColumns = [
-  { field: 'responsibility', header: 'Responsabilidad', body: ''},
-  { field: 'indicator', header: 'Indicador', body: ''},
-  { field: 'weighing', header: 'Ponderación', body: '' },
-  {field: 'objective', header: 'Objetivo', body:''},
-  { field: 'real', header: 'Real', body: realTemplate },
-  { field: 'compliance', header: 'Cumplimiento', body: complianceTemplate },
-  { field: 'observations', header: 'Observaciones', body: observationsTemplate },
+  { header: 'Responsabilidad', body: responsTemplate},
+/*   { field: 'data_rios.indicator', header: 'Indicador', body: ''},
+  { field: 'data_rios.weighing', header: 'Ponderación', body: '' },
+  {field: 'data_rios.objective', header: 'Objetivo', body:''},
+  { field: 'data_rios.real', header: 'Real', body: realTemplate },
+  { field: 'data_rios.compliance', header: 'Cumplimiento', body: complianceTemplate },
+  { field: 'data_rios.observations', header: 'Observaciones', body: observationsTemplate }, */
 ];

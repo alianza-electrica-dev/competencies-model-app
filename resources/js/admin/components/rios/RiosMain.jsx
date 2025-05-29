@@ -1,6 +1,6 @@
 import { useAppQuery } from '../../../hooks';
 import { Error, Loading } from '../../../common';
-import { RiosForm, RiosInfo } from './';
+import { RiosForm } from './';
 import styles from '../../styles/RiosMain.module.css';
 
 export const RiosMain = () => {
@@ -19,12 +19,7 @@ export const RiosMain = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.card}>
         <RiosForm employees={data.employees} periods={data.periods} />
-      </div>
-      <div className={styles.card}>
-        <RiosInfo />
-      </div>
     </div>
   );
 };

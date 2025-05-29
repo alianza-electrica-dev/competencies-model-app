@@ -59,4 +59,10 @@ import { InputText } from 'primereact/inputtext'
         }
         </>
       )
+     
   }
+    export const responsTemplate = rowdata => {
+      return (
+        <span>{rowdata.data_rios.responsibility}</span>
+      )
+    } 

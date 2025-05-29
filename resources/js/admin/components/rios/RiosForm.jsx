@@ -12,9 +12,12 @@ import { StepperPanel } from 'primereact/stepperpanel';
 import { RiosTable } from './RiosTable';
 import { useAppMutation } from '../../../hooks';
 import {  } from "module";
+import {RiosInfo} from './'
+import styles from '../../styles/RiosMain.module.css';
+import {useState} from 'react'
 
 export const RiosForm = ({ employees, periods }) => {
-  
+  const [respo, setRespo] = useState([])
   const initialValues = {
     user_id: '',
     period_id: '',
@@ -64,6 +67,7 @@ export const RiosForm = ({ employees, periods }) => {
 
   return (
     <>
+    <div className={styles.card}>
     <Formik
       initialValues={initialValues}
       onSubmit={values => onSaveRioData(values)}
@@ -208,6 +212,7 @@ export const RiosForm = ({ employees, periods }) => {
                       label='Guardar'
                       onClick={e => {
                         onPushRioData(formik, push ); 
+                        setRespo(formik.values.rios)
                       }}
                       // type='button'
                     />
@@ -221,6 +226,12 @@ export const RiosForm = ({ employees, periods }) => {
         
       )}
     </Formik>
+    </div>
+    <div className={styles.card}>
+      <RiosInfo
+        dataRespo ={respo}
+      />
+    </div>
     </>
   );
 };

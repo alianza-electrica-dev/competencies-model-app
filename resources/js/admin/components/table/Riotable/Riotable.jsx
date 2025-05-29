@@ -22,19 +22,18 @@ export const Riotable = ({
         tableStyle={{ minWidth: '50rem' }}
         emptyMessage='No existe ningun registro'
         rowGroupMode="subheader"
-        groupRowsBy="period"
+/*         groupRowsBy="period"
         expandableRowGroups 
         expandedRows={expandedRows} 
         onRowToggle={(e) => setExpandedRows(e.data)}
         sortMode="single" 
         sortField="period" 
         rowGroupHeaderTemplate={headerTemplate}
-        rowGroupFooterTemplate={footerTemplate} 
+        rowGroupFooterTemplate={footerTemplate}  */
       >
         {tableColumns.map(colum =>
             <Column
-              key={colum.field}
-              field={colum.field}
+              key={colum.header}
               header={colum.header}
               body={colum.body}
             />
