@@ -106,20 +106,30 @@ class RioController extends Controller
     public function getEmployeeRios($employeeId)
     {
         try {
-            $rios = Rio::with(['dataRios', 'period'])
+            $rios = Rio::with(['dataRios', 'period', 'user'])
                 ->where('user_id', $employeeId)
                 ->get();
+
+            if ($rios->isEmpty()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'No se encontraron RIOs para este empleado',
+                    'rios' => []
+                ]);
+            }
 
             return response()->json([
                 'success' => true,
                 'rios' => $rios
             ]);
         } catch (\Throwable $th) {
+            \Log::error('Error al obtener RIOs del empleado: ' . $th->getMessage());
+            \Log::error('Stack trace: ' . $th->getTraceAsString());
+            
             return response()->json([
                 'success' => false,
-                'error' => $th->getMessage(),
-                'file' => $th->getFile(),
-                'line' => $th->getLine(),
+                'error' => 'Error al obtener los RIOs del empleado',
+                'message' => $th->getMessage()
             ], 500);
         }
     }
