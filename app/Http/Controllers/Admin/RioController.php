@@ -21,16 +21,16 @@ class RioController extends Controller
         ]);
     }
 
-    public function createRio(Request $request)
+       public function createRio(Request $request)
     {
         DB::beginTransaction();
-
+ 
         try {
             $rio = new Rio;
             $rio->user_id = $request->user_id;
             $rio->period_id = $request->period_id;
             $rio->saveOrFail();
-
+ 
             foreach ($request->rios as $rioData) {
                 $dataRio = new DataRio;
                 $dataRio->responsibility = $rioData['responsability'];
@@ -42,9 +42,9 @@ class RioController extends Controller
                 $dataRio->rio_id = $rio->id;
                 $dataRio->saveOrFail();
             }
-
+ 
             DB::commit();
-
+ 
             return response()->json([
                 'success' => true,
                 'titleAlert' => '¡Documento creado!',

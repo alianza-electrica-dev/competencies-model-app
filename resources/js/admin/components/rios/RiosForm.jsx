@@ -19,6 +19,7 @@ export const RiosForm = ({ employees, periods }) => {
     responsability: '',
     indicator: '',
     weighing: '',
+    objective: '',
     rios: [],
   };
 
@@ -36,13 +37,16 @@ export const RiosForm = ({ employees, periods }) => {
       responsability: formik.values.responsability,
       indicator: formik.values.indicator,
       weighing: formik.values.weighing,
+      objective: formik.values.objective,
     };
 
+    console.log(newRio)
     push(newRio);
 
     formik.setFieldValue('responsability', '');
     formik.setFieldValue('indicator', '');
     formik.setFieldValue('weighing', '');
+    formik.setFieldValue('objective', '');
 
     setActiveStep(0);
     stepperRef.current.setActiveStep(0);
@@ -168,12 +172,42 @@ export const RiosForm = ({ employees, periods }) => {
                     />
                     <Button
                       className='btn-primary'
+                      label='Siguiente'
+                      icon='pi pi-arrow-right'
+                      iconPos='right'
+                      onClick={onNextStep}
+                      // type='button'
+                    />
+                  </div>
+                </StepperPanel>
+
+                <StepperPanel header='Objetivo'>
+                  <div className='border-dashed border-round-md mb-4 border-400 flex justify-content-center pt-3'>
+                    <CustomInputText
+                      label='Añade un objetivo'
+                      name='objective'
+                      col='4'
+                      type='number'
+                    />
+                  </div>
+
+                  <div className='flex justify-content-around'>
+                    <Button
+                      label='Atras'
+                      icon='pi pi-arrow-left'
+                      iconPos='left'
+                      onClick={onPrevStep}
+                      className='btn-secondary'
+                    />
+                    <Button
+                      className='btn-primary'
                       label='Guardar'
                       onClick={e => onPushRioData(formik, push)}
                       // type='button'
                     />
                   </div>
                 </StepperPanel>
+
               </Stepper>
             )}
           </FieldArray>

@@ -5,7 +5,8 @@ export const DataRio = [{
     real:17,
     compliance:17,
     observations:"mayor difusion y comunicación de los planes de capacitacion que se presentaran durante el mes  ",
-    period:"Periodo de Enero a Junio"    
+    period:"Periodo de Enero a Junio",   
+    objective: 20
 },
 {
     responsibility:"Establecer y dar seguimiento de cumplimiento a los planes de sucesión (Desarrollo y Carrera) que permitan mapear a todo el personal que cumpla con los requisitos de crecimiento",
@@ -14,7 +15,8 @@ export const DataRio = [{
     real:10,
     compliance:17,
     observations:"en proceso de validacion una vez que se emita el resultado de la evaluacion de desempeño se estara trabajando en la estrategia de implementacion ",
-    period:"Periodo de Julio a Diciembre"  
+    period:"Periodo de Julio a Diciembre",
+    objective: 20 
 },
 {
     responsibility:"Asegurar el cumplimiento de las matrices de desarrollo conforme al formato 70,20,10 estableciento los planes de desarrollo de nivel jerarquico promoviendo al menos 1 persona cada trimestre",
@@ -23,7 +25,8 @@ export const DataRio = [{
     real:null,
     compliance:null,
     observations:null,
-    period:"Periodo de Enero a Junio"    
+    period:"Periodo de Enero a Junio",
+    objective: 30
 },
 {
     responsibility:"Asegurar y establecer los canales de comunicación corporativa conforme a los nuevos pilares definidos para 2024. (Imagen, mesajes, marca, etc)",
@@ -32,7 +35,8 @@ export const DataRio = [{
     real:null,
     compliance:null,
     observations:null,
-    period:"Periodo de Julio a Diciembre"    
+    period:"Periodo de Julio a Diciembre",
+    objective: 30    
 },
 {
     responsibility:"Asegurar el cumplimiento de las matrices de desarrollo conforme al formato 70,20,10 estableciento los planes de desarrollo de nivel jerarquico promoviendo al menos 1 persona cada trimestre",
@@ -41,7 +45,8 @@ export const DataRio = [{
     real:null,
     compliance:null,
     observations:null,
-    period:"Periodo de Enero a Junio"    
+    period:"Periodo de Enero a Junio",
+    objective: 30
 },
 {
     responsibility:"Asegurar y establecer los canales de comunicación corporativa conforme a los nuevos pilares definidos para 2024. (Imagen, mesajes, marca, etc)",
@@ -50,5 +55,6 @@ export const DataRio = [{
     real:null,
     compliance:null,
     observations:null,
-    period:"Periodo de Julio a Diciembre"    
+    period:"Periodo de Julio a Diciembre",
+    objective: 30    
 }]

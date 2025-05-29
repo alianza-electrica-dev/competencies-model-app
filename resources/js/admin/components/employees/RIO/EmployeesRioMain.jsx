@@ -1,22 +1,21 @@
-import { /* useParams, */ useNavigate } from 'react-router-dom';
-/* import { useAppQuery } from '../../../../hooks';
-import { Error, Loading } from '../../../../common'; */
+import {  useParams, useNavigate } from 'react-router-dom'; import { useAppQuery } from '../../../../hooks';
+import { Error, Loading } from '../../../../common';  
 import { Riotable } from '../../table/Riotable';
-/* import { EmployeesCompetenciesForm } from './'; */
 import {
   employeesRioColumns,
 } from '../../../helpers';
 import { Button } from 'primereact/button';
 
-import { DataRio } from '../../table/help/DataRio'
+/* import { DataRio } from '../../table/help/DataRio' */
 
-export const EmployeesCompetenciesMain = () => {
+
+export const EmployeesRioMain = () => {
   const navigate = useNavigate();
-/*   const { id } = useParams(); 
+const { id } = useParams(); 
 
    const { isPending, isError, data, error } = useAppQuery(
     'EmployeesEvaluations',
-    'admin.employees.user.test',
+    'admin.rios.employee_rios',
     { id },
   );
 
@@ -26,7 +25,7 @@ export const EmployeesCompetenciesMain = () => {
 
   if (isError) {
     return <Error errorMessage={error.message} />;
-  } */
+  } 
 
   const onNavigateBack = () => {
     navigate(-1, { replace: true });
@@ -52,7 +51,7 @@ export const EmployeesCompetenciesMain = () => {
 
   return (
       <Riotable
-      tableData={DataRio}
+      tableData={data}
       tableHeader={tableHeader}
       tableColumns={employeesRioColumns}
       >

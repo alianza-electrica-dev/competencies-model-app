@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 export const useAppQuery = (queryKey, url, params = {}) => {
   const onGetData = async () => {
     const { data } = await axios.get(route(url, params));
+    console.log(route(url,params))
     return data;
   };
 

@@ -7,7 +7,6 @@ import { Column } from 'primereact/column';
 
 export const RiosTable = ({ rios }) => {
   const [dialogVisible, setDialogVisible] = useState(false);
-
   return (
     <div className='card'>
       <Button
@@ -36,6 +35,8 @@ export const RiosTable = ({ rios }) => {
           <Column field='responsability' header='Responsabilidad' />
           <Column field='indicator' header='Indicador' />
           <Column field='weighing' header='Ponderación' />
+          <Column field='objective' header='Objetivo'/>
+
         </DataTable>
       </Dialog>
     </div>
