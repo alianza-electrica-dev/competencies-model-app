@@ -1,54 +1,10 @@
-import { InputText } from 'primereact/inputtext';
-
+import { Button } from 'primereact/button';
+import { Tag } from 'primereact/tag';
 export const calculateCalif = Data => {
   const calif = 17;
-  console.log(Data);
   return calif;
 };
 
-<<<<<<< HEAD
-  export const realTemplate = tableData => {
-      return(
-        <>
-          {tableData.real === null ? 
-            <InputText value={""} className="p-inputtext-sm" placeholder="Añadir Real" onChange={() => ""} />
-          :
-           <span>{tableData.real}</span> 
-        }
-        </>
-      )
-  }
-    export const complianceTemplate = tableData => {
-      return(
-        <>
-          {tableData.compliance === null ? 
-            <InputText value={""} className="p-inputtext-sm" placeholder="Añadir Cumplimiento" onChange={() => ""} />
-            
-          :
-           <span>{tableData.compliance}</span> 
-        }
-        </>
-      )
-  }
-    export const observationsTemplate = tableData => {
-      return(
-        <>
-          {tableData.observations === null ? 
-            <InputText value={""} className="p-inputtext-sm" placeholder="Añadir Observaciones" onChange={() => ""} />
-          :
-           <span>{tableData.observations}</span> 
-        }
-        </>
-      )
-     
-  }
-    export const responsTemplate = rowdata => {
-      const ultimo = rowdata.data_rios.slice(-1)[0]
-      return (
-        <span>{'ultimo'}</span>
-      )
-    } 
-=======
 export const headerTemplate = tableData => {
   return <>{tableData.period}</>;
 };
@@ -70,12 +26,7 @@ export const realTemplate = tableData => {
   return (
     <>
       {tableData.real === null ? (
-        <InputText
-          value={''}
-          className='p-inputtext-sm'
-          placeholder='Añadir Real'
-          onChange={() => ''}
-        />
+       <Tag value="Sin Asignar" severity='danger' />
       ) : (
         <span>{tableData.real}</span>
       )}
@@ -87,12 +38,7 @@ export const complianceTemplate = tableData => {
   return (
     <>
       {tableData.compliance === null ? (
-        <InputText
-          value={''}
-          className='p-inputtext-sm'
-          placeholder='Añadir Cumplimiento'
-          onChange={() => ''}
-        />
+           <Tag value="Sin Asignar" severity='danger' />
       ) : (
         <span>{tableData.compliance}</span>
       )}
@@ -104,18 +50,28 @@ export const observationsTemplate = tableData => {
   return (
     <>
       {tableData.observations === null ? (
-        <InputText
-          value={''}
-          className='p-inputtext-sm'
-          placeholder='Añadir Observaciones'
-          onChange={() => ''}
-        />
+          <Tag value="Sin Asignar" severity='danger' />
       ) : (
         <span>{tableData.observations}</span>
       )}
     </>
   );
 };
+
+ export const actionBodyTemplate = (rowData) => {
+        return (
+            <>
+                <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => ("")} />
+                <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => ("")} />
+            </>
+        );
+    };
+
+
+export const allowEdit = (rowData) => {
+        return rowData.Real !== null;
+    };
+
 
 export const responsTemplate = rowdata => {
   return <span>{rowdata.responsibility}</span>;
@@ -132,4 +88,7 @@ export const weighingTemplate = rowdata => {
 export const periodTemplate = rowdata => {
   return <span>{rowdata.period}</span>;
 };
->>>>>>> accb0d87a1f6f25fb0f3786b5800a014e14bab2f
+
+export const editTemplate = rowdata =>{
+  return ""
+}
