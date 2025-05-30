@@ -9,19 +9,32 @@ use App\Models\Rio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class RioController extends Controller
 {
     public function getRiosEmployees()
     {
-        return response()->json([
-            'success' => true,
-            'employees' => Auth::user()->getAllSubordinates(),
-            'periods' => Period::all(),
-        ]);
+        try {
+            return response()->json([
+                'success' => true,
+                'employees' => Auth::user()->getAllSubordinates(),
+                'periods' => Period::all(),
+            ]);
+        } catch (\Throwable $th) {
+            Log::error('Error al obtener empleados y períodos: ' . $th->getMessage());
+            Log::error('Stack trace: ' . $th->getTraceAsString());
+            
+            return response()->json([
+                'success' => false,
+                'titleAlert' => 'Error',
+                'textAlert' => 'Ha ocurrido un error al obtener los datos',
+                'error' => $th->getMessage()
+            ], 500);
+        }
     }
 
-       public function createRio(Request $request)
+    public function createRio(Request $request)
     {
         DB::beginTransaction();
  
@@ -52,13 +65,14 @@ class RioController extends Controller
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();
-            \Log::error('Error al crear RIO: ' . $th->getMessage());
-            \Log::error('Stack trace: ' . $th->getTraceAsString());
+            Log::error('Error al crear RIO: ' . $th->getMessage());
+            Log::error('Stack trace: ' . $th->getTraceAsString());
+            
             return response()->json([
-                'error' => $th->getMessage(),
-                'file' => $th->getFile(),
-                'line' => $th->getLine(),
-                'trace' => $th->getTraceAsString()
+                'success' => false,
+                'titleAlert' => 'Error',
+                'textAlert' => 'Ha ocurrido un error al crear el documento RIO',
+                'error' => $th->getMessage()
             ], 500);
         }
     }
@@ -86,11 +100,14 @@ class RioController extends Controller
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();
+            Log::error('Error al actualizar RIO: ' . $th->getMessage());
+            Log::error('Stack trace: ' . $th->getTraceAsString());
+            
             return response()->json([
                 'success' => false,
                 'titleAlert' => 'Error',
                 'textAlert' => 'Ha ocurrido un error al actualizar el documento RIO',
-                'error' => $th->getMessage(),
+                'error' => $th->getMessage()
             ], 500);
         }
     }
@@ -105,7 +122,8 @@ class RioController extends Controller
             if ($rios->isEmpty()) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'No se encontraron RIOs para este empleado',
+                    'titleAlert' => 'Información',
+                    'textAlert' => 'No se encontraron RIOs para este empleado',
                     'rios' => []
                 ]);
             }
@@ -115,13 +133,14 @@ class RioController extends Controller
                 'rios' => $rios
             ]);
         } catch (\Throwable $th) {
-            \Log::error('Error al obtener RIOs del empleado: ' . $th->getMessage());
-            \Log::error('Stack trace: ' . $th->getTraceAsString());
+            Log::error('Error al obtener RIOs del empleado: ' . $th->getMessage());
+            Log::error('Stack trace: ' . $th->getTraceAsString());
             
             return response()->json([
                 'success' => false,
-                'error' => 'Error al obtener los RIOs del empleado',
-                'message' => $th->getMessage()
+                'titleAlert' => 'Error',
+                'textAlert' => 'Ha ocurrido un error al obtener los RIOs del empleado',
+                'error' => $th->getMessage()
             ], 500);
         }
     }
