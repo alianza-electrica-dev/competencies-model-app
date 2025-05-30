@@ -5,7 +5,7 @@ import { DataTable } from 'primereact/datatable';
 import { useState } from 'react';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputText } from 'primereact/inputtext';
-import { headerTemplate, footerTemplate, allowEdit } from './Riotemplates';
+import { headerTemplate, footerTemplate } from './Riotemplates';
 import { Loading } from '../../../../common';
 import { useRioMutation } from '../../../../../js/hooks';
 import {
@@ -101,28 +101,28 @@ export const Riotable = ({
           <Column key={colum.header} header={colum.header} body={colum.body} />
         ))}
         <Column
-          key='Real'
+          field='real'
           header='Real'
           body={realTemplate}
-          editor={data => realEditor(data)}
+          editor={realEditor}
         />
         <Column
-          key='Cumplimiento'
+          field='compliance'
           header='Cumplimiento'
           body={complianceTemplate}
-          editor={data => complianceEditor(data)}
+          editor={complianceEditor}
         />
         <Column
-          key='Observaciones'
+          field='observations'
           header='Observaciones'
           body={observationsTemplate}
-          editor={data => observationsEditor(data)}
+          editor={observationsEditor}
         />
         <Column
-          rowEditor={allowEdit}
+          rowEditor
           headerStyle={{ width: '10%', minWidth: '8rem' }}
           bodyStyle={{ textAlign: 'center', color: 'green' }}
-        ></Column>
+        />
         {children}
       </DataTable>
     </Card>

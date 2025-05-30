@@ -26,7 +26,7 @@ export const realTemplate = tableData => {
   return (
     <>
       {tableData.real === null ? (
-       <Tag value="Sin Asignar" severity='danger' />
+        <Tag value='Sin Asignar' severity='danger' />
       ) : (
         <span>{tableData.real}</span>
       )}
@@ -38,7 +38,7 @@ export const complianceTemplate = tableData => {
   return (
     <>
       {tableData.compliance === null ? (
-           <Tag value="Sin Asignar" severity='danger' />
+        <Tag value='Sin Asignar' severity='danger' />
       ) : (
         <span>{tableData.compliance}</span>
       )}
@@ -50,7 +50,7 @@ export const observationsTemplate = tableData => {
   return (
     <>
       {tableData.observations === null ? (
-          <Tag value="Sin Asignar" severity='danger' />
+        <Tag value='Sin Asignar' severity='danger' />
       ) : (
         <span>{tableData.observations}</span>
       )}
@@ -58,20 +58,30 @@ export const observationsTemplate = tableData => {
   );
 };
 
- export const actionBodyTemplate = (rowData) => {
-        return (
-            <>
-                <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => ("")} />
-                <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => ("")} />
-            </>
-        );
-    };
+export const actionBodyTemplate = rowData => {
+  return (
+    <>
+      <Button
+        icon='pi pi-pencil'
+        rounded
+        outlined
+        className='mr-2'
+        onClick={() => ''}
+      />
+      <Button
+        icon='pi pi-trash'
+        rounded
+        outlined
+        severity='danger'
+        onClick={() => ''}
+      />
+    </>
+  );
+};
 
-
-export const allowEdit = (rowData) => {
-        return rowData.Real !== null;
-    };
-
+export const allowEdit = () => {
+  return true;
+};
 
 export const responsTemplate = rowdata => {
   return <span>{rowdata.responsibility}</span>;
@@ -89,6 +99,6 @@ export const periodTemplate = rowdata => {
   return <span>{rowdata.period}</span>;
 };
 
-export const editTemplate = rowdata =>{
-  return ""
-}
+export const editTemplate = rowdata => {
+  return '';
+};
