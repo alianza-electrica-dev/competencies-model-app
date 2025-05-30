@@ -9,7 +9,7 @@ export const useRioMutation = (url, invalidQuery = '') => {
   return useMutation({
     mutationFn: ({ params = {}, request = '' }) => {
       console.log(route(url, params), request)
-      return axios.post(route(url, params), request);
+      return axios.put(route(url, params), request);
     },
 
     onSuccess: data => {
