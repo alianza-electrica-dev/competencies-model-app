@@ -31,7 +31,14 @@ export const EmployeesRioMain = () => {
   const tableHeader = (
     <div className='flex justify-content-between align-items-center px-4 pt-4'>
       <span className='text-3xl text-900 font-bold text-secondary'>
-        RIO - {data.rios[0]?data.rios[0].user.name+" "+ data?.rios[0].user.last_name+" "+ data?.rios[0].user.second_last_name:"No hay RIO para este usuario"} 
+        RIO -{' '}
+        {data.rios[0]
+          ? data.rios[0].user.name +
+            ' ' +
+            data?.rios[0].user.last_name +
+            ' ' +
+            data?.rios[0].user.second_last_name
+          : 'No hay RIO para este usuario'}
       </span>
       <Button
         onClick={onNavigateBack}

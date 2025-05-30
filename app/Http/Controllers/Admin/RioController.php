@@ -68,23 +68,14 @@ class RioController extends Controller
         DB::beginTransaction();
 
         try {
-            $rio = Rio::findOrFail($id);
+            $dataRio = DataRio::findOrFail($id);
             
-            // Solo actualizar total en la tabla rios
-            if ($request->has('total')) $rio->total = $request->total;
-            $rio->saveOrFail();
-
-            // Actualizar solo los campos permitidos en data_rios
-            if ($request->has('data_rios')) {
-                foreach ($request->data_rios as $dataRio) {
-                    $dataRioModel = DataRio::findOrFail($dataRio['id']);
-                    if (isset($dataRio['responsability'])) $dataRioModel->responsibility = $dataRio['responsability'];
-                    if (isset($dataRio['indicator'])) $dataRioModel->indicator = $dataRio['indicator'];
-                    if (isset($dataRio['weighing'])) $dataRioModel->weighing = $dataRio['weighing'];
-                    if (isset($dataRio['objective'])) $dataRioModel->objective = $dataRio['objective'];
-                    $dataRioModel->saveOrFail();
-                }
-            }
+            // Solo actualizar los campos permitidos
+            if (isset($request->real)) $dataRio->real = $request->real;
+            if (isset($request->compliance)) $dataRio->compliance = $request->compliance;
+            if (isset($request->observations)) $dataRio->observations = $request->observations;
+            
+            $dataRio->saveOrFail();
 
             DB::commit();
 
@@ -96,9 +87,10 @@ class RioController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json([
+                'success' => false,
+                'titleAlert' => 'Error',
+                'textAlert' => 'Ha ocurrido un error al actualizar el documento RIO',
                 'error' => $th->getMessage(),
-                'file' => $th->getFile(),
-                'line' => $th->getLine(),
             ], 500);
         }
     }
