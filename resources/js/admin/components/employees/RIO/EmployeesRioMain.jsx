@@ -11,7 +11,7 @@ export const EmployeesRioMain = () => {
   const { id } = useParams();
 
   const { isPending, isError, data, error } = useAppQuery(
-    'EmployeesEvaluations',
+    'EmployeesRios',
     'admin.rios.employee_rios',
     { id },
   );
@@ -33,7 +33,7 @@ export const EmployeesRioMain = () => {
       <span className='text-3xl text-900 font-bold text-secondary'>
         RIO -{' '}
         {data.rios[0]
-          ? data.rios[0].user.name +
+          ? data?.rios[0].user.name +
             ' ' +
             data?.rios[0].user.last_name +
             ' ' +

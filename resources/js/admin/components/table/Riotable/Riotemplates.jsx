@@ -1,26 +1,23 @@
-import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
-export const calculateCalif = Data => {
-  const calif = 17;
-  return calif;
-};
+
 
 export const headerTemplate = tableData => {
-  return <>{tableData.period}</>;
+  return <span className='text-orange-500'>{tableData.period}</span>;
 };
 
-export const footerTemplate = tableData => {
-  const calificacion = calculateCalif(tableData.compliance);
-  return (
-    <>
-      <td colSpan={7}>
-        <div className='flex justify-content-end font-bold w-full'>
-          Calificación:{calificacion}
-        </div>
-      </td>
-    </>
-  );
-};
+export function setSeverity(total){
+  
+  switch(true){
+    case total>0 && total<=80:
+      return 'danger'
+    case  total>80 && total<=95:
+      return 'warning'
+    case total>95:
+      return 'success'
+    default:
+      return 'info'
+  } 
+}
 
 export const realTemplate = tableData => {
   return (
@@ -56,31 +53,6 @@ export const observationsTemplate = tableData => {
       )}
     </>
   );
-};
-
-export const actionBodyTemplate = rowData => {
-  return (
-    <>
-      <Button
-        icon='pi pi-pencil'
-        rounded
-        outlined
-        className='mr-2'
-        onClick={() => ''}
-      />
-      <Button
-        icon='pi pi-trash'
-        rounded
-        outlined
-        severity='danger'
-        onClick={() => ''}
-      />
-    </>
-  );
-};
-
-export const allowEdit = () => {
-  return true;
 };
 
 export const responsTemplate = rowdata => {

@@ -240,3 +240,4 @@ RiosForm.propTypes = {
   employees: PropTypes.arrayOf(PropTypes.object).isRequired,
   periods: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
+
