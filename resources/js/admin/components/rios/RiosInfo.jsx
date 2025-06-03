@@ -32,7 +32,7 @@ export const RiosInfo = ({ dataRespo, pending }) => {
       <h1>Borrador de envío</h1>
         <DataTable
           value={dataRespo}
-          tableStyle={{ minWidth: '30rem', minHeight:'27rem' }}
+          tableStyle={{ minWidth: '20rem', minHeight:'27rem' }}
           footer={footerTemplate}
           scrollable
           scrollHeight='450px'

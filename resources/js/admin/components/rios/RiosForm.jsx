@@ -72,8 +72,8 @@ export const RiosForm = ({ employees, periods }) => {
       >
         {formik => (
           <Form>
-            <div className='grid justify-content-center'>
-              <div className={`${styles.card} mx-2 my-2`}>
+            <div className='grid justify-content-center gap-4'>
+              <div className={`${styles.card} my-2 w-7`}>
                 <div className='flex'>
                   <div className='col'>
                     <div className='flex justify-content-center'>
@@ -234,7 +234,7 @@ export const RiosForm = ({ employees, periods }) => {
                   )}
                 </FieldArray>
               </div>
-              <div className={`${styles.cardRespo} mx-2 my-2`}>
+              <div className={`${styles.cardRespo} my-2 w-4`}>
                 <div className='align-content-end'>
                   <RiosInfo 
                   dataRespo={respo} 

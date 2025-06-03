@@ -2,6 +2,7 @@ import { useAppQuery } from '../../../hooks';
 import { Error, Loading } from '../../../common';
 import { RiosForm } from './';
 
+
 export const RiosMain = () => {
   const { isPending, isError, data, error } = useAppQuery(
     'managers_rio',
