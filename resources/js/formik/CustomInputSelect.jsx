@@ -6,7 +6,7 @@ export const CustomInputSelect = ({ label, ...props }) => {
   const [field] = useField(props);
 
   return (
-    <div className={`field mb-4 col-${props.col ? props.col : '12'}`}>
+    <div className={`field mb-3 col-${props.col ? props.col : '12'}`} style={{ width: '400px' } }>
       <label
         htmlFor={props.id || props.name}
         className='text-black-alpha-90 font-medium'
@@ -22,3 +22,4 @@ export const CustomInputSelect = ({ label, ...props }) => {
     </div>
   );
 };
+

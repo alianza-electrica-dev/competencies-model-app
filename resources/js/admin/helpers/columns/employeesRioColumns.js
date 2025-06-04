@@ -2,6 +2,7 @@ import {
   responsTemplate,
   indicatorTemplate,
   weighingTemplate,
+  objectiveTemplate
 } from '../../components/table/Riotable/Riotemplates';
 
 export const employeesRioColumns = [
@@ -24,4 +25,9 @@ export const employeesRioColumns = [
     body: weighingTemplate,
     
   },
+  {
+    field: 'objective',
+    header: 'Objetivo',
+    body: objectiveTemplate,
+  }
 ];

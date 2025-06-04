@@ -10,12 +10,13 @@ export const RiosTable = ({ rios }) => {
   return (
     <div className='card'>
       <Button
-        label='Ver RIO'
+        label='Ver Rio Completo'
         icon='pi pi-eye'
         text
-        className='text-secondary hover:surface-200'
+        className='text-white hover:surface-500 bg-blue-900'
         onClick={() => setDialogVisible(true)}
         type='button'
+        
       />
       <Dialog
         header='Documento RIO'

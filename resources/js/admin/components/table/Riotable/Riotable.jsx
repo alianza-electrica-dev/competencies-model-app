@@ -12,6 +12,7 @@ import {
   realTemplate,
   complianceTemplate,
   observationsTemplate,
+  differenceTemplate,
   setSeverity,
 } from '../../table/Riotable/Riotemplates';
 
@@ -35,6 +36,32 @@ export const Riotable = ({
   }
 
   const realEditor = data => {
+    const errorKey = data.rowData.id + '-' + data.field;
+    return (
+      <>
+        <InputNumber
+          inputId='minmax-buttons'
+          value={data.value}
+          onValueChange={e => data.editorCallback(e.value)}
+          mode='decimal'
+          showButtons
+          invalid={errors[errorKey]}
+          inputStyle={{ width: '55px' }} 
+          min={0} 
+          max={100}
+        />
+        {errors[errorKey] && (
+          <div>
+            <small className='text-red-600'>
+              {errors[errorKey]}
+            </small>
+          </div>
+        )}
+      </>
+    );
+  };
+
+   const differenceEditor = data => {
     const errorKey = data.rowData.id + '-' + data.field;
     return (
       <>
@@ -116,6 +143,7 @@ export const Riotable = ({
     const newObject = {
       id: newData.id,
       real: newData.real,
+      difference:newData.difference,
       compliance: newData.compliance,
       observations: newData.observations,
     };
@@ -134,6 +162,18 @@ export const Riotable = ({
       errors = {
         ...errors,
         [data.id + '-' + 'real']: 'Este campo no puede estar vacio',
+      };
+    }
+    if (newObject.difference < 0) {
+      errors = {
+        ...errors,
+        [data.id + '-' + 'difference']: 'El número no puede ser menor que 0',
+      };
+    }
+    if (newObject.difference === null) {
+      errors = {
+        ...errors,
+        [data.id + '-' + 'difference']: 'Este campo no puede estar vacio',
       };
     }
     if (newObject.compliance < 0 || newObject.compliance > data.weighing) {
@@ -221,6 +261,14 @@ export const Riotable = ({
           header='Real'
           body={realTemplate}
           editor={realEditor}
+          style={{ width: '120px' }}
+        />
+        <Column
+          field='difference'
+          header='Diferencia'
+          body={differenceTemplate}
+          editor={differenceEditor}
+          style={{ width: '120px' }}
         />
         <Column
           field='compliance'
