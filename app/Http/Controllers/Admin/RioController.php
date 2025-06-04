@@ -88,6 +88,7 @@ class RioController extends Controller
             if (isset($request->real)) $dataRio->real = $request->real;
             if (isset($request->compliance)) $dataRio->compliance = $request->compliance;
             if (isset($request->observations)) $dataRio->observations = $request->observations;
+            if (isset($request->difference)) $dataRio->difference = $request->difference;
             
             $dataRio->saveOrFail();
 
