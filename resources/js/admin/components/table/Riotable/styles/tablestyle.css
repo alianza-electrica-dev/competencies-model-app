@@ -1,0 +1,20 @@
+/*
+Original Colors
+Orange:#FF4D00
+Marine:#183462
+yellow:#F59E0B
+*/
+.p-rowgroup-header, .p-row-toggler, .p-row-editor-init,.p-row-editor-save,.p-row-editor-cancel {
+    color: #FF4D00;
+}
+
+.p-datatable-thead>tr>th {
+    color: #183462  !important;
+}
+.p-column-title{
+    font-weight: bold !important;
+}
+.p-inputnumber-button{
+    background-color: #183462;
+    border-color: white;
+}

@@ -8,6 +8,7 @@ import { headerTemplate } from './Riotemplates';
 import { Loading } from '../../../../common';
 import { useRioMutation } from '../../../../../js/hooks';
 import { Tag } from 'primereact/tag';
+import './styles/tablestyle.css'
 import {
   realTemplate,
   complianceTemplate,
@@ -122,7 +123,7 @@ export const Riotable = ({
         <InputTextarea
           value={data.value}
           onChange={e => data.editorCallback(e.target.value)}
-          rows={5}
+          rows={2}
           cols={40}
           autoResize
           invalid={errors[errorKey]}
@@ -225,7 +226,7 @@ export const Riotable = ({
         .reduce((acc, item) => acc + item.real, 0);
     }
     return (
-      <td colSpan={7}>
+      <td colSpan={8}>
         <div className='flex justify-content-end font-bold w-full'>
           Calificación:
           <Tag value={total} severity={setSeverity(total)} />
