@@ -2,7 +2,7 @@ import { Tag } from 'primereact/tag';
 
 
 export const headerTemplate = tableData => {
-  return <span className='text-orange-500'>{tableData.period}</span>;
+  return <b className='text-black text-bold'>{tableData.period}</b>;
 };
 
 export function setSeverity(total){
@@ -26,6 +26,18 @@ export const realTemplate = tableData => {
         <Tag value='Sin Asignar' severity='danger' />
       ) : (
         <span>{tableData.real}</span>
+      )}
+    </>
+  );
+};
+
+export const differenceTemplate = tableData => {
+  return (
+    <>
+      {tableData.difference === null ? (
+        <Tag value='Sin Asignar' severity='danger' />
+      ) : (
+        <span>{tableData.difference}</span>
       )}
     </>
   );
@@ -65,6 +77,9 @@ export const indicatorTemplate = rowdata => {
 
 export const weighingTemplate = rowdata => {
   return <span>{rowdata.weighing}</span>;
+};
+export const objectiveTemplate = rowdata => {
+  return <span>{rowdata.objective}</span>;
 };
 
 export const periodTemplate = rowdata => {
