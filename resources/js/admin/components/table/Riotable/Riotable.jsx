@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Card } from 'primereact/card';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
-import { useState, useRef,useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { InputNumber } from 'primereact/inputnumber';
 import { headerTemplate } from './Riotemplates';
 import { useRioMutation } from '../../../../../js/hooks';
@@ -27,11 +27,10 @@ export const Riotable = ({
   children,
 }) => {
   const [expandedRows, setExpandedRows] = useState([]);
-  const { mutate } = useRioMutation(
-    'admin.rios.update_rio',
-    'EmployeesRios',
-  );
+  const { mutate } = useRioMutation('admin.rios.update_rio', 'EmployeesRios');
   const [errors, setErrors] = useState({});
+  const [totalej, setTotalej] = useState(0);
+  const [totaljd, setTotaljd] = useState(0);
 
   const toast = useRef(null);
 
@@ -136,8 +135,8 @@ export const Riotable = ({
 
   const onRowEditComplete = e => {
     const { originalEvent, newData, data } = e;
-    console.log(e)
     const newObject = {
+      total: null,
       id: newData.id,
       real: newData.real,
       difference: newData.difference,
@@ -145,6 +144,14 @@ export const Riotable = ({
       observations: newData.observations,
     };
 
+    if (e.data.period === 'Periodo de Enero a Junio') {
+      newObject.total=totalej
+      console.log(totalej)
+    } else {
+      newObject.total=totaljd
+      console.log(totaljd)
+    }
+    console.log(newObject);
     let errors = {};
 
     if (newObject.real < 0 || newObject.real > data.weighing) {
@@ -160,10 +167,11 @@ export const Riotable = ({
         [data.id + '-' + 'real']: 'Este campo no puede estar vacio',
       };
     }
-    if (newObject.difference < 0 || newObject.difference> 100) {
+    if (newObject.difference < 0 || newObject.difference > 100) {
       errors = {
         ...errors,
-        [data.id + '-' + 'difference']: 'El número solo puede estar entre 0 y 100',
+        [data.id + '-' + 'difference']:
+          'El número solo puede estar entre 0 y 100',
       };
     }
     if (newObject.difference === null) {
@@ -192,11 +200,9 @@ export const Riotable = ({
       };
     }
 
-    console.log(newObject)
-
     if (Object.keys(errors).length === 0) {
       setErrors({});
-      mutate({ request: newObject, params: (e.data.idRio) });
+      mutate({ request: newObject, params: e.data.idRio });
     } else {
       setErrors(errors);
       originalEvent.preventDefault();
@@ -213,6 +219,7 @@ export const Riotable = ({
             item.period === 'Periodo de Enero a Junio' && item.real !== null,
         )
         .reduce((acc, item) => acc + item.real, 0);
+      setTotalej(total);
     } else {
       total = tableData
         .filter(
@@ -221,12 +228,23 @@ export const Riotable = ({
             item.real !== null,
         )
         .reduce((acc, item) => acc + item.real, 0);
+        setTotaljd(total);
     }
+    setTotaljd(total);
     return (
       <td colSpan={8}>
-        <div className='flex justify-content-end align-content-center  font-bold w-full'style={{fontSize:'120%' }}>
+        <div
+          className='flex justify-content-end align-content-center  font-bold w-full'
+          style={{ fontSize: '120%' }}
+        >
           <div className='flex'>Calificación: </div>
-          <div className='flex'><Tag value={total} severity={setSeverity(total)} style={{ width: '50px', height: '30px', fontSize:'100%' }} /></div>
+          <div className='flex'>
+            <Tag
+              value={total}
+              severity={setSeverity(total)}
+              style={{ width: '50px', height: '30px', fontSize: '100%' }}
+            />
+          </div>
         </div>
       </td>
     );
