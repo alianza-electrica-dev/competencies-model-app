@@ -2,13 +2,12 @@ import PropTypes from 'prop-types';
 import { Card } from 'primereact/card';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
-import { useState } from 'react';
+import { useState, useRef,useEffect } from 'react';
 import { InputNumber } from 'primereact/inputnumber';
 import { headerTemplate } from './Riotemplates';
-import { Loading } from '../../../../common';
 import { useRioMutation } from '../../../../../js/hooks';
 import { Tag } from 'primereact/tag';
-import './styles/tablestyle.css'
+import './styles/tablestyle.css';
 import {
   realTemplate,
   complianceTemplate,
@@ -18,6 +17,8 @@ import {
 } from '../../table/Riotable/Riotemplates';
 
 import { InputTextarea } from 'primereact/inputtextarea';
+import { Toast } from 'primereact/toast';
+import { setToastRef } from './services/toastService';
 
 export const Riotable = ({
   tableData,
@@ -26,15 +27,17 @@ export const Riotable = ({
   children,
 }) => {
   const [expandedRows, setExpandedRows] = useState([]);
-  const { isPending, mutate } = useRioMutation(
+  const { mutate } = useRioMutation(
     'admin.rios.update_rio',
     'EmployeesRios',
   );
   const [errors, setErrors] = useState({});
 
-  if (isPending) {
-    return <Loading />;
-  }
+  const toast = useRef(null);
+
+  useEffect(() => {
+    setToastRef(toast.current);
+  }, []);
 
   const realEditor = data => {
     const errorKey = data.rowData.id + '-' + data.field;
@@ -47,22 +50,20 @@ export const Riotable = ({
           mode='decimal'
           showButtons
           invalid={errors[errorKey]}
-          inputStyle={{ width: '55px' }} 
-          min={0} 
+          inputStyle={{ width: '55px' }}
+          min={0}
           max={100}
         />
         {errors[errorKey] && (
           <div>
-            <small className='text-red-600'>
-              {errors[errorKey]}
-            </small>
+            <small className='text-red-600'>{errors[errorKey]}</small>
           </div>
         )}
       </>
     );
   };
 
-   const differenceEditor = data => {
+  const differenceEditor = data => {
     const errorKey = data.rowData.id + '-' + data.field;
     return (
       <>
@@ -73,15 +74,13 @@ export const Riotable = ({
           mode='decimal'
           showButtons
           invalid={errors[errorKey]}
-          inputStyle={{ width: '55px' }} 
-          min={0} 
+          inputStyle={{ width: '55px' }}
+          min={0}
           max={100}
         />
         {errors[errorKey] && (
           <div>
-            <small className='text-red-600'>
-              {errors[errorKey]}
-            </small>
+            <small className='text-red-600'>{errors[errorKey]}</small>
           </div>
         )}
       </>
@@ -92,26 +91,24 @@ export const Riotable = ({
     const errorKey = data.rowData.id + '-' + data.field;
     return (
       <>
-      <div className=''>
-        <InputNumber
-          inputId='minmax-buttons'
-          value={data.value}
-          onValueChange={e => data.editorCallback(e.value)}
-          mode='decimal'
-          showButtons
-          invalid={errors[errorKey]}  
-          inputStyle={{ width: '55px' }}  
-          min={0}   
-          max={100}
-        />
-        {errors[errorKey] && (
-          <div>
-            <small className='text-red-600'>
-              {errors[errorKey]}
-            </small>
-          </div>
-        )}
-      </div>
+        <div className=''>
+          <InputNumber
+            inputId='minmax-buttons'
+            value={data.value}
+            onValueChange={e => data.editorCallback(e.value)}
+            mode='decimal'
+            showButtons
+            invalid={errors[errorKey]}
+            inputStyle={{ width: '55px' }}
+            min={0}
+            max={100}
+          />
+          {errors[errorKey] && (
+            <div>
+              <small className='text-red-600'>{errors[errorKey]}</small>
+            </div>
+          )}
+        </div>
       </>
     );
   };
@@ -124,15 +121,13 @@ export const Riotable = ({
           value={data.value}
           onChange={e => data.editorCallback(e.target.value)}
           rows={2}
-          cols={40}
+          cols={25}
           autoResize
           invalid={errors[errorKey]}
         />
         {errors[errorKey] && (
           <div>
-            <small className='text-red-600'>
-              {errors[errorKey]}
-            </small>
+            <small className='text-red-600'>{errors[errorKey]}</small>
           </div>
         )}
       </>
@@ -144,19 +139,18 @@ export const Riotable = ({
     const newObject = {
       id: newData.id,
       real: newData.real,
-      difference:newData.difference,
+      difference: newData.difference,
       compliance: newData.compliance,
       observations: newData.observations,
     };
 
     let errors = {};
 
-    console.log(data)
-
     if (newObject.real < 0 || newObject.real > data.weighing) {
       errors = {
         ...errors,
-        [data.id + '-' + 'real']: 'El número solo puede estar entre 0 y '+ data.weighing,
+        [data.id + '-' + 'real']:
+          'El número solo puede estar entre 0 y ' + data.weighing,
       };
     }
     if (newObject.real === null) {
@@ -180,7 +174,8 @@ export const Riotable = ({
     if (newObject.compliance < 0 || newObject.compliance > data.weighing) {
       errors = {
         ...errors,
-        [data.id + '-' + 'compliance']: 'El número solo puede estar entre 0 y '+ data.weighing,
+        [data.id + '-' + 'compliance']:
+          'El número solo puede estar entre 0 y ' + data.weighing,
       };
     }
     if (newObject.compliance === null) {
@@ -196,7 +191,6 @@ export const Riotable = ({
       };
     }
 
-    console.log(errors);
     if (Object.keys(errors).length === 0) {
       setErrors({});
       mutate({ request: newObject, params: e.newData.id });
@@ -237,6 +231,7 @@ export const Riotable = ({
 
   return (
     <Card header={tableHeader} style={{ height: '100%' }}>
+      <Toast ref={toast} />
       <DataTable
         value={tableData}
         tableStyle={{ minWidth: '50rem' }}
@@ -269,24 +264,27 @@ export const Riotable = ({
           header='Diferencia'
           body={differenceTemplate}
           editor={differenceEditor}
-          style={{ width: '120px' }}
+          style={{ width: '100px' }}
         />
         <Column
           field='compliance'
           header='Cumplimiento'
           body={complianceTemplate}
           editor={complianceEditor}
+          style={{ width: '100px' }}
         />
         <Column
           field='observations'
           header='Observaciones'
           body={observationsTemplate}
           editor={observationsEditor}
+          style={{ width: '100px' }}
         />
         <Column
           rowEditor
           headerStyle={{ width: '10%', minWidth: '8rem' }}
           bodyStyle={{ textAlign: 'center', color: 'green' }}
+          style={{ width: '50px' }}
         />
         {children}
       </DataTable>
@@ -302,4 +300,3 @@ Riotable.propTypes = {
   filters: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
 };
-
