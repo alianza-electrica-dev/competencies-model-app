@@ -223,9 +223,9 @@ export const Riotable = ({
     }
     return (
       <td colSpan={8}>
-        <div className='flex justify-content-end align-content-center  font-bold w-full'style={{fontSize:'140%' }}>
-          <div className='flex'>Calificación:</div>
-          <div className='flex'><Tag value={total} severity={setSeverity(total)} style={{ width: '40px', height: '30px', fontSize:'100%' }} /></div>
+        <div className='flex justify-content-end align-content-center  font-bold w-full'style={{fontSize:'120%' }}>
+          <div className='flex'>Calificación: </div>
+          <div className='flex'><Tag value={total} severity={setSeverity(total)} style={{ width: '50px', height: '30px', fontSize:'100%' }} /></div>
         </div>
       </td>
     );
