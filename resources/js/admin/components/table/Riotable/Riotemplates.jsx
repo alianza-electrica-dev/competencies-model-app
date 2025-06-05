@@ -8,7 +8,7 @@ export const headerTemplate = tableData => {
 export function setSeverity(total){
   
   switch(true){
-    case total>0 && total<=80:
+    case total>=0 && total<=80:
       return 'danger'
     case  total>80 && total<=95:
       return 'warning'

@@ -5,10 +5,10 @@ import { RiosTable } from './RiosTable';
 import { Button } from 'primereact/button';
 import { useState } from 'react'
 
-export const RiosInfo = ({ dataRespo, pending }) => {
+export const RiosInfo = ({ formik, formikReplace, formikRemove , pending }) => {
   const [total,setTotal]=useState(0)
   const footerTemplate = () => {
-    setTotal(dataRespo
+    setTotal(formik.values.rios
       ?.map(item => item?.weighing)
       .reduce((acc, weighing) => acc + weighing, 0))
     return (
@@ -20,7 +20,6 @@ export const RiosInfo = ({ dataRespo, pending }) => {
     );
   };
   const validTotal = (number) =>{
-    console.log(number)
     if(number=== 100){
       return false
     }else{
@@ -31,19 +30,19 @@ export const RiosInfo = ({ dataRespo, pending }) => {
     <>
       <h1>Borrador de envío</h1>
         <DataTable
-          value={dataRespo}
+          value={formik.values.rios}
           tableStyle={{ minWidth: '20rem', minHeight:'27rem' }}
           footer={footerTemplate}
           scrollable
           scrollHeight='450px'
-          
+          emptyMessage='No existen elementos en espera'
         >
           <Column field='responsability' header='Responsabilidad' />
           <Column field='weighing' header='Ponderación' />
         </DataTable>
         <div className='flex my-4 flex justify-content-center'>
           <div className='mx-3'>
-            <RiosTable rios={dataRespo} />
+            <RiosTable rios={formik} forkRep={formikReplace} forkRem={formikRemove} />
           </div>
           <div className='mx-3'>
             <Button

@@ -159,10 +159,10 @@ export const Riotable = ({
         [data.id + '-' + 'real']: 'Este campo no puede estar vacio',
       };
     }
-    if (newObject.difference < 0) {
+    if (newObject.difference < 0 || newObject.difference> 100) {
       errors = {
         ...errors,
-        [data.id + '-' + 'difference']: 'El número no puede ser menor que 0',
+        [data.id + '-' + 'difference']: 'El número solo puede estar entre 0 y 100',
       };
     }
     if (newObject.difference === null) {
@@ -184,12 +184,14 @@ export const Riotable = ({
         [data.id + '-' + 'compliance']: 'Este campo no puede estar vacio',
       };
     }
-    if (newObject.observations === '') {
+    if (newObject.observations === '' || newObject.observations === null) {
       errors = {
         ...errors,
         [data.id + '-' + 'observations']: 'Este campo no puede estar vacio',
       };
     }
+
+    console.log(newObject)
 
     if (Object.keys(errors).length === 0) {
       setErrors({});
@@ -221,9 +223,9 @@ export const Riotable = ({
     }
     return (
       <td colSpan={8}>
-        <div className='flex justify-content-end font-bold w-full'>
-          Calificación:
-          <Tag value={total} severity={setSeverity(total)} />
+        <div className='flex justify-content-end align-content-center  font-bold w-full'style={{fontSize:'140%' }}>
+          <div className='flex'>Calificación:</div>
+          <div className='flex'><Tag value={total} severity={setSeverity(total)} style={{ width: '40px', height: '30px', fontSize:'100%' }} /></div>
         </div>
       </td>
     );

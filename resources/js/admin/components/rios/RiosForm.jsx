@@ -13,10 +13,7 @@ import { useAppMutation } from '../../../hooks';
 import {} from 'module';
 import { RiosInfo } from './';
 import styles from '../../styles/RiosMain.module.css';
-import { useState } from 'react';
-
 export const RiosForm = ({ employees, periods }) => {
-  const [respo, setRespo] = useState([]);
   const initialValues = {
     user_id: '',
     period_id: '',
@@ -45,7 +42,6 @@ export const RiosForm = ({ employees, periods }) => {
     };
 
     push(newRio);
-    setRespo([...respo, newRio]);
 
     formik.setFieldValue('responsability', '');
     formik.setFieldValue('indicator', '');
@@ -72,37 +68,37 @@ export const RiosForm = ({ employees, periods }) => {
       >
         {formik => (
           <Form>
-            <div className='grid justify-content-center gap-4'>
-              <div className={`${styles.card} my-2 w-7`}>
-                <div className='flex'>
-                  <div className='col'>
-                    <div className='flex justify-content-center'>
-                      <CustomInputSelect
-                        label='Periodo de evaluación'
-                        name='period_id'
-                        col='4'
-                        options={periods}
-                        optionLabel='name'
-                        optionValue='id'
-                      />
+            <FieldArray name='rios'>
+              {({ push, replace, remove }) => (
+                <div className='grid justify-content-center gap-4'>
+                  <div className={`${styles.card} my-2 w-7`}>
+                    <div className='flex'>
+                      <div className='col'>
+                        <div className='flex justify-content-center'>
+                          <CustomInputSelect
+                            label='Periodo de evaluación'
+                            name='period_id'
+                            col='4'
+                            options={periods}
+                            optionLabel='name'
+                            optionValue='id'
+                          />
+                        </div>
+                      </div>
+                      <div className='col'>
+                        <div className='flex justify-content-center'>
+                          <CustomInputSelect
+                            label='¿A quién se le asigna?'
+                            name='user_id'
+                            col='4'
+                            options={employees}
+                            optionLabel='full_name'
+                            optionValue='id'
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className='col'>
-                    <div className='flex justify-content-center'>
-                      <CustomInputSelect
-                        label='¿A quién se le asigna?'
-                        name='user_id'
-                        col='4'
-                        options={employees}
-                        optionLabel='full_name'
-                        optionValue='id'
-                      />
-                    </div>
-                  </div>
-                </div>
 
-                <FieldArray name='rios'>
-                  {({ push }) => (
                     <Stepper
                       ref={stepperRef}
                       activeStep={activeStep}
@@ -159,10 +155,7 @@ export const RiosForm = ({ employees, periods }) => {
                             icon='pi pi-arrow-right'
                             iconPos='right'
                             onClick={onNextStep}
-                            disabled={onDisableButtons(
-                              formik.values.indicator,
-                            )}
-                            
+                            disabled={onDisableButtons(formik.values.indicator)}
                           />
                         </div>
                       </StepperPanel>
@@ -191,9 +184,7 @@ export const RiosForm = ({ employees, periods }) => {
                             icon='pi pi-arrow-right'
                             iconPos='right'
                             onClick={onNextStep}
-                            disabled={onDisableButtons(
-                              formik.values.weighing,
-                            )}
+                            disabled={onDisableButtons(formik.values.weighing)}
                             // type='button'
                           />
                         </div>
@@ -223,26 +214,26 @@ export const RiosForm = ({ employees, periods }) => {
                             onClick={e => {
                               onPushRioData(formik, push);
                             }}
-                            disabled={onDisableButtons(
-                              formik.values.objective,
-                            )}
+                            disabled={onDisableButtons(formik.values.objective)}
                             // type='button'
                           />
                         </div>
                       </StepperPanel>
                     </Stepper>
-                  )}
-                </FieldArray>
-              </div>
-              <div className={`${styles.cardRespo} my-2 w-4`}>
-                <div className='align-content-end'>
-                  <RiosInfo 
-                  dataRespo={respo} 
-                  pending={isPending}
-                  />
+                  </div>
+                  <div className={`${styles.cardRespo} my-2 w-4`}>
+                    <div className='align-content-end'>
+                      <RiosInfo
+                        formik={formik}
+                        formikReplace={replace}
+                        formikRemove={remove}
+                        pending={isPending}
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              )}
+            </FieldArray>
           </Form>
         )}
       </Formik>
@@ -254,4 +245,3 @@ RiosForm.propTypes = {
   employees: PropTypes.arrayOf(PropTypes.object).isRequired,
   periods: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-
