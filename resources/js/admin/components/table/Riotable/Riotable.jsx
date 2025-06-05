@@ -145,11 +145,9 @@ export const Riotable = ({
     };
 
     if (e.data.period === 'Periodo de Enero a Junio') {
-      newObject.total=totalej
-      console.log(totalej)
+      newObject.total=totalej+newData.real-data.real
     } else {
-      newObject.total=totaljd
-      console.log(totaljd)
+      newObject.total=totaljd+newData.real-data.real
     }
     console.log(newObject);
     let errors = {};
@@ -230,7 +228,6 @@ export const Riotable = ({
         .reduce((acc, item) => acc + item.real, 0);
         setTotaljd(total);
     }
-    setTotaljd(total);
     return (
       <td colSpan={8}>
         <div
