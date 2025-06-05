@@ -58,6 +58,7 @@ export const EmployeesRioMain = () => {
     data?.rios?.flatMap(rio =>
       rio.data_rios.map(dataRio => ({
         id: dataRio.id,
+        idRio: rio.id,
         responsibility: dataRio.responsibility,
         indicator: dataRio.indicator,
         weighing: dataRio.weighing,

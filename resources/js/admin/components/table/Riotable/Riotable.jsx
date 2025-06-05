@@ -136,6 +136,7 @@ export const Riotable = ({
 
   const onRowEditComplete = e => {
     const { originalEvent, newData, data } = e;
+    console.log(e)
     const newObject = {
       id: newData.id,
       real: newData.real,
@@ -195,7 +196,7 @@ export const Riotable = ({
 
     if (Object.keys(errors).length === 0) {
       setErrors({});
-      mutate({ request: newObject, params: e.newData.id });
+      mutate({ request: newObject, params: (e.data.idRio) });
     } else {
       setErrors(errors);
       originalEvent.preventDefault();

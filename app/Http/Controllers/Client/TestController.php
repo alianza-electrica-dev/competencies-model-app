@@ -13,17 +13,20 @@ class TestController extends Controller
     public function indexContent()
     {
         $tests = User::find(Auth::user()->id)
-            ->tests()
-            ->with(['questions', 'competency'])
-            ->get();
-
+        ->tests()
+        ->with(['questions', 'competency'])
+        ->get();
+        
+        
         $tests->each(function ($test) {
             $test->pivot->load('status');
         });
-
+        $rios = User::find(Auth::user()->id)->rios()->get();
+        
         return response()->json([
             'success' => true,
-            'tests' => $tests
+            'tests' => $tests,
+            'rios' => $rios,
         ]);
     }
 
