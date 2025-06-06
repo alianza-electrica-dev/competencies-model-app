@@ -39,6 +39,19 @@ class RioController extends Controller
         DB::beginTransaction();
  
         try {
+            // Validar si ya existe un RIO para ese usuario y periodo
+            $exists = Rio::where('user_id', $request->user_id)
+                ->where('period_id', $request->period_id)
+                ->exists();
+
+            if ($exists) {
+                return response()->json([
+                    'success' => false,
+                    'titleAlert' => 'Error',
+                    'textAlert' => 'Ya existe un RIO para este usuario y periodo.',
+                ], 400);
+            }
+
             $rio = new Rio;
             $rio->user_id = $request->user_id;
             $rio->period_id = $request->period_id;
@@ -91,6 +104,15 @@ class RioController extends Controller
             if (isset($request->difference)) $dataRio->difference = $request->difference;
             
             $dataRio->saveOrFail();
+
+            // Si viene el campo total, actualizar el total en la tabla rios
+            if (isset($request->total)) {
+                $rio = $dataRio->rio; // relación belongsTo en el modelo DataRio
+                if ($rio) {
+                    $rio->total = $request->total;
+                    $rio->save();
+                }
+            }
 
             DB::commit();
 

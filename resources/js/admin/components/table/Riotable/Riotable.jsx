@@ -38,7 +38,6 @@ export const Riotable = ({
     setToastRef(toast.current);
   }, []);
 
-
   const realEditor = data => {
     const errorKey = data.rowData.id + '-' + data.field;
     return (
@@ -146,9 +145,9 @@ export const Riotable = ({
     };
 
     if (e.data.period === 'Periodo de Enero a Junio') {
-      newObject.total=totalej+newData.real-data.real
+      newObject.total = totalej + newData.real - data.real;
     } else {
-      newObject.total=totaljd+newData.real-data.real
+      newObject.total = totaljd + newData.real - data.real;
     }
     let errors = {};
 
@@ -200,7 +199,7 @@ export const Riotable = ({
 
     if (Object.keys(errors).length === 0) {
       setErrors({});
-      mutate({ request: newObject, params: e.data.idRio });
+      mutate({ request: newObject, params: newData.id });
     } else {
       setErrors(errors);
       originalEvent.preventDefault();
@@ -208,17 +207,22 @@ export const Riotable = ({
     }
   };
 
-useEffect(() => {
-  const totalEneJun = tableData
-    .filter(item => item.period === 'Periodo de Enero a Junio' && item.real != null)
-    .reduce((acc, item) => acc + item.real, 0);
-  setTotalej(totalEneJun);
+  useEffect(() => {
+    const totalEneJun = tableData
+      .filter(
+        item => item.period === 'Periodo de Enero a Junio' && item.real != null,
+      )
+      .reduce((acc, item) => acc + item.real, 0);
+    setTotalej(totalEneJun);
 
-  const totalJulDic = tableData
-    .filter(item => item.period === 'Periodo de Julio a Diciembre' && item.real != null)
-    .reduce((acc, item) => acc + item.real, 0);
-  setTotaljd(totalJulDic);
-}, [tableData]);
+    const totalJulDic = tableData
+      .filter(
+        item =>
+          item.period === 'Periodo de Julio a Diciembre' && item.real != null,
+      )
+      .reduce((acc, item) => acc + item.real, 0);
+    setTotaljd(totalJulDic);
+  }, [tableData]);
 
   const footerTemplate = data => {
     return (
@@ -230,14 +234,18 @@ useEffect(() => {
           <div className='flex'>Calificación: </div>
           <div className='flex'>
             <Tag
-              value={data.period=== 'Periodo de Enero a Junio'?totalej:totaljd}
-              severity={setSeverity(data.period=== 'Periodo de Enero a Junio'?totalej:totaljd)}
+              value={
+                data.period === 'Periodo de Enero a Junio' ? totalej : totaljd
+              }
+              severity={setSeverity(
+                data.period === 'Periodo de Enero a Junio' ? totalej : totaljd,
+              )}
               style={{ width: '50px', height: '30px', fontSize: '100%' }}
             />
           </div>
         </div>
       </td>
-    );    
+    );
   };
 
   return (
