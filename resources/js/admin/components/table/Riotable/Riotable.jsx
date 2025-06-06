@@ -221,8 +221,7 @@ useEffect(() => {
 }, [tableData]);
 
   const footerTemplate = data => {
-    if(data.period=== 'Periodo de Enero a Junio'){
-      return (
+    return (
       <td colSpan={8}>
         <div
           className='flex justify-content-end align-content-center  font-bold w-full'
@@ -231,34 +230,14 @@ useEffect(() => {
           <div className='flex'>Calificación: </div>
           <div className='flex'>
             <Tag
-              value={totalej}
-              severity={setSeverity(totalej)}
+              value={data.period=== 'Periodo de Enero a Junio'?totalej:totaljd}
+              severity={setSeverity(data.period=== 'Periodo de Enero a Junio'?totalej:totaljd)}
               style={{ width: '50px', height: '30px', fontSize: '100%' }}
             />
           </div>
         </div>
       </td>
-    );
-    }else{
-      return (
-      <td colSpan={8}>
-        <div
-          className='flex justify-content-end align-content-center  font-bold w-full'
-          style={{ fontSize: '120%' }}
-        >
-          <div className='flex'>Calificación: </div>
-          <div className='flex'>
-            <Tag
-              value={totaljd}
-              severity={setSeverity(totaljd)}
-              style={{ width: '50px', height: '30px', fontSize: '100%' }}
-            />
-          </div>
-        </div>
-      </td>
-    );
-    }
-    
+    );    
   };
 
   return (
