@@ -38,6 +38,7 @@ export const Riotable = ({
     setToastRef(toast.current);
   }, []);
 
+
   const realEditor = data => {
     const errorKey = data.rowData.id + '-' + data.field;
     return (
@@ -149,7 +150,6 @@ export const Riotable = ({
     } else {
       newObject.total=totaljd+newData.real-data.real
     }
-    console.log(newObject);
     let errors = {};
 
     if (newObject.real < 0 || newObject.real > data.weighing) {
@@ -208,27 +208,21 @@ export const Riotable = ({
     }
   };
 
+useEffect(() => {
+  const totalEneJun = tableData
+    .filter(item => item.period === 'Periodo de Enero a Junio' && item.real != null)
+    .reduce((acc, item) => acc + item.real, 0);
+  setTotalej(totalEneJun);
+
+  const totalJulDic = tableData
+    .filter(item => item.period === 'Periodo de Julio a Diciembre' && item.real != null)
+    .reduce((acc, item) => acc + item.real, 0);
+  setTotaljd(totalJulDic);
+}, [tableData]);
+
   const footerTemplate = data => {
-    let total = 0;
-    if (data.period === 'Periodo de Enero a Junio') {
-      total = tableData
-        .filter(
-          item =>
-            item.period === 'Periodo de Enero a Junio' && item.real !== null,
-        )
-        .reduce((acc, item) => acc + item.real, 0);
-      setTotalej(total);
-    } else {
-      total = tableData
-        .filter(
-          item =>
-            item.period === 'Periodo de Julio a Diciembre' &&
-            item.real !== null,
-        )
-        .reduce((acc, item) => acc + item.real, 0);
-        setTotaljd(total);
-    }
-    return (
+    if(data.period=== 'Periodo de Enero a Junio'){
+      return (
       <td colSpan={8}>
         <div
           className='flex justify-content-end align-content-center  font-bold w-full'
@@ -237,14 +231,34 @@ export const Riotable = ({
           <div className='flex'>Calificación: </div>
           <div className='flex'>
             <Tag
-              value={total}
-              severity={setSeverity(total)}
+              value={totalej}
+              severity={setSeverity(totalej)}
               style={{ width: '50px', height: '30px', fontSize: '100%' }}
             />
           </div>
         </div>
       </td>
     );
+    }else{
+      return (
+      <td colSpan={8}>
+        <div
+          className='flex justify-content-end align-content-center  font-bold w-full'
+          style={{ fontSize: '120%' }}
+        >
+          <div className='flex'>Calificación: </div>
+          <div className='flex'>
+            <Tag
+              value={totaljd}
+              severity={setSeverity(totaljd)}
+              style={{ width: '50px', height: '30px', fontSize: '100%' }}
+            />
+          </div>
+        </div>
+      </td>
+    );
+    }
+    
   };
 
   return (
