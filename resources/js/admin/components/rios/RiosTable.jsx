@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { DataTable } from 'primereact/datatable';
@@ -95,7 +94,7 @@ export const RiosTable = ({ rios, forkRep, forkRem }) => {
   return (
     <div className='card'>
       <Button
-        label='Ver o Modificar Rio'
+        label='Ver o Modificar envio'
         icon='pi pi-eye'
         text
         className='text-white hover:surface-500 bg-blue-900'
@@ -138,7 +137,5 @@ export const RiosTable = ({ rios, forkRep, forkRem }) => {
   );
 };
 
-RiosTable.propTypes = {
-  rios: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
+
 

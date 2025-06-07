@@ -38,9 +38,9 @@ export const EmployeesMain = () => {
         header=''
         body={rowData => (
           <LinkButton
-            icon='pi pi-user'
+            icon='pi pi-file-excel'
             tooltipText='Ver RIO'
-            linkTo={`/admin/employees-RIO/${rowData.id}`}// ${rowData.id}
+            linkTo={`/admin/employees-rio/${rowData.id}`}// ${rowData.id}
           />
         )}
       />

@@ -2,9 +2,11 @@
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { showErrorAlert, showSuccessAlert } from '../utils/alert';
+import { useNavigate } from "react-router-dom";
 
 export const useAppMutation = (url, invalidQuery = '') => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   return useMutation({
     mutationFn: ({ params = {}, request = '' }) => {
@@ -14,19 +16,21 @@ export const useAppMutation = (url, invalidQuery = '') => {
     onSuccess: data => {
       const { data: response } = data;
 
-      response.success
-        ? showSuccessAlert(response.titleAlert, response.textAlert)
-        : showErrorAlert(response.titleAlert, response.textAlert);
+      if(response.success){
+        showSuccessAlert(response.titleAlert, response.textAlert)
+        setTimeout(() => {navigate('/employees')},1700)
+      }else{
+        showErrorAlert(response.titleAlert, response.textAlert);
+      }
 
       if (response.success && invalidQuery !== '')
         queryClient.invalidateQueries({ queryKey: [invalidQuery] });
     },
 
-    onError: (error, variables, context) => {
-      console.log({ error, variables, context });
+    onError: (error) => {
       showErrorAlert(
-        'Ha ocurrido un error',
-        'Favor de contactar a oscar.lopez@alianzaelectrica.com',
+        error.response.data.titleAlert,
+        error.response.data.textAlert,
       );
     },
   });

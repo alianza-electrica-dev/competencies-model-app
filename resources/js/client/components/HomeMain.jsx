@@ -1,6 +1,6 @@
 import { useAppQuery } from '../../hooks';
 import { Error, Footer, Loading } from '../../common';
-import { EvaluationGrid, Header } from './';
+import { EvaluationGrid, Header, RiosGrid } from './';
 import styles from '../styles/home.module.css';
 
 export const HomeMain = () => {
@@ -25,6 +25,11 @@ export const HomeMain = () => {
 
       <div className={`overflow-hidden ${styles.grid}`}>
         <EvaluationGrid evaluations={data.tests} />
+
+        <div className='m-6'>
+          <RiosGrid rios={data.rios} tests={data.tests} />
+        </div>
+
       </div>
 
       <div className={styles.footer}>
