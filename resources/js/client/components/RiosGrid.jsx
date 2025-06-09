@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import {useState } from 'react';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { Tag } from 'primereact/tag';
@@ -47,15 +47,14 @@ const getColor = value => {
 }
 
 export function RiosGrid({ rios, tests }) {
-  const [visible, setVisible] = useState(false);
   
-  const periodEJ = 0 ?? rios.filter(item => item.period_id === 1)[0].total ;
-  const periodJD = 0 ?? rios.filter(item => item.period_id === 2)[0].total;
-  const promRio = parseFloat(((periodEJ + periodJD) / 2).toFixed(2));
+  const [visible, setVisible] = useState(false);
+  const periodEJ = rios.filter(item => item.period_id === 1)[0]?.total ?? 0;
+  const periodJD = rios.filter(item => item.period_id === 2)[0]?.total ?? 0;
+  const promRio = parseFloat(((periodEJ + periodJD) / 2).toFixed(2)) ?? 0;
 
-  const score = 0 ??
-    tests.map(item => item.pivot.score).reduce((acc, act) => acc + act, 0);
-  const promCom = parseFloat((score / tests.length).toFixed(2));
+  const score = tests.map(item => item?.pivot?.score).reduce((acc, act) => acc + act, 0) ?? 0;
+  const promCom = parseFloat((score / tests?.length).toFixed(2)) ?? 0;
 
   const califMatriz = [
     [4, 2, 1],
