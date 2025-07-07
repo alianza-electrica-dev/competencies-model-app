@@ -65,7 +65,7 @@ export const ManagersForm = ({
           onClick={() => setVisible(true)}
           className='btn-primary'
           icon='pi pi-plus'
-          label='Añadir Administrador'
+          label='Añadir Nuevo Usuario'
           rounded
           type='button'
         />

@@ -33,7 +33,7 @@ class UserController extends Controller
             'areas' => Area::all(),
             'branches' => Branch::all(),
             'companies' => Company::all(),
-            'roles' => Role::query()->where('id', '!=', Role::EMPLOYEE)->get(),
+            'roles' => Role::query()->where('id', '!=', Role::ADMIN)->get(),
         ]);
     }
 

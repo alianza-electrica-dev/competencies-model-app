@@ -67,7 +67,7 @@ export const EmplooyessForm = ({
           onClick={() => setVisible(true)}
           className='btn-primary'
           icon='pi pi-plus'
-          label='Añadir Colaborador'
+          label='Añadir Nuevo Usuario'
           rounded
           type='button'
         />

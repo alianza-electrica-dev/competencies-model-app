@@ -23,7 +23,7 @@ export const ManagersMain = () => {
     <AdminTable
       tableData={data.managers}
       tableHeader={
-        <TableHeader tableTitle='Gerentes y Administradores'>
+        <TableHeader tableTitle='Lideres y Gerentes'>
           <ManagersForm
             areas={data.areas}
             branches={data.branches}

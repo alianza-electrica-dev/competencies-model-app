@@ -78,7 +78,7 @@ export const Header = () => {
 
   if (user.role_id === 1) {
     items.unshift({
-      label: 'Lideres y Administradores',
+      label: 'Lideres y Gerentes',
       root: true,
       template: itemRenderer,
       route: '/admin/managers',
