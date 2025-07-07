@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import { useAppMutation } from '../../../hooks';
-import { CustomInputSelect, CustomInputText } from '../../../formik';
+import { CustomInputSelect, CustomInputText, CustomInputSelectSearch } from '../../../formik';
 import { adminValidations } from '../../validations/adminValidations';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
@@ -131,6 +131,7 @@ export const ManagersForm = ({
                 options={areas}
                 optionLabel='name'
                 optionValue='id'
+                col='6'
               />
 
               <CustomInputSelect
@@ -157,9 +158,10 @@ export const ManagersForm = ({
                 options={roles}
                 optionLabel='name'
                 optionValue='id'
+                col='6'
               />
 
-              <CustomInputSelect
+              <CustomInputSelectSearch
                 label='A quien reporta'
                 name='reports_to'
                 options={managers}

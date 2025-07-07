@@ -49,9 +49,15 @@ const getColor = value => {
 export function RiosGrid({ rios, tests }) {
   
   const [visible, setVisible] = useState(false);
+  let justdiv = 2
   const periodEJ = rios.filter(item => item.period_id === 1)[0]?.total ?? 0;
   const periodJD = rios.filter(item => item.period_id === 2)[0]?.total ?? 0;
-  const promRio = parseFloat(((periodEJ + periodJD) / 2).toFixed(2)) ?? 0;
+
+  if((periodEJ ===0 && periodJD !==0)||(periodEJ !==0 && periodJD ===0)){
+    justdiv = 1
+  }
+
+  const promRio = parseFloat(((periodEJ + periodJD) / justdiv).toFixed(2));
 
   const score = tests.map(item => item?.pivot?.score).reduce((acc, act) => acc + act, 0) ?? 0;
   const promCom = parseFloat((score / tests?.length).toFixed(2)) ?? 0;

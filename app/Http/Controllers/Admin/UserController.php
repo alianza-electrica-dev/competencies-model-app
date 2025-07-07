@@ -44,16 +44,31 @@ class UserController extends Controller
                 ->where('id', '!=', 1)
                 ->with(['role', 'area', 'tests', 'company', 'supervisor', 'subordinates', 'branch', 'rios.dataRios'])
                 ->get();
+            $managers = User::query()
+            ->whereIn('role_id', [Role::ADMIN, Role::MANAGERS, Role::LEADERS])
+            ->where('id', '!=', 1)
+            ->with(['role', 'area', 'company', 'branch', 'supervisor', 'subordinates'])
+            ->get();
         } else {
             $employees = Auth::user()->getAllSubordinates();
             $employees->load(['role', 'area', 'tests', 'company', 'supervisor', 'subordinates', 'branch', 'rios.dataRios']);
+            $managers = User::query()
+            ->whereIn('role_id', [Role::ADMIN, Role::MANAGERS, Role::LEADERS])
+            ->where('id', '!=', 1)
+            ->with(['role', 'area', 'company', 'branch', 'supervisor', 'subordinates'])
+            ->get();
         }
 
         return response()->json([
             'success' => true,
             'employees' => $employees,
+            'managers' => $managers,
             'competencies' => Competency::all(),
             'tests' => Test::all(),
+            'areas' => Area::all(),
+            'branches' => Branch::all(),
+            'companies' => Company::all(),
+            'roles' => Role::query()->where('id', '!=', Role::ADMIN)->get(),
         ]);
     }
 
@@ -82,10 +97,10 @@ class UserController extends Controller
 
             return response()->json([
                 'success' => true,
-                'titleAlert' => $id === 'FAKE_ID' ? '¡Administrador agregado!' : '¡Administrador actualizado!',
+                'titleAlert' => $id === 'FAKE_ID' ? '¡Usuario agregado!' : '¡Usuario actualizado!',
                 'textAlert' => $id === 'FAKE_ID'
-                    ? 'El administrador ha sido agregado correctamente'
-                    : 'El administrador ha sido actualizado correctamente',
+                    ? 'El usuario ha sido agregado correctamente'
+                    : 'El usuario ha sido actualizado correctamente',
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();

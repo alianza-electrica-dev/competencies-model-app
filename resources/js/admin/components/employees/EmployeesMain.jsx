@@ -1,11 +1,14 @@
 import { useAppQuery } from '../../../hooks';
-import { AdminTable, LinkButton, ToggleButton } from '../table';
+import { AdminTable, LinkButton, ToggleButton, TableHeader } from '../table';
 import { Error, Loading } from '../../../common';
 import { AssignEvaluationForm, ShowEmployee } from './';
 import { employeesColumns, employeesFilters } from '../../helpers';
 import { Column } from 'primereact/column';
+import { EmplooyessForm } from './EmplooyessForm'; // Corrected import path
+import { useAuthUserStore } from '../../../store/authUser';
 
 export const EmployeesMain = () => {
+  const {user} = useAuthUserStore();
   const { isPending, isError, data, error } = useAppQuery(
     'Employees',
     'admin.employees.index_content',
@@ -19,28 +22,44 @@ export const EmployeesMain = () => {
     return <Error errorMessage={error.message} />;
   }
 
-  const tableHeader = (
-    <div className='flex justify-content-between align-items-center px-4 pt-4'>
-      <span className='text-3xl text-900 font-bold text-secondary'>
-        Colaboradores
-      </span>
-    </div>
-  );
-
   return (
     <AdminTable
       tableData={data.employees}
-      tableHeader={tableHeader}
+      tableHeader={
+        <TableHeader tableTitle='Colaboradoress'>
+          <EmplooyessForm
+            areas={data.areas}
+            branches={data.branches}
+            companies={data.companies}
+            managers={data.employees}
+            roles={data.roles}
+          />
+        </TableHeader>
+      }
       tableColumns={employeesColumns}
       filters={employeesFilters}
     >
+      {user.role_id === 1?<Column
+        header=''
+        body={rowData => (
+          <EmplooyessForm
+            isUpdate={true}
+            rowData={rowData}
+            areas={data.areas}
+            branches={data.branches}
+            companies={data.companies}
+            managers={data.managers}
+            roles={data.roles}
+          />
+        )}
+      />: null}
       <Column
         header=''
         body={rowData => (
           <LinkButton
             icon='pi pi-file-excel'
             tooltipText='Ver RIO'
-            linkTo={`/admin/employees-rio/${rowData.id}`}// ${rowData.id}
+            linkTo={`/admin/employees-rio/${rowData.id}`} // ${rowData.id}
           />
         )}
       />
@@ -86,4 +105,3 @@ export const EmployeesMain = () => {
     </AdminTable>
   );
 };
-

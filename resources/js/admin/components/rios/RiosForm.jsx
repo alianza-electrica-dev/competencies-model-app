@@ -78,7 +78,7 @@ export const RiosForm = ({ employees, periods }) => {
                           <CustomInputSelect
                             label='Periodo de evaluación'
                             name='period_id'
-                            col='4'
+                            col='11'
                             options={periods}
                             optionLabel='name'
                             optionValue='id'
@@ -90,7 +90,7 @@ export const RiosForm = ({ employees, periods }) => {
                           <CustomInputSelect
                             label='¿A quién se le asigna?'
                             name='user_id'
-                            col='4'
+                            col='11'
                             options={employees}
                             optionLabel='full_name'
                             optionValue='id'
@@ -103,6 +103,7 @@ export const RiosForm = ({ employees, periods }) => {
                       ref={stepperRef}
                       activeStep={activeStep}
                       className='col-12'
+                      linear
                     >
                       <StepperPanel header='Responsabilidad'>
                         <div className='border-dashed border-round-md mb-4 border-400'>

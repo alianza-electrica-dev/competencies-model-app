@@ -4,7 +4,7 @@ import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { useState, useRef, useEffect } from 'react';
 import { InputNumber } from 'primereact/inputnumber';
-import { headerTemplate } from './Riotemplates';
+import { headerTemplate, responsTemplate } from './Riotemplates';
 import { useRioMutation } from '../../../../../js/hooks';
 import { Tag } from 'primereact/tag';
 import './styles/tablestyle.css';
@@ -119,8 +119,8 @@ export const Riotable = ({
         <InputTextarea
           value={data.value}
           onChange={e => data.editorCallback(e.target.value)}
-          rows={2}
-          cols={25}
+          rows={5}
+          cols={40}
           autoResize
           invalid={errors[errorKey]}
         />
@@ -268,15 +268,18 @@ export const Riotable = ({
         editMode='row'
         onRowEditComplete={onRowEditComplete}
       >
+
+        <Column field='responsibility' header='Responsabilidad' body={responsTemplate} style={{ width: '400px' }}/>
+
         {tableColumns.map(colum => (
-          <Column key={colum.header} header={colum.header} body={colum.body} />
+          <Column key={colum.header} header={colum.header} body={colum.body} style={{ width: '100px' }}/>
         ))}
         <Column
           field='real'
           header='Real'
           body={realTemplate}
           editor={realEditor}
-          style={{ width: '120px' }}
+          style={{ width: '130px' }}
         />
         <Column
           field='difference'
@@ -297,15 +300,14 @@ export const Riotable = ({
           header='Observaciones'
           body={observationsTemplate}
           editor={observationsEditor}
-          style={{ width: '100px' }}
+          style={{ width: '380px' }}
         />
         <Column
           rowEditor
-          headerStyle={{ width: '10%', minWidth: '8rem' }}
+          headerStyle={{ width: '10%', minWidth: '5rem' }}
           bodyStyle={{ textAlign: 'center', color: 'green' }}
-          style={{ width: '50px' }}
+          style={{ width: '40px' }}
         />
-        {children}
       </DataTable>
     </Card>
   );

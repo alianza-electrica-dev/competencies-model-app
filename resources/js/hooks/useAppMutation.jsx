@@ -18,7 +18,7 @@ export const useAppMutation = (url, invalidQuery = '') => {
 
       if(response.success){
         showSuccessAlert(response.titleAlert, response.textAlert)
-        setTimeout(() => {navigate('/employees')},1700)
+        setTimeout(() => {navigate(1)},1700)
       }else{
         showErrorAlert(response.titleAlert, response.textAlert);
       }

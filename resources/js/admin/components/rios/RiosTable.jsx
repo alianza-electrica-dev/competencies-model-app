@@ -10,11 +10,11 @@ import { InputTextarea } from 'primereact/inputtextarea';
 export const RiosTable = ({ rios, forkRep, forkRem }) => {
   const [dialogVisible, setDialogVisible] = useState(false);
 
-  const onRowEditComplete = e => {
-  const {/*  originalEvent, data */ index, newData } = e;
+/*   const onRowEditComplete = e => {
+  const {originalEvent, data index, newData } = e;
   forkRep(index, newData)
   console.log(index, newData)
-  }
+  } */
   const actionBodyTemplate = ind => {
     return (
       <>
@@ -94,7 +94,7 @@ export const RiosTable = ({ rios, forkRep, forkRem }) => {
   return (
     <div className='card'>
       <Button
-        label='Ver o Modificar envio'
+        label='Ver Envío Completo'
         icon='pi pi-eye'
         text
         className='text-white hover:surface-500 bg-blue-900'
@@ -108,7 +108,7 @@ export const RiosTable = ({ rios, forkRep, forkRem }) => {
         style={{ width: '75vw' }}
         maximizable
         modal
-        contentStyle={{ height: '300px' }}
+        contentStyle={{ height: '600px' }}
         onHide={() => setDialogVisible(false)}
       >
         <DataTable
@@ -117,18 +117,18 @@ export const RiosTable = ({ rios, forkRep, forkRem }) => {
           scrollHeight='flex'
           tableStyle={{ minWidth: '50rem' }}
           editMode='row'
-          onRowEditComplete={onRowEditComplete}
+          /* onRowEditComplete={onRowEditComplete} */
           emptyMessage='No existe ningun registro'
         >
           <Column field='responsability' header='Responsabilidad' editor={respoEditor}/>
           <Column field='indicator' header='Indicador' editor={indiEditor}/>
           <Column field='weighing' header='Ponderación' editor={weigEditor}/>
           <Column field='objective' header='Objetivo' editor={objEditor}/>
-          <Column
+{/*           <Column
           rowEditor
           headerStyle={{ width: '10%', minWidth: '8rem' }}
           bodyStyle={{ textAlign: 'center' }}
-          style={{ width: '50px' }}/>
+          style={{ width: '50px' }}/> */}
           <Column body={(rowData, options) => actionBodyTemplate(options.rowIndex)} exportable={false} style={{ minWidth: '12rem' }}></Column>
 
         </DataTable>

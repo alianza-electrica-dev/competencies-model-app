@@ -1,18 +1,10 @@
 import {
-  responsTemplate,
   indicatorTemplate,
   weighingTemplate,
   objectiveTemplate
 } from '../../components/table/Riotable/Riotemplates';
 
 export const employeesRioColumns = [
-  {
-    field: 'responsibility',
-    header: 'Responsabilidad',
-    body: responsTemplate,
-    
-    
-  },
   {
     field: 'indicator',
     header: 'Indicador',
@@ -21,7 +13,7 @@ export const employeesRioColumns = [
   },
   {
     field: 'weighing',
-    header: 'Ponderación',
+    header: 'Pond.',
     body: weighingTemplate,
     
   },
