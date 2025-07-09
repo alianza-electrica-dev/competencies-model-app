@@ -39,7 +39,7 @@ class UserController extends Controller
 
     public function indexContent()
     {
-        if (Auth::user()->email === 'admin@alianzaelectrica.com') {
+        if (Auth::user()->email === 'admin@alianzaelectrica.com' || 'adminAE@alianzaelectrica.com') {
             $employees = User::query()
                 ->where('id', '!=', 1)
                 ->with(['role', 'area', 'tests', 'company', 'supervisor', 'subordinates', 'branch', 'rios.dataRios'])
