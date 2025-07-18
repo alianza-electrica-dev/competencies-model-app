@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,39 +14,13 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name',
-        'last_name',
-        'second_last_name',
-        'email',
-        'password',
-        'role_id',
-        'area_id',
-        'company_id',
-        'branch_id',
-        'reports_to',
+        'name', 'last_name', 'second_last_name', 'email', 'password',
+        'role_id', 'area_id', 'company_id', 'branch_id', 'reports_to',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -61,29 +33,18 @@ class User extends Authenticatable
 
     public function getFullNameAttribute(): string
     {
-        return "{$this->name} {$this->last_name} {$this->second_last_name}";
+        return "$this->name $this->last_name $this->second_last_name";
     }
 
     public function getScoreAttribute(): float
     {
-        $score = 0;
-
-        foreach ($this->tests as $test) {
-            $score += $test->pivot->score;
-        }
-
-        return $score;
+        return $this->tests->sum(fn($test) => $test->pivot->score);
     }
 
     public function getAverageAttribute(): ?float
     {
         $totalTests = $this->tests->count();
-
-        if ($totalTests > 0) {
-            return  round($this->score / $totalTests, 2);
-        } else {
-            return null;
-        }
+        return $totalTests > 0 ? round($this->score / $totalTests, 2) : null;
     }
 
     public function area(): BelongsTo
@@ -117,16 +78,16 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Test::class)
             ->using(TestUser::class)
-            ->withPivot('status_id', 'score')
+            ->withPivot('id', 'status_id', 'score')
             ->withTimestamps();
     }
 
-    public function supervisor()
+    public function supervisor(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reports_to');
     }
 
-    public function subordinates()
+    public function subordinates(): HasMany
     {
         return $this->hasMany(User::class, 'reports_to');
     }
@@ -134,18 +95,16 @@ class User extends Authenticatable
     public function getAllSubordinates(): EloquentCollection
     {
         $subordinates = new EloquentCollection();
-
         foreach ($this->subordinates as $subordinate) {
             $subordinates->push($subordinate);
             $subordinates = $subordinates->merge($subordinate->getAllSubordinates());
         }
-
         return $subordinates;
     }
 
-    public function hasSupervisor()
+    public function hasSupervisor(): bool
     {
-        return $this->reports_to !== null;
+        return !is_null($this->reports_to);
     }
 
     public function rios(): HasMany

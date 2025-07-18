@@ -9,36 +9,33 @@ import { Dialog } from 'primereact/dialog';
 
 export const EvaluationForm = ({ questions, test }) => {
   const [visible, setVisible] = useState(false);
-
   const { mutate, isPending } = useAppMutation(
     'client.evaluations.answer_test',
     'evaluations',
   );
 
-  const initialValues = questions.reduce((values, question) => {
-    values[`question_${question.id}`] = '';
-    return values;
-  }, {});
-
-  const validationSchema = Yup.object(
-    questions.reduce((schema, question) => {
-      schema[`question_${question.id}`] = Yup.string().required(
-        'Este campo es requerido',
-      );
-      return schema;
-    }, {}),
+  const initialValues = Object.fromEntries(
+    questions.map(q => [`question_${q.id}`, '']),
   );
 
-  const onSubmit = async values => {
-    const responses = Object.keys(values).map(key => {
-      const questionId = key.split('_')[1];
-      return {
-        question_id: questionId,
-        response_value: values[key],
-      };
-    });
+  const validationSchema = Yup.object(
+    Object.fromEntries(
+      questions.map(q => [
+        `question_${q.id}`,
+        Yup.string().required('Este campo es requerido'),
+      ]),
+    ),
+  );
 
-    mutate({ request: { responses }, params: test.id });
+  const onSubmit = values => {
+    const responses = Object.entries(values).map(([key, value]) => ({
+      question_id: key.split('_')[1],
+      response_value: value,
+    }));
+    mutate({
+      request: { responses, test_user_id: test.pivot.id },
+      params: test.id,
+    });
     setVisible(false);
   };
 
@@ -52,7 +49,6 @@ export const EvaluationForm = ({ questions, test }) => {
         severity='warning'
         type='button'
       />
-
       <Dialog
         onHide={() => setVisible(false)}
         header={test.description}
@@ -65,7 +61,7 @@ export const EvaluationForm = ({ questions, test }) => {
           onSubmit={onSubmit}
           validationSchema={validationSchema}
         >
-          {({ values }) => (
+          {() => (
             <Form>
               {questions.map(question => (
                 <CustomRadioButton

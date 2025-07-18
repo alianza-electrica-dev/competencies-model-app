@@ -9,43 +9,45 @@ import { Dialog } from 'primereact/dialog';
 
 export const EmployeesCompetenciesForm = ({ questions, test }) => {
   const [visible, setVisible] = useState(false);
-  const { mutate } = useAppMutation(
+  const { mutate, isLoading, isSuccess, isError, error } = useAppMutation(
     'admin.employees.close.evaluation',
     'EmployeesEvaluations',
   );
 
-  const initialValues = questions.reduce((values, question) => {
-    const response = test.questions.find(q => q.id === question.id)?.users[0]
-      ?.pivot?.response_value;
-    values[`question_${question.id}`] =
-      response !== undefined ? `${response}` : '';
-    return values;
-  }, {});
-
-  const validationSchema = Yup.object().shape(
-    questions.reduce((schema, question) => {
-      schema[`question_${question.id}`] = Yup.string().required(
-        'Este campo es requerido',
+  const initialValues = Object.fromEntries(
+    questions.map(q => {
+      const questionObj = test.questions.find(tq => tq.id === q.id);
+      const userResponse = questionObj?.users?.find(
+        u => u.pivot && u.pivot.test_user_id === test.pivot.id,
       );
-      return schema;
-    }, {}),
+      const response = userResponse?.pivot?.response_value;
+      return [`question_${q.id}`, response !== undefined ? `${response}` : ''];
+    }),
   );
 
-  const onSubmit = async values => {
-    const responses = Object.keys(values).map(key => {
-      const questionId = key.split('_')[1];
-      return {
-        question_id: parseInt(questionId),
-        response_value: parseInt(values[key]),
-      };
-    });
+  const validationSchema = Yup.object(
+    Object.fromEntries(
+      questions.map(q => [
+        `question_${q.id}`,
+        Yup.string().required('Este campo es requerido'),
+      ]),
+    ),
+  );
 
-    mutate({
-      request: { responses },
-      params: { userId: test.pivot.user_id, testId: test.id },
-    });
-
+  if (isSuccess && visible) {
     setVisible(false);
+  }
+
+  const onSubmit = values => {
+    const responses = Object.entries(values).map(([key, value]) => ({
+      question_id: parseInt(key.split('_')[1]),
+      response_value: parseInt(value),
+    }));
+    mutate({
+      request: { responses, test_user_id: test.pivot.id },
+      params: { userId: test.pivot.user_id, testId: test.id },
+      customUrl: `/admin/employees/employee/evaluation/close/${test.pivot.user_id}/${test.id}`,
+    });
   };
 
   return (
@@ -61,7 +63,6 @@ export const EmployeesCompetenciesForm = ({ questions, test }) => {
         tooltipOptions={{ position: 'top' }}
         type='button'
       />
-
       <Dialog
         onHide={() => setVisible(false)}
         header={test.description}
@@ -90,11 +91,18 @@ export const EmployeesCompetenciesForm = ({ questions, test }) => {
                   ]}
                 />
               ))}
+              {isError && (
+                <div style={{ color: 'red', marginBottom: '1rem' }}>
+                  {error?.response?.data?.textAlert ||
+                    'Error al enviar la evaluación.'}
+                </div>
+              )}
               <Button
                 icon='pi pi-send'
-                label='Enviar'
+                label={isLoading ? 'Enviando...' : 'Enviar'}
                 severity='warning'
                 type='submit'
+                disabled={isLoading}
               />
             </Form>
           )}

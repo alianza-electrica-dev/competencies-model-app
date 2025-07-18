@@ -6,53 +6,66 @@ use App\Http\Controllers\Controller;
 use App\Models\Status;
 use App\Models\Test;
 use App\Models\User;
+use App\Models\TestUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
 {
-
     public function closeEvaluation(Request $request, $userId, $testId)
     {
         $user = User::findOrFail($userId);
-
         $responses = collect($request->responses);
+        $testUserId = $request->test_user_id;
 
-        $existingResponses = $user->questions()
-            ->whereIn('questions.id', $responses->pluck('question_id'))
-            ->get()
-            ->pluck('pivot', 'id')
-            ->toArray();
-
-        $attachData = [];
         foreach ($responses as $response) {
             $questionId = $response['question_id'];
             $responseValue = $response['response_value'];
 
-            if (isset($existingResponses[$questionId])) {
-                $user->questions()->updateExistingPivot($questionId, ['response_value' => $responseValue]);
-            } else {
-                $attachData[$questionId] = ['response_value' => $responseValue];
-            }
-        }
+            $existing = \DB::table('user_response')
+                ->where('user_id', $userId)
+                ->where('question_id', $questionId)
+                ->where('test_user_id', $testUserId)
+                ->first();
 
-        if (!empty($attachData)) {
-            $user->questions()->attach($attachData);
+            if ($existing) {
+                \DB::table('user_response')
+                    ->where('id', $existing->id)
+                    ->update([
+                        'response_value' => $responseValue,
+                        'updated_at' => now()
+                    ]);
+            } else {
+                $user->questions()->attach($questionId, [
+                    'response_value' => $responseValue,
+                    'test_user_id' => $testUserId,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
         }
 
         $totalScore = $user->questions()
             ->wherePivotIn('question_id', $responses->pluck('question_id')->toArray())
+            ->wherePivot('test_user_id', $testUserId)
             ->sum('response_value');
 
-        $user->tests()->updateExistingPivot($testId, [
+        $testUser = TestUser::find($testUserId);
+        if (!$testUser) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No se encontró el registro del test',
+            ], 404);
+        }
+        $testUser->update([
             'status_id' => Status::FINALIZADO,
-            'score' => $totalScore / count($responses),
+            'score' => $totalScore / max($responses->count(), 1),
         ]);
 
         return response()->json([
             'success' => true,
-            'titleAlert' => '¡Se finalizo la evaluación!',
-            'textAlert' => 'Esta evaluación ha dado cierre por un administrador',
+            'titleAlert' => '¡Se finalizó la evaluación!',
+            'textAlert' => 'Esta evaluación ha sido cerrada por un administrador',
         ]);
     }
 
@@ -80,15 +93,14 @@ class TestController extends Controller
 
     public function getUserTests($id)
     {
-        $user = User::query()->findOrFail($id);
-
+        $user = User::findOrFail($id);
         $tests = $user->tests()
             ->with([
                 'competency',
                 'questions' => function ($query) use ($id) {
                     $query->with(['users' => function ($query) use ($id) {
                         $query->where('user_id', $id)
-                            ->withPivot('response_value');
+                            ->withPivot('response_value', 'test_user_id');
                     }]);
                 }
             ])
@@ -96,6 +108,11 @@ class TestController extends Controller
 
         $tests->each(function ($test) {
             $test->pivot->load('status');
+            $testUser = TestUser::where('user_id', $test->pivot->user_id)
+                ->where('test_id', $test->pivot->test_id)
+                ->where('created_at', $test->pivot->created_at)
+                ->first();
+            $test->pivot->id = $testUser ? $testUser->id : null;
         });
 
         return response()->json([
@@ -109,18 +126,14 @@ class TestController extends Controller
         switch ($competencyId) {
             case 1:
                 return Test::where('competency_id', 1)->get();
-
             case 2:
                 return Test::whereHas('areas', function ($query) use ($areaId) {
                     $query->where('area_id', $areaId);
                 })->get();
-
             case 3:
                 return Test::where('competency_id', 3)->get();
-
             case 4:
                 return Test::where('competency_id', 4)->get();
-
             default:
                 return [];
         }
